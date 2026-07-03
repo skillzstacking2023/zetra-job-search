@@ -149,7 +149,7 @@ function render(){
   const hideStale=document.getElementById('fStale').checked;
   let rows=JOBS.filter(j=>{
     if(m&&j.market!==m)return false;
-    if(r?i&&j.roleType!==r)return false;
+    if(r&&j.roleType!==r)return false;
     if(p&&j.priority!==p)return false;
     if(hideStale&&ageDays(j.posted)>=30)return false;
     if(q){const blob=(j.title+' '+j.company+' '+j.city+' '+(j.notes||'')+' '+(j.tags||[]).join(' ')).toLowerCase();if(!blob.includes(q))return false;}
@@ -160,16 +160,54 @@ function render(){
   document.getElementById('footer').textContent =
     'Showing '+rows.length+' of '+JOBS.length+' listings · Scored to Zetra’s executive cybersecurity profile · Markets: MD, VA, DC, Remote';
 }
-function cardHTML(j){const a=ageDays(j.posted);const ageCls=a<30?'fresh':'stale';const tags=(j.tags||[]).map(t=>'<span class="badge clr">'+t+'</span>').join('');return `<div class="card ${j.priority}"><div class="ctop"><div><div class="title">${j.title}</div><div class="company">${j.company}</div></div><div class="score ${j.priority}">${j.score}<small>${j.priority.toUpperCase()}</small></div></div><div class="meta"><span>📄 ${j.city} · ${j.market}</span><span>💰 ${j.salary}</span></div><div class="badges"><span class="badge role">${j.roleType}</span>${tags}</div><div class="notes">${j.notes||''}</div><div class="cbot"><a class="apply" href="${j.url}" target="_blank" rel="noopener">View / Apply →</a><span class="posted">Posted ${j.posted}<span class="age ${ageCls}">${a}d</span></span></div></div>`;}
-function buildStats(){const c=(f)=>JOBS.filter(f).length;const s=[['Total',JOBS.length],['High',c(j=>j.priority==='High')],['Medium',c(j=>j.priority==='Medium')],['Stretch',c(j=>j.priority==='Stretch')],['Updated',JOBS[0]?JOBS[0].posted:'-']];document.getElementById('stats').innerHTML=s.map(x=>`<div class="stat"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('');}
-function buildRoleFilter(){const roles=[...new Set(JOBS.map(j=>j.roleType))].sort();const sel=document.getElementById('fRole');roles.forEach(r=>{const o=document.createElement('option');o.textContent=r;sel.appendChild(o);});}
+function cardHTML(j){
+  const a=ageDays(j.posted);
+  const ageCls=a<30?'fresh':'stale';
+  const tags=(j.tags||[]).map(t=>'<span class="badge clr">'+t+'</span>').join('');
+  return `<div class="card ${j.priority}">
+    <div class="ctop">
+      <div>
+        <div class="title">${j.title}</div>
+        <div class="company">${j.company}</div>
+      </div>
+      <div class="score ${j.priority}">${j.score}<small>${j.priority.toUpperCase()}</small></div>
+    </div>
+    <div class="meta">
+      <span>\u{1F4CD} ${j.city} · ${j.market}</span>
+      <span>\u{1F4B0} ${j.salary}</span>
+    </div>
+    <div class="badges"><span class="badge role">${j.roleType}</span>${tags}</div>
+    <div class="notes">${j.notes||''}</div>
+    <div class="cbot">
+      <a class="apply" href="${j.url}" target="_blank" rel="noopener">View / Apply →</a>
+      <span class="posted">Posted ${j.posted}<span class="age ${ageCls}">${a}d</span></span>
+    </div>
+  </div>`;
+}
+function buildStats(){
+  const c=(f)=>JOBS.filter(f).length;
+  const s=[
+    ['Total',JOBS.length],
+    ['High',c(j=>j.priority==='High')],
+    ['Medium',c(j=>j.priority==='Medium')],
+    ['Stretch',c(j=>j.priority==='Stretch')],
+    ['Updated',JOBS[0]?JOBS[0].posted:'-']
+  ];
+  document.getElementById('stats').innerHTML=s.map(x=>`<div class="stat"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('');
+}
+function buildRoleFilter(){
+  const roles=[...new Set(JOBS.map(j=>j.roleType))].sort();
+  const sel=document.getElementById('fRole');
+  roles.forEach(r=>{const o=document.createElement('option');o.textContent=r;sel.appendChild(o);});
+}
 function openResume(){document.getElementById('resumeModal').classList.add('open');}
 function closeResume(){document.getElementById('resumeModal').classList.remove('open');}
 document.getElementById('resumeModal').addEventListener('click',e=>{if(e.target.id==='resumeModal')closeResume();});
 ['fMarket','fRole','fPriority','fStale'].forEach(id=>document.getElementById(id).addEventListener('change',render));
 document.getElementById('fSearch').addEventListener('input',render);
 document.getElementById('refreshLink').href='?v='+Date.now();
-fetch('jobs.json?v='+Date.now()).then(r=>r.json()).then(d=>{JOBS=d;buildStats();buildRoleFilter();render();}).catch(e=>{grid.innerHTML='<div class="empty">Could not load jobs.json ('+e+')</div>';});
+fetch('jobs.json?v='+Date.now()).then(r=>r.json()).then(d=>{JOBS=d;buildStats();buildRoleFilter();render();})
+ .catch(e=>{grid.innerHTML='<div class="empty">Could not load jobs.json ('+e+')</div>';});
 </script>
 </body>
 </html>
