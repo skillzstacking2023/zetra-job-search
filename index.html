@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zetra M. Batiste, CISSP - Cybersecurity Executive Job Search</title>
+<style>
+  :root{
+    --bg:#0b1220; --panel:#131c2e; --panel2:#1a2540; --line:#26324d;
+    --txt:#e8eef7; --muted:#93a1bd; --accent:#4f8cff; --accent2:#31d0aa;
+    --high:#31d0aa; --med:#f2b544; --stretch:#8a93a8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.5;padding-bottom:60px}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  header{background:linear-gradient(135deg,#0e1830,#16233f);border-bottom:1px solid var(--line);padding:30px 0 26px}
+  .name{font-size:30px;font-weight:700;letter-spacing:.2px}
+  .subtitle{color:var(--muted);margin-top:4px;font-size:15px}
+  .cred{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .chip{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:5px 12px;font-size:12.5px;color:var(--txt)}
+  .chip b{color:var(--accent2)}
+  .btnrow{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+  .btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt)}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:22px 0}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center}
+  .stat .n{font-size:24px;font-weight:700}
+  .stat .l{font-size:12px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+  .controls{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;position:sticky;top:0;z-index:5}
+  .controls .grp{display:flex;flex-direction:column;gap:5px}
+  .controls label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  select,input[type=text]{background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px;min-width:140px}
+  .toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none;margin-top:16px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+  .card{background:var(--panel);border:1px solid var(--line);border-left-width:4px;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:9px}
+  .card.High{border-left-color:var(--high)}
+  .card.Medium{border-left-color:var(--med)}
+  .card.Stretch{border-left-color:var(--stretch)}
+  .ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .title{font-size:16.5px;font-weight:700;line-height:1.3}
+  .company{color:var(--muted);font-size:13.5px;margin-top:2px}
+  .score{flex:0 0 auto;width:52px;height:52px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;font-size:19px;background:var(--panel2);border:1px solid var(--line)}
+  .score.High{color:var(--high)} .score.Medium{color:var(--med)} .score.Stretch{color:var(--stretch)}
+  .score small{font-size:8.5px;color:var(--muted);font-weight:600;letter-spacing:.5px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted)}
+  .meta span{display:inline-flex;align-items:center;gap:4px}
+  .badges{display:flex;flex-wrap:wrap;gap:6px}
+  .badge{font-size:11px;padding:3px 9px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);color:var(--txt)}
+  .badge.role{background:rgba(79,140,255,.14);border-color:rgba(79,140,255,.35);color:#a9c6ff}
+  .badge.clr{background:rgba(49,208,170,.13);border-color:rgba(49,208,170,.35);color:#7ff0d5}
+  .notes{font-size:13px;color:#c3ceE0}
+  .cbot{display:flex;justify-content:space-between;align-items:center;margin-top:4px;padding-top:10px;border-top:1px solid var(--line)}
+  .apply{background:var(--accent);color:#fff;padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:600}
+  .posted{font-size:12px;color:var(--muted)}
+  .age{margin-left:8px;padding:2px 8px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:11px}
+  .age.fresh{color:var(--high)} .age.stale{color:var(--med)}
+  .empty{text-align:center;color:var(--muted);padding:50px;grid-column:1/-1}
+  .modal{position:fixed;inset:0;background:rgba(4,8,16,.72);display:none;align-items:flex-start;justify-content:center;padding:40px 20px;z-index:50;overflow:auto}
+  .modal.open{display:flex}
+  .sheet{background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:760px;width:100%;padding:26px 28px}
+  .sheet h2{font-size:20px;margin-bottom:4px}
+  .sheet h3{font-size:14px;color:var(--accent2);margin:18px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .sheet p,.sheet li{font-size:14px;color:#cdd7e8}
+  .sheet ul{margin-left:18px;margin-top:4px}
+  .sheet .x{float:right;cursor:pointer;color:var(--muted);font-size:22px;line-height:1}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:34px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="name">Zetra M. Batiste, CISSP</div>
+    <div class="subtitle">Senior Cybersecurity Executive &middot; Cyber Supply Chain Risk, RMF/FISMA, Endpoint Security, Cyber Operations</div>
+    <div class="cred">
+      <span class="chip"><b>Clearance:</b> TS/SCI</span>
+      <span class="chip"><b>Certs:</b> CISSP &middot; CISM &middot; CRISC</span>
+      <span class="chip"><b>Based:</b> Ellicott City, MD</span>
+      <span class="chip"><b>Target:</b> MD &middot; VA &middot; DC &middot; Remote</span>
+      <span class="chip"><b>Availability:</b> Immediate</span>
+    </div>
+    <div class="btnrow">
+      <button class="btn" onclick="openResume()">View Candidate Summary</button>
+      <a class="btn ghost" id="refreshLink" href="?">Refresh Listings</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats" id="stats"></div>
+
+  <div class="controls">
+    <div class="grp"><label>Market</label>
+      <select id="fMarket"><option value="">All Markets</option><option>MD</option><option>VA</option><option>DC</option><option>Remote</option></select>
+    </div>
+    <div class="grp"><label>Role Type</label>
+      <select id="fRole"><option value="">All Roles</option></select>
+    </div>
+    <div class="grp"><label>Priority</label>
+      <select id="fPriority"><option value="">All</option><option>High</option><option>Medium</option><option>Stretch</option></select>
+    </div>
+    <div class="grp"><label>Search</label>
+      <input type="text" id="fSearch" placeholder="title, company, keyword">
+    </div>
+    <label class="toggle"><input type="checkbox" id="fStale"> Hide listings 30+ days old</label>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <footer id="footer"></footer>
+</div>
+
+<div class="modal" id="resumeModal">
+  <div class="sheet">
+    <span class="x" onclick="closeResume()">&times;</span>
+    <h2>Zetra M. Batiste, CISSP</h2>
+    <p>Innovative, results-driven cybersecurity executive with 20+ years of federal, military, and international leadership. Proven record designing and implementing enterprise cybersecurity frameworks, leading large teams and multimillion-dollar budgets, and driving risk-informed decisions across federal IT ecosystems.</p>
+    <h3>Clearance &amp; Certifications</h3>
+    <p>Active TS/SCI. CISSP (ISC2), CISM &amp; CRISC (ISACA). CEH and CISA training. MBA (May 2026), MS Digital Forensics &amp; Cyber Investigations, MS Computer Information Technology (Security).</p>
+    <h3>Core Expertise</h3>
+    <ul>
+      <li>Cyber Supply Chain Risk Management (C-SCRM), NIST SP 800-161, vendor/third-party risk</li>
+      <li>Risk Management Framework (RMF), FISMA, A&amp;A / ATO, security compliance</li>
+      <li>Endpoint security, EDR/HBSS, vulnerability management, SIEM (ArcSight)</li>
+      <li>Incident response, insider threat programs, threat intelligence, CND / Red Team</li>
+      <li>Security program leadership, policy development, executive briefings, budget oversight</li>
+    </ul>
+    <h3>Recent Leadership</h3>
+    <ul>
+      <li>Director, C-SCRM &mdash; U.S. Department of State (2022&ndash;present)</li>
+      <li>Division Chief, Endpoint Security &mdash; Department of Defense, Fort Meade (2019&ndash;2022)</li>
+      <li>Technical Director &amp; Network Warfare Cyber Manager &mdash; DoD (2017&ndash;2019)</li>
+      <li>European Theater CISO &mdash; Defense Intelligence Agency (2012&ndash;2013)</li>
+    </ul>
+    <h3>Job Search Focus</h3>
+    <p>Executive and senior cybersecurity leadership roles &mdash; CISO/Deputy CISO, Cyber/Security Director, C-SCRM lead, GRC &amp; cyber risk, ISSM/RMF, and cyber operations leadership &mdash; located in Maryland, Virginia, Washington DC, or fully remote.</p>
+  </div>
+</div>
+
+<script>
+let JOBS=[];
+const grid=document.getElementById('grid');
+function ageDays(d){const t=new Date(d+'T00:00:00');return Math.floor((Date.now()-t)/86400000);}
+function render(){
+  const m=document.getElementById('fMarket').value;
+  const r=document.getElementById('fRole').value;
+  const p=document.getElementById('fPriority').value;
+  const q=document.getElementById('fSearch').value.trim().toLowerCase();
+  const hideStale=document.getElementById('fStale').checked;
+  let rows=JOBS.filter(j=>{
+    if(m&&j.market!==m)return false;
+    if(r?i&&j.roleType!==r)return false;
+    if(p&&j.priority!==p)return false;
+    if(hideStale&&ageDays(j.posted)>=30)return false;
+    if(q){const blob=(j.title+' '+j.company+' '+j.city+' '+(j.notes||'')+' '+(j.tags||[]).join(' ')).toLowerCase();if(!blob.includes(q))return false;}
+    return true;
+  });
+  grid.innerHTML = rows.length? rows.map(cardHTML).join('') :
+    '<div class="empty">No listings match these filters.</div>';
+  document.getElementById('footer').textContent =
+    'Showing '+rows.length+' of '+JOBS.length+' listings · Scored to Zetra’s executive cybersecurity profile · Markets: MD, VA, DC, Remote';
+}
+function cardHTML(j){const a=ageDays(j.posted);const ageCls=a<30?'fresh':'stale';const tags=(j.tags||[]).map(t=>'<span class="badge clr">'+t+'</span>').join('');return `<div class="card ${j.priority}"><div class="ctop"><div><div class="title">${j.title}</div><div class="company">${j.company}</div></div><div class="score ${j.priority}">${j.score}<small>${j.priority.toUpperCase()}</small></div></div><div class="meta"><span>📄 ${j.city} · ${j.market}</span><span>💰 ${j.salary}</span></div><div class="badges"><span class="badge role">${j.roleType}</span>${tags}</div><div class="notes">${j.notes||''}</div><div class="cbot"><a class="apply" href="${j.url}" target="_blank" rel="noopener">View / Apply →</a><span class="posted">Posted ${j.posted}<span class="age ${ageCls}">${a}d</span></span></div></div>`;}
+function buildStats(){const c=(f)=>JOBS.filter(f).length;const s=[['Total',JOBS.length],['High',c(j=>j.priority==='High')],['Medium',c(j=>j.priority==='Medium')],['Stretch',c(j=>j.priority==='Stretch')],['Updated',JOBS[0]?JOBS[0].posted:'-']];document.getElementById('stats').innerHTML=s.map(x=>`<div class="stat"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('');}
+function buildRoleFilter(){const roles=[...new Set(JOBS.map(j=>j.roleType))].sort();const sel=document.getElementById('fRole');roles.forEach(r=>{const o=document.createElement('option');o.textContent=r;sel.appendChild(o);});}
+function openResume(){document.getElementById('resumeModal').classList.add('open');}
+function closeResume(){document.getElementById('resumeModal').classList.remove('open');}
+document.getElementById('resumeModal').addEventListener('click',e=>{if(e.target.id==='resumeModal')closeResume();});
+['fMarket','fRole','fPriority','fStale'].forEach(id=>document.getElementById(id).addEventListener('change',render));
+document.getElementById('fSearch').addEventListener('input',render);
+document.getElementById('refreshLink').href='?v='+Date.now();
+fetch('jobs.json?v='+Date.now()).then(r=>r.json()).then(d=>{JOBS=d;buildStats();buildRoleFilter();render();}).catch(e=>{grid.innerHTML='<div class="empty">Could not load jobs.json ('+e+')</div>';});
+</script>
+</body>
+</html>
