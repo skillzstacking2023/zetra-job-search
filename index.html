@@ -23,7 +23,7 @@
   .btnrow{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
   .btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer}
   .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt)}
-  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:22px 0}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:12px;margin:22px 0}
   .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center}
   .stat .n{font-size:24px;font-weight:700}
   .stat .l{font-size:12px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
@@ -57,6 +57,24 @@
   .age{margin-left:8px;padding:2px 8px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:11px}
   .age.fresh{color:var(--high)} .age.stale{color:var(--med)}
   .empty{text-align:center;color:var(--muted);padding:50px;grid-column:1/-1}
+  /* --- v2: tracking, deadlines, scanning aids --- */
+  .flags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:-2px}
+  .flag{font-size:10.5px;font-weight:700;letter-spacing:.4px;padding:2px 8px;border-radius:10px;text-transform:uppercase}
+  .flag.new{background:rgba(79,140,255,.16);border:1px solid rgba(79,140,255,.45);color:#a9c6ff}
+  .flag.close{background:rgba(242,181,68,.16);border:1px solid rgba(242,181,68,.5);color:#f7cd7a}
+  .flag.close.urgent{background:rgba(255,90,90,.18);border-color:rgba(255,90,90,.6);color:#ff9a9a}
+  .card.tracked{box-shadow:inset 3px 0 0 rgba(255,255,255,.04)}
+  .track{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:2px}
+  .sbtn{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);cursor:pointer}
+  .sbtn:hover{color:var(--txt)}
+  .sbtn.on.Saved{background:rgba(79,140,255,.18);border-color:var(--accent);color:#bcd4ff}
+  .sbtn.on.Applied{background:rgba(49,208,170,.16);border-color:var(--accent2);color:#7ff0d5}
+  .sbtn.on.Interviewing{background:rgba(242,181,68,.18);border-color:var(--med);color:#f7cd7a}
+  .sbtn.on.Passed{background:rgba(138,147,168,.18);border-color:var(--stretch);color:#c3ceE0}
+  .notebtn{margin-left:auto;font-size:11.5px;color:var(--muted);cursor:pointer;background:none;border:none;text-decoration:underline dotted}
+  .notebox{width:100%;margin-top:6px;background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:vertical;display:none}
+  .notebox.show{display:block}
+  .stat.act .n{color:var(--accent2)}
   .modal{position:fixed;inset:0;background:rgba(4,8,16,.72);display:none;align-items:flex-start;justify-content:center;padding:40px 20px;z-index:50;overflow:auto}
   .modal.open{display:flex}
   .sheet{background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:760px;width:100%;padding:26px 28px}
@@ -100,10 +118,19 @@
     <div class="grp"><label>Priority</label>
       <select id="fPriority"><option value="">All</option><option>High</option><option>Medium</option><option>Stretch</option></select>
     </div>
+    <div class="grp"><label>Sort By</label>
+      <select id="fSort">
+        <option value="score">Best Match</option>
+        <option value="newest">Newest</option>
+        <option value="closing">Closing Soonest</option>
+        <option value="salary">Salary (high)</option>
+      </select>
+    </div>
     <div class="grp"><label>Search</label>
       <input type="text" id="fSearch" placeholder="title, company, keyword">
     </div>
-    <label class="toggle"><input type="checkbox" id="fStale"> Hide listings 30+ days old</label>
+    <label class="toggle"><input type="checkbox" id="fStale"> Hide 30+ days old</label>
+    <label class="toggle"><input type="checkbox" id="fVerified"> Verified direct postings only</label>
   </div>
 
   <div class="grid" id="grid"></div>
@@ -139,32 +166,94 @@
 
 <script>
 let JOBS=[];
+let NEWKEYS=new Set();      // keys new since last visit
 const grid=document.getElementById('grid');
+const STATUSES=['Saved','Applied','Interviewing','Passed'];
 function ageDays(d){const t=new Date(d+'T00:00:00');return Math.floor((Date.now()-t)/86400000);}
+
+/* ---- stable per-job key (survives jobs.json refreshes that reassign ids) ---- */
+function keyOf(j){return (j.title+'|'+j.company).toLowerCase().replace(/\s+/g,' ').trim();}
+
+/* ---- localStorage-backed tracking ---- */
+function lsGet(k,def){try{return JSON.parse(localStorage.getItem(k))??def;}catch(e){return def;}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+let TRACK=lsGet('zetra_track',{});   // {key:{status,note}}
+function trackOf(j){return TRACK[keyOf(j)]||{status:'',note:''};}
+function setStatus(j,status){
+  const k=keyOf(j);const cur=TRACK[k]||{status:'',note:''};
+  cur.status = (cur.status===status)?'':status;   // toggle off if same
+  TRACK[k]=cur;lsSet('zetra_track',TRACK);buildStats();render();
+}
+function setNote(j,note){
+  const k=keyOf(j);const cur=TRACK[k]||{status:'',note:''};
+  cur.note=note;TRACK[k]=cur;lsSet('zetra_track',TRACK);
+}
+
+/* ---- deadline parsing: explicit closeDate field, else parse "CLOSES <Month> <d>, <yyyy>" from notes ---- */
+const MONTHS={january:0,february:1,march:2,april:3,may:4,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
+function closeDateOf(j){
+  if(j.closeDate){const d=new Date(j.closeDate+'T23:59:59');return isNaN(d)?null:d;}
+  const m=(j.notes||'').match(/clos\w*\s+([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/i);
+  if(m&&MONTHS[m[1].toLowerCase()]!==undefined){return new Date(+m[3],MONTHS[m[1].toLowerCase()],+m[2],23,59,59);}
+  return null;
+}
+function daysToClose(j){const d=closeDateOf(j);return d?Math.ceil((d-Date.now())/86400000):null;}
+function isVerified(j){return (j.tags||[]).some(t=>/verified/i.test(t));}
+function salaryNum(j){const m=(j.salary||'').match(/(\d+)\s*K/i);return m?+m[1]:0;}
 function render(){
   const m=document.getElementById('fMarket').value;
   const r=document.getElementById('fRole').value;
   const p=document.getElementById('fPriority').value;
   const q=document.getElementById('fSearch').value.trim().toLowerCase();
   const hideStale=document.getElementById('fStale').checked;
+  const verOnly=document.getElementById('fVerified').checked;
+  const sort=document.getElementById('fSort').value;
   let rows=JOBS.filter(j=>{
     if(m&&j.market!==m)return false;
     if(r&&j.roleType!==r)return false;
     if(p&&j.priority!==p)return false;
     if(hideStale&&ageDays(j.posted)>=30)return false;
+    if(verOnly&&!isVerified(j))return false;
     if(q){const blob=(j.title+' '+j.company+' '+j.city+' '+(j.notes||'')+' '+(j.tags||[]).join(' ')).toLowerCase();if(!blob.includes(q))return false;}
     return true;
+  });
+  rows.sort((a,b)=>{
+    if(sort==='newest')return (b.posted||'').localeCompare(a.posted||'');
+    if(sort==='salary')return salaryNum(b)-salaryNum(a);
+    if(sort==='closing'){                       // jobs with a deadline first, soonest on top
+      const da=daysToClose(a),db=daysToClose(b);
+      if(da===null&&db===null)return b.score-a.score;
+      if(da===null)return 1; if(db===null)return -1; return da-db;
+    }
+    return b.score-a.score;
   });
   grid.innerHTML = rows.length? rows.map(cardHTML).join('') :
     '<div class="empty">No listings match these filters.</div>';
   document.getElementById('footer').textContent =
     'Showing '+rows.length+' of '+JOBS.length+' listings · Scored to Zetra’s executive cybersecurity profile · Markets: MD, VA, DC, Remote';
 }
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function cardHTML(j){
+  const i=JOBS.indexOf(j);
   const a=ageDays(j.posted);
   const ageCls=a<30?'fresh':'stale';
   const tags=(j.tags||[]).map(t=>'<span class="badge clr">'+t+'</span>').join('');
-  return `<div class="card ${j.priority}">
+  const tr=trackOf(j);
+  // flags
+  let flags='';
+  if(NEWKEYS.has(keyOf(j)))flags+='<span class="flag new">New</span>';
+  const dtc=daysToClose(j);
+  if(dtc!==null){
+    const cls = dtc<=3?'flag close urgent':'flag close';
+    const lbl = dtc<0?'Closed':(dtc===0?'Closes today':(dtc===1?'Closes in 1 day':'Closes in '+dtc+' days'));
+    flags+=`<span class="${cls}">${lbl}</span>`;
+  }
+  const flagRow=flags?`<div class="flags">${flags}</div>`:'';
+  // status buttons
+  const sbtns=STATUSES.map(s=>`<button class="sbtn ${s} ${tr.status===s?'on':''}" data-i="${i}" data-act="status" data-s="${s}">${s}</button>`).join('');
+  const noteShow=tr.note?'show':'';
+  return `<div class="card ${j.priority} ${tr.status?'tracked':''}">
+    ${flagRow}
     <div class="ctop">
       <div>
         <div class="title">${j.title}</div>
@@ -178,6 +267,8 @@ function cardHTML(j){
     </div>
     <div class="badges"><span class="badge role">${j.roleType}</span>${tags}</div>
     <div class="notes">${j.notes||''}</div>
+    <div class="track">${sbtns}<button class="notebtn" data-i="${i}" data-act="note-toggle">${tr.note?'Edit note':'+ Note'}</button></div>
+    <textarea class="notebox ${noteShow}" data-i="${i}" data-act="note" placeholder="Private note — application status, contacts, follow-ups…">${esc(tr.note||'')}</textarea>
     <div class="cbot">
       <a class="apply" href="${j.url}" target="_blank" rel="noopener">View / Apply →</a>
       <span class="posted">Posted ${j.posted}<span class="age ${ageCls}">${a}d</span></span>
@@ -186,14 +277,17 @@ function cardHTML(j){
 }
 function buildStats(){
   const c=(f)=>JOBS.filter(f).length;
+  const ts=(st)=>JOBS.filter(j=>trackOf(j).status===st).length;
   const s=[
-    ['Total',JOBS.length],
-    ['High',c(j=>j.priority==='High')],
-    ['Medium',c(j=>j.priority==='Medium')],
-    ['Stretch',c(j=>j.priority==='Stretch')],
-    ['Updated',JOBS[0]?JOBS[0].posted:'-']
+    ['Total',JOBS.length,''],
+    ['High',c(j=>j.priority==='High'),''],
+    ['Medium',c(j=>j.priority==='Medium'),''],
+    ['Saved',ts('Saved'),'act'],
+    ['Applied',ts('Applied'),'act'],
+    ['Interviewing',ts('Interviewing'),'act'],
+    ['Updated',JOBS[0]?JOBS[0].posted:'-','']
   ];
-  document.getElementById('stats').innerHTML=s.map(x=>`<div class="stat"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('');
+  document.getElementById('stats').innerHTML=s.map(x=>`<div class="stat ${x[2]}"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('');
 }
 function buildRoleFilter(){
   const roles=[...new Set(JOBS.map(j=>j.roleType))].sort();
@@ -203,11 +297,38 @@ function buildRoleFilter(){
 function openResume(){document.getElementById('resumeModal').classList.add('open');}
 function closeResume(){document.getElementById('resumeModal').classList.remove('open');}
 document.getElementById('resumeModal').addEventListener('click',e=>{if(e.target.id==='resumeModal')closeResume();});
-['fMarket','fRole','fPriority','fStale'].forEach(id=>document.getElementById(id).addEventListener('change',render));
+['fMarket','fRole','fPriority','fStale','fVerified','fSort'].forEach(id=>document.getElementById(id).addEventListener('change',render));
 document.getElementById('fSearch').addEventListener('input',render);
 document.getElementById('refreshLink').href='?v='+Date.now();
-fetch('jobs.json?v='+Date.now()).then(r=>r.json()).then(d=>{JOBS=d;buildStats();buildRoleFilter();render();})
- .catch(e=>{grid.innerHTML='<div class="empty">Could not load jobs.json ('+e+')</div>';});
+
+/* delegated handlers for tracking controls */
+grid.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]');if(!el)return;
+  const act=el.dataset.act;
+  if(act==='status'){setStatus(JOBS[+el.dataset.i],el.dataset.s);}
+  else if(act==='note-toggle'){
+    const box=el.closest('.card').querySelector('.notebox');
+    box.classList.toggle('show');if(box.classList.contains('show'))box.focus();
+  }
+});
+grid.addEventListener('input',e=>{
+  const el=e.target.closest('[data-act="note"]');if(!el)return;
+  setNote(JOBS[+el.dataset.i],el.value);
+});
+const JOBS_DATA=[{"id":1,"score":95,"title":"Supervisory IT Specialist (Cyber Policy and Planning) GS-15","company":"Department of Homeland Security","market":"DC","city":"Washington, DC","salary":"$150K-$195K/yr","roleType":"Federal Exec","tags":["GS-15","Cyber Policy","VERIFIED"],"priority":"High","url":"https://dhs.usajobs.gov/job/874975400","notes":"VERIFIED OPEN 2026-07-03 \u2014 CLOSES JULY 8, 2026. GS-2210-15 leading a national-level cyber policy team. Direct match to her federal exec track \u2014 APPLY NOW.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":2,"score":94,"title":"Director, Cyber Supply Chain Risk Management (C-SCRM)","company":"Federal Systems Integrator","market":"VA","city":"Arlington, VA","salary":"$175K-$215K/yr","roleType":"C-SCRM","tags":["TS/SCI","CISSP","RMF"],"priority":"High","url":"https://www.linkedin.com/jobs/search/?keywords=Director%20Cyber%20Supply%20Chain%20Risk%20Management&location=Arlington%20Virginia","notes":"Direct match to current State Dept C-SCRM director role - NIST 800-161 - Vendor risk governance - TS/SCI leveraged","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":3,"score":93,"title":"Lead Cyber-Supply Chain Risk Management Specialist","company":"Boeing","market":"VA","city":"Arlington, VA","salary":"$160K-$205K/yr","roleType":"C-SCRM","tags":["C-SCRM","NIST 800-161","VERIFIED"],"priority":"High","url":"https://jobs.boeing.com/job/arlington/lead-cyber-supply-chain-risk-management-specialist/185/96799241056","notes":"VERIFIED LIVE 2026-07-03 \u2014 direct posting. Lead C-SCRM specialist, emerging frameworks. Her exact specialty.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":4,"score":92,"title":"Senior Cyber-Supply Chain Risk Management Specialist","company":"Boeing","market":"VA","city":"Arlington, VA","salary":"$150K-$190K/yr","roleType":"C-SCRM","tags":["C-SCRM","NIST 800-53","VERIFIED"],"priority":"High","url":"https://jobs.boeing.com/search-jobs/c-scrm/185/1","notes":"VERIFIED \u2014 Job ID JR2026514501, posted June 22, 2026. 5+ yrs risk management/governance, NIST 800-53/800-171/CMMC frameworks.","postedDate":"2026-06-22","posted":"2026-06-22"},{"id":5,"score":92,"title":"Deputy Chief Information Security Officer","company":"State of Maryland","market":"MD","city":"Baltimore, MD","salary":"$150K-$185K/yr","roleType":"CISO","tags":["State Gov","Deputy CISO"],"priority":"High","url":"https://www.jobapscloud.com/MD/sup/BulPreview.asp?R1=24&R2=004491&R3=0007","notes":"State of MD Deputy CISO announcement (repost) \u2014 still appearing in listings 2026-07-03; verify status on MD JobAps before applying.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":6,"score":91,"title":"Chief Information Security Officer","company":"Federal Agency (USAJOBS)","market":"DC","city":"Washington, DC","salary":"$180K-$221K/yr","roleType":"Federal Exec","tags":["CISO","Federal","VERIFIED"],"priority":"High","url":"https://www.usajobs.gov/job/873411000","notes":"VERIFIED on USAJOBS 2026-07-03 \u2014 agency CISO vacancy. Check announcement for closing date and SES/GS level.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":7,"score":90,"title":"Information Systems Security Manager (ISSM) 2 \u2014 TS/SCI w/Poly","company":"Amentum","market":"MD","city":"Fort Meade, MD","salary":"$140K-$175K/yr","roleType":"ISSM/RMF","tags":["TS/SCI","RMF","VERIFIED"],"priority":"High","url":"https://www.amentumcareers.com/jobs/information-systems-security-manager-issm-2-ts-sci-w-poly-fort-meade-maryland-united-states-94673c63-1cc1-4d12-ad24-b76876243c17","notes":"VERIFIED LIVE 2026-07-03 \u2014 direct posting at Fort Meade. Her old duty station; RMF + clearance direct match.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":90,"title":"Deputy Program Manager \u2014 TS/SCI w/Poly","company":"Amentum","market":"MD","city":"Columbia, MD","salary":"$150K-$190K/yr","roleType":"Program Mgmt","tags":["TS/SCI Poly","PMO","RMF","VERIFIED"],"priority":"High","url":"https://www.amentumcareers.com/jobs/deputy-program-manager-ts-sci-w-poly-columbia-maryland-united-states","notes":"VERIFIED LIVE 2026-07-03 \u2014 PMO for enterprise-wide cybersecurity + RMF program near Fort Meade. Cost/schedule/risk/staffing across task orders. Her Division Chief + budget experience is a direct hit. 15 min from Ellicott City.","postedDate":"2026-07-03","posted":"2026-07-03","id":8},{"id":9,"score":89,"title":"Information Systems Security Manager (ISSM), Senior Advisor","company":"Peraton","market":"MD","city":"Fort Meade, MD","salary":"$146K-$234K/yr","roleType":"ISSM/RMF","tags":["TS/SCI","Senior Advisor","VERIFIED"],"priority":"High","url":"https://www.careers.peraton.com/jobs/information-systems-security-manager-issm-senior-advisor-fort-meade-maryland-160098-jobs--cyber-security--","notes":"VERIFIED LIVE 2026-07-03 \u2014 Senior Advisor level ISSM at Fort Meade. Matches her Division Chief seniority better than standard ISSM.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":10,"score":88,"title":"Information Systems Security Manager (ISSM)","company":"The Swift Group","market":"MD","city":"Annapolis Junction, MD","salary":"$135K-$185K/yr","roleType":"ISSM/RMF","tags":["TS/SCI Poly","RMF","VERIFIED"],"priority":"High","url":"https://jobs.gem.com/the-swift-group/am9icG9zdDrOmSysURENNOHCDbX-m1mk","notes":"VERIFIED LIVE 2026-07-03 \u2014 ISSM leading IA program, RMF/DoD. Annapolis Junction = 20 min from Ellicott City.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":11,"score":88,"title":"Supervisory IT Cybersecurity Specialist (INFOSEC) GS-15","company":"Federal Agency (USAJOBS)","market":"DC","city":"Washington, DC","salary":"$143K-$195K/yr","roleType":"Federal Exec","tags":["GS-15","INFOSEC","VERIFIED"],"priority":"High","url":"https://www.usajobs.gov/job/872132300","notes":"VERIFIED on USAJOBS 2026-07-03 \u2014 GS-15 supervisory cyber. Check closing date.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":88,"title":"Cybersecurity Program Manager (Cleared)","company":"Federal Contractor (Ft Meade corridor)","market":"MD","city":"Fort Meade / Columbia, MD","salary":"$150K-$195K/yr","roleType":"Program Mgmt","tags":["TS/SCI","Program Mgmt"],"priority":"High","url":"https://www.clearancejobs.com/q-program-manager","notes":"1,300+ cleared cyber roles active in the Ft Meade corridor. Cyber PM roles map to her portfolio management of major State Dept IT security projects + multimillion-dollar budget oversight.","postedDate":"2026-07-03","posted":"2026-07-03","id":12},{"id":13,"score":87,"title":"Cybersecurity Executive (DHS Cybersecurity Service)","company":"Department of Homeland Security","market":"DC","city":"Washington, DC","salary":"$176K-$238K/yr","roleType":"Federal Exec","tags":["DHS CS","Executive"],"priority":"High","url":"https://cybersecurity.usajobs.gov/","notes":"DHS Cybersecurity Service \u2014 excepted service, pay up to $238K. Rolling intake for executive-track cyber leaders.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":87,"title":"Principal / Director Consultant, Vendor Risk Management","company":"Consulting (DC-Baltimore)","market":"DC","city":"Washington DC-Baltimore","salary":"$150K-$200K/yr","roleType":"Vendor Risk/TPRM","tags":["TPRM","NIST 800-161"],"priority":"High","url":"https://www.linkedin.com/jobs/third-party-risk-jobs","notes":"Director-level vendor risk consulting actively hiring per July 2026 scan. Her State Dept vendor due-diligence frameworks + NIST 800-161 program = the exact service offering. 22,000+ TPRM listings nationally, 146 new.","postedDate":"2026-07-03","posted":"2026-07-03","id":14},{"id":15,"score":86,"title":"Cyber Security Task Lead","company":"Leidos","market":"MD","city":"Linthicum Heights, MD","salary":"$150K-$190K/yr","roleType":"Cyber Ops","tags":["TS/SCI","Task Lead"],"priority":"High","url":"https://careers.leidos.com/search/jobs?keywords=cyber%20security%20task%20lead&location=Maryland","notes":"Leidos cyber task lead roles in MD \u2014 leadership + cleared ops match.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":16,"score":85,"title":"Director of Cybersecurity / Security Program","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$170K-$220K/yr","roleType":"Security Director","tags":["Remote","Director"],"priority":"High","url":"https://www.linkedin.com/jobs/search/?keywords=Director%20of%20Cybersecurity&location=United%20States&f_WT=2","notes":"Remote director-level security program roles \u2014 venture-backed and enterprise cos actively hiring CISSP execs per July 2026 market scan.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":85,"title":"Technical / IT Program Manager (Cleared)","company":"Federal Contractor","market":"DC","city":"Washington, DC / Arlington, VA","salary":"$145K-$190K/yr","roleType":"Program Mgmt","tags":["TS eligible","Federal IT"],"priority":"High","url":"https://www.glassdoor.com/Job/washington-program-manager-top-secret-clearance-jobs-SRCH_IL.0,10_IC1138213_KO11,47.htm","notes":"693 cleared PM openings in DC (July 2026). Typical bar: 10+ yrs IT ops with 5+ supervisory in federal environment \u2014 she clears it easily. DC TPM average $164K.","postedDate":"2026-07-03","posted":"2026-07-03","id":17},{"id":18,"score":84,"title":"Senior Manager, Cyber Risk / GRC","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$155K-$200K/yr","roleType":"GRC/Risk","tags":["Remote","GRC"],"priority":"Medium","url":"https://www.indeed.com/q-cyber-security-grc-remote-jobs.html","notes":"152 remote GRC roles on Glassdoor as of this refresh \u2014 CRISC/CISM directly valued.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":84,"title":"Supervisory Program Manager (IT/Cyber) GS-14/15","company":"Federal Agency (USAJOBS)","market":"DC","city":"Washington, DC","salary":"$142K-$195K/yr","roleType":"Program Mgmt","tags":["GS-14/15","Federal"],"priority":"Medium","url":"https://www.usajobs.gov/Search/Results?k=program%20project%20management%20cybersecurity","notes":"Federal PM track (0340/2210 series) \u2014 cyber program oversight roles post regularly. Her federal exec background + MBA fits; watch for direct-hire announcements.","postedDate":"2026-07-03","posted":"2026-07-03","id":19},{"id":20,"score":83,"title":"Director, Cybersecurity","company":"State of Maryland (DoIT)","market":"MD","city":"Baltimore, MD","salary":"$140K-$180K/yr","roleType":"CISO","tags":["State Gov","Director"],"priority":"Medium","url":"https://jobapscloud.com/MD/sup/bulpreview.asp?R1=23&R2=005485&R3=0030","notes":"MD DoIT cybersecurity director announcement \u2014 older series; verify current status. MD added Director of State Cybersecurity + Director of Local Cybersecurity roles under State CISO.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":21,"score":82,"title":"Cybersecurity Supply Chain Risk Management SME","company":"Navanti Group","market":"VA","city":"Arlington, VA","salary":"$140K-$180K/yr","roleType":"C-SCRM","tags":["C-SCRM","SME"],"priority":"Medium","url":"https://www.indeed.com/jobs?q=Navanti+cybersecurity+supply+chain+risk+management&l=Arlington%2C+VA","notes":"C-SCRM SME supporting federal client \u2014 her exact current function.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":22,"score":81,"title":"Supply Chain Risk Management (SCRM) Lead","company":"Federal Contractor","market":"VA","city":"Falls Church, VA","salary":"$140K-$175K/yr","roleType":"C-SCRM","tags":["SCRM","Federal"],"priority":"Medium","url":"https://www.indeed.com/jobs?q=supply+chain+risk+management+lead+cyber&l=Falls+Church%2C+VA","notes":"SCRM lead roles clustered in NoVA federal corridor.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":23,"score":80,"title":"Principal Computer Network Defense Analyst","company":"Leidos","market":"MD","city":"Linthicum Heights, MD","salary":"$150K-$185K/yr","roleType":"Cyber Ops","tags":["CND","TS/SCI"],"priority":"Medium","url":"https://careers.leidos.com/search/jobs?keywords=principal%20computer%20network%20defense&location=Maryland","notes":"Principal CND \u2014 maps to her Red Team / CND analyst background at senior level.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":80,"title":"Third-Party Risk Management Lead","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$120K-$165K/yr","roleType":"Vendor Risk/TPRM","tags":["Remote","TPRM"],"priority":"Medium","url":"https://www.indeed.com/q-remote-third-party-risk-management-jobs.html","notes":"600+ remote TPRM roles on Glassdoor. Lead/manager level pays below her director comp \u2014 but strong part-time/flexible and remote pipeline for the post-retirement phase.","postedDate":"2026-07-03","posted":"2026-07-03","id":24},{"id":25,"score":79,"title":"Cyber Risk / GRC Manager","company":"Private Sector","market":"DC","city":"Washington, DC","salary":"$130K-$180K/yr","roleType":"GRC/Risk","tags":["GRC","CRISC"],"priority":"Medium","url":"https://www.ziprecruiter.com/Jobs/Grc-Manager/-in-Washington,DC","notes":"GRC manager roles in DC \u2014 CRISC + CISM stack directly relevant.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":26,"score":78,"title":"Insider Threat Program Manager","company":"Federal Contractor","market":"VA","city":"McLean, VA","salary":"$140K-$178K/yr","roleType":"IR/Threat","tags":["Insider Threat","TS/SCI"],"priority":"Medium","url":"https://www.linkedin.com/jobs/search/?keywords=insider%20threat%20program%20manager&location=McLean%20Virginia","notes":"She ran the DIA insider threat program in the European theater \u2014 direct experience match.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":27,"score":77,"title":"Incident Response / DFIR Manager","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$150K-$190K/yr","roleType":"IR/Threat","tags":["Remote","DFIR"],"priority":"Medium","url":"https://www.indeed.com/q-incident-response-manager-l-remote-jobs.html","notes":"MS in Digital Forensics & Cyber Investigations + incident handling program leadership.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":77,"title":"PMO / Portfolio Director","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$160K-$210K/yr","roleType":"Program Mgmt","tags":["Remote","PMO"],"priority":"Medium","url":"https://www.ziprecruiter.com/Jobs/Technical-Program-Manager/-in-Washington,DC","notes":"Portfolio/PMO leadership \u2014 her multi-task-order, multi-bureau program orchestration translates directly. PMP not held; MBA (May 2026) + 20 yrs federal program leadership carries most postings that say PMP preferred.","postedDate":"2026-07-03","posted":"2026-07-03","id":28},{"id":29,"score":76,"title":"Delegated Authorizing Official Rep (DAO-R) / RMF Lead","company":"Arcfield","market":"VA","city":"Chantilly, VA","salary":"$140K-$180K/yr","roleType":"ISSM/RMF","tags":["RMF","A&A"],"priority":"Medium","url":"https://www.indeed.com/jobs?q=Arcfield+authorizing+official+RMF&l=Chantilly%2C+VA","notes":"RMF SME / A&A authority role \u2014 she was RMF SME for the European theater.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":30,"score":75,"title":"Endpoint Security / EDR Program Lead","company":"Federal Contractor","market":"VA","city":"Reston, VA","salary":"$140K-$180K/yr","roleType":"Endpoint","tags":["EDR","HBSS"],"priority":"Medium","url":"https://www.linkedin.com/jobs/search/?keywords=endpoint%20security%20program%20lead&location=Reston%20Virginia","notes":"Former DoD Endpoint Security Division Chief (50-person team) \u2014 overqualified in a good way.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":31,"score":74,"title":"Threat Intelligence Lead / Manager","company":"Federal Contractor","market":"MD","city":"Hanover, MD","salary":"$135K-$175K/yr","roleType":"IR/Threat","tags":["Threat Intel","TS/SCI"],"priority":"Medium","url":"https://www.indeed.com/jobs?q=threat+intelligence+lead&l=Maryland","notes":"Threat intel leadership near BWI corridor \u2014 NSA-adjacent contractor cluster.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":74,"title":"Cybersecurity Training & Workforce Development Lead","company":"Federal Contractor","market":"MD","city":"Fort Meade, MD","salary":"$130K-$170K/yr","roleType":"Program Mgmt","tags":["Training","Curriculum"],"priority":"Medium","url":"https://clearedjobs.net/l-maryland-jobs.html","notes":"She built the NSA Mission Manager curriculum and ran DoD 8570 workforce certification for DISA Europe \u2014 workforce development leadership is an underused arrow in her quiver.","postedDate":"2026-07-03","posted":"2026-07-03","id":32},{"score":70,"title":"Adjunct Faculty \u2014 Cybersecurity (Part-Time)","company":"UMGC / Regional Universities","market":"Remote","city":"Remote / Adelphi, MD","salary":"Per course","roleType":"Program Mgmt","tags":["Part-Time","Flexible"],"priority":"Medium","url":"https://careers.umgc.edu/","notes":"Two-time UMGC alum (MBA May 2026 + MS Digital Forensics) with 20 yrs practitioner credibility \u2014 natural part-time/flexible income and identity bridge for the March 2027 post-retirement phase.","postedDate":"2026-07-03","posted":"2026-07-03","id":33},{"id":34,"score":72,"title":"Chief Information Security Officer","company":"Private Sector (Enterprise)","market":"DC","city":"Washington, DC","salary":"$200K-$280K/yr","roleType":"CISO","tags":["CISO","Enterprise"],"priority":"Stretch","url":"https://www.linkedin.com/jobs/search/?keywords=Chief%20Information%20Security%20Officer&location=Washington%20DC","notes":"250 CISO listings in DC on Ladders as of this refresh. Private-sector CISO comp at IC primes can exceed $350K.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":35,"score":71,"title":"VP / Senior Director, Cybersecurity","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$200K-$260K/yr","roleType":"Security Director","tags":["Remote","VP"],"priority":"Stretch","url":"https://www.linkedin.com/jobs/search/?keywords=VP%20cybersecurity&location=United%20States&f_WT=2","notes":"VP-level remote \u2014 MBA (May 2026) + 20 yrs federal leadership strengthens the exec case.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":36,"score":70,"title":"Cyber Operations Director (Cleared)","company":"Booz Allen Hamilton","market":"VA","city":"McLean, VA","salary":"$170K-$220K/yr","roleType":"Cyber Ops","tags":["TS/SCI","Director"],"priority":"Stretch","url":"https://careers.boozallen.com/teams/cyber","notes":"She started her cleared career at Booz Allen (2003-2007) \u2014 alumni returner angle.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":37,"score":69,"title":"Principal Cybersecurity Architect","company":"JHU Applied Physics Laboratory","market":"MD","city":"Laurel, MD","salary":"$160K-$210K/yr","roleType":"Security Director","tags":["FFRDC","Laurel MD"],"priority":"Stretch","url":"https://www.linkedin.com/jobs/search/?keywords=principal%20cybersecurity%20architect&location=Laurel%20Maryland","notes":"APL = 15 min from Ellicott City, stable FFRDC, strong benefits.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":38,"score":66,"title":"Cybersecurity Consulting Director","company":"Big 4 / Consulting","market":"Remote","city":"Remote","salary":"$180K-$250K/yr","roleType":"Security Director","tags":["Consulting","Remote"],"priority":"Stretch","url":"https://www.linkedin.com/jobs/search/?keywords=cybersecurity%20consulting%20director&location=United%20States","notes":"Consulting director track \u2014 federal C-SCRM expertise is a differentiator Big 4 firms sell to agencies.","postedDate":"2026-07-03","posted":"2026-07-03"}];
+function boot(d){
+  JOBS=d;
+  // "new since last visit": keys present now but not at last visit
+  const seen=lsGet('zetra_seen',null);
+  const curKeys=JOBS.map(keyOf);
+  if(Array.isArray(seen)&&seen.length){
+    const seenSet=new Set(seen);
+    NEWKEYS=new Set(curKeys.filter(k=>!seenSet.has(k)));
+  }
+  lsSet('zetra_seen',curKeys);   // record current for next visit
+  buildStats();buildRoleFilter();render();
+}
+fetch('jobs.json?v='+Date.now()).then(r=>r.json()).then(boot).catch(()=>boot(JOBS_DATA));
 </script>
 </body>
 </html>
