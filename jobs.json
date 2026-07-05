@@ -2,6 +2,26 @@
  {
   "id": 1,
   "score": 95,
+  "title": "Supervisory IT Specialist (Cyber Policy and Planning) GS-15",
+  "company": "Department of Homeland Security",
+  "market": "DC",
+  "city": "Washington, DC",
+  "salary": "$150K-$195K/yr",
+  "roleType": "Federal Exec",
+  "tags": [
+   "GS-15",
+   "Cyber Policy",
+   "VERIFIED"
+  ],
+  "priority": "High",
+  "url": "https://dhs.usajobs.gov/job/874975400",
+  "notes": "VERIFIED OPEN 2026-07-03 \u2014 CLOSES JULY 8, 2026. GS-2210-15 leading a national-level cyber policy team. Direct match to her federal exec track \u2014 APPLY NOW.",
+  "postedDate": "2026-07-03",
+  "posted": "2026-07-03"
+ },
+ {
+  "id": 2,
+  "score": 94,
   "title": "Director, Cyber Supply Chain Risk Management (C-SCRM)",
   "company": "Federal Systems Integrator",
   "market": "VA",
@@ -20,25 +40,6 @@
   "posted": "2026-07-03"
  },
  {
-  "id": 2,
-  "score": 94,
-  "title": "Deputy Chief Information Security Officer",
-  "company": "State of Maryland",
-  "market": "MD",
-  "city": "Baltimore, MD",
-  "salary": "$150K-$185K/yr",
-  "roleType": "CISO",
-  "tags": [
-   "CISSP",
-   "RMF"
-  ],
-  "priority": "High",
-  "url": "https://www.jobapscloud.com/MD/sup/BulPreview.asp?R1=24&R2=004491&R3=0007",
-  "notes": "Enterprise security leadership - Policy and compliance - Strong seniority match - MD state government",
-  "postedDate": "2026-07-03",
-  "posted": "2026-07-03"
- },
- {
   "id": 3,
   "score": 93,
   "title": "Lead Cyber-Supply Chain Risk Management Specialist",
@@ -48,74 +49,98 @@
   "salary": "$160K-$205K/yr",
   "roleType": "C-SCRM",
   "tags": [
-   "CISSP",
-   "RMF"
+   "C-SCRM",
+   "NIST 800-161",
+   "VERIFIED"
   ],
   "priority": "High",
   "url": "https://jobs.boeing.com/job/arlington/lead-cyber-supply-chain-risk-management-specialist/185/96799241056",
-  "notes": "C-SCRM SME - Third party risk and resilience - Emerging frameworks - Hybrid Arlington - Direct domain fit",
+  "notes": "VERIFIED LIVE 2026-07-03 \u2014 direct posting. Lead C-SCRM specialist, emerging frameworks. Her exact specialty.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
   "id": 4,
   "score": 92,
-  "title": "Chief Information Security Officer (SES)",
-  "company": "U.S. General Services Administration",
-  "market": "DC",
-  "city": "Washington, DC",
-  "salary": "$180K-$221K/yr",
-  "roleType": "Federal Exec",
+  "title": "Senior Cyber-Supply Chain Risk Management Specialist",
+  "company": "Boeing",
+  "market": "VA",
+  "city": "Arlington, VA",
+  "salary": "$150K-$190K/yr",
+  "roleType": "C-SCRM",
   "tags": [
-   "Public Trust",
-   "SES"
+   "C-SCRM",
+   "NIST 800-53",
+   "VERIFIED"
   ],
   "priority": "High",
-  "url": "https://www.usajobs.gov/Search/Results?k=chief%20information%20security%20officer&l=Washington%2C%20DC",
-  "notes": "Senior Executive Service CISO - Agency-wide security program - 15+ yrs and exec leadership required - Strong fit",
-  "postedDate": "2026-07-03",
-  "posted": "2026-07-03"
+  "url": "https://jobs.boeing.com/search-jobs/c-scrm/185/1",
+  "notes": "VERIFIED \u2014 Job ID JR2026514501, posted June 22, 2026. 5+ yrs risk management/governance, NIST 800-53/800-171/CMMC frameworks.",
+  "postedDate": "2026-06-22",
+  "posted": "2026-06-22"
  },
  {
   "id": 5,
-  "score": 91,
-  "title": "Cybersecurity Executive (DHS Cybersecurity Service)",
-  "company": "Department of Homeland Security",
-  "market": "DC",
-  "city": "Washington, DC",
-  "salary": "$176K-$238K/yr",
-  "roleType": "Federal Exec",
+  "score": 92,
+  "title": "Deputy Chief Information Security Officer",
+  "company": "State of Maryland",
+  "market": "MD",
+  "city": "Baltimore, MD",
+  "salary": "$150K-$185K/yr",
+  "roleType": "CISO",
   "tags": [
-   "Public Trust"
+   "State Gov",
+   "Deputy CISO"
   ],
   "priority": "High",
-  "url": "https://cybersecurity.usajobs.gov/",
-  "notes": "DHS Cybersecurity Service executive tier - OCIO / USSS roles - DC metro locality - 15+ yrs cyber leadership",
+  "url": "https://www.jobapscloud.com/MD/sup/BulPreview.asp?R1=24&R2=004491&R3=0007",
+  "notes": "State of MD Deputy CISO announcement (repost) \u2014 still appearing in listings 2026-07-03; verify status on MD JobAps before applying.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
   "id": 6,
+  "score": 91,
+  "title": "Chief Information Security Officer",
+  "company": "Federal Agency (USAJOBS)",
+  "market": "DC",
+  "city": "Washington, DC",
+  "salary": "$180K-$221K/yr",
+  "roleType": "Federal Exec",
+  "tags": [
+   "CISO",
+   "Federal",
+   "VERIFIED"
+  ],
+  "priority": "High",
+  "url": "https://www.usajobs.gov/job/873411000",
+  "notes": "VERIFIED on USAJOBS 2026-07-03 \u2014 agency CISO vacancy. Check announcement for closing date and SES/GS level.",
+  "postedDate": "2026-07-03",
+  "posted": "2026-07-03"
+ },
+ {
+  "id": 7,
   "score": 90,
-  "title": "Information System Security Manager (ISSM) Level 3",
-  "company": "Federal Contractor",
+  "title": "Information Systems Security Manager (ISSM) 2 \u2014 TS/SCI w/Poly",
+  "company": "Amentum",
   "market": "MD",
-  "city": "Annapolis Junction, MD",
-  "salary": "$139K-$210K/yr",
+  "city": "Fort Meade, MD",
+  "salary": "$140K-$175K/yr",
   "roleType": "ISSM/RMF",
   "tags": [
    "TS/SCI",
-   "RMF"
+   "RMF",
+   "VERIFIED"
   ],
   "priority": "High",
-  "url": "https://www.indeed.com/jobs?q=ISSM+level+3&l=Annapolis+Junction%2C+MD",
-  "notes": "Senior ISSM - RMF and continuous monitoring - Directs ISSO teams - TS/SCI - Strong comp band",
+  "url": "https://www.amentumcareers.com/jobs/information-systems-security-manager-issm-2-ts-sci-w-poly-fort-meade-maryland-united-states-94673c63-1cc1-4d12-ad24-b76876243c17",
+  "notes": "VERIFIED LIVE 2026-07-03 \u2014 direct posting at Fort Meade. Her old duty station; RMF + clearance direct match.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
   "score": 90,
-  "title": "Deputy Program Manager — TS/SCI w/Poly",
+  "title": "Deputy Program Manager \u2014 TS/SCI w/Poly",
   "company": "Amentum",
   "market": "MD",
   "city": "Columbia, MD",
@@ -129,45 +154,68 @@
   ],
   "priority": "High",
   "url": "https://www.amentumcareers.com/jobs/deputy-program-manager-ts-sci-w-poly-columbia-maryland-united-states",
-  "notes": "VERIFIED LIVE 2026-07-03 — PMO for enterprise-wide cybersecurity + RMF program near Fort Meade. Cost/schedule/risk/staffing across task orders. Her Division Chief + budget experience is a direct hit. 15 min from Ellicott City.",
+  "notes": "VERIFIED LIVE 2026-07-03 \u2014 PMO for enterprise-wide cybersecurity + RMF program near Fort Meade. Cost/schedule/risk/staffing across task orders. Her Division Chief + budget experience is a direct hit. 15 min from Ellicott City.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03",
-  "id": 7
+  "id": 8
  },
  {
-  "id": 8,
+  "id": 9,
   "score": 89,
-  "title": "Senior Cyber-Supply Chain Risk Management Specialist",
-  "company": "Boeing",
-  "market": "VA",
-  "city": "Arlington, VA",
-  "salary": "$150K-$190K/yr",
-  "roleType": "C-SCRM",
+  "title": "Information Systems Security Manager (ISSM), Senior Advisor",
+  "company": "Peraton",
+  "market": "MD",
+  "city": "Fort Meade, MD",
+  "salary": "$146K-$234K/yr",
+  "roleType": "ISSM/RMF",
   "tags": [
-   "CISSP",
-   "RMF"
+   "TS/SCI",
+   "Senior Advisor",
+   "VERIFIED"
   ],
   "priority": "High",
-  "url": "https://jobs.boeing.com/job/arlington/senior-cyber-supply-chain-risk-management-specialist/185/96799241024",
-  "notes": "C-SCRM subject matter expert - Vendor assessments - NIST 800-161 - Hybrid Arlington - Direct domain fit",
+  "url": "https://www.careers.peraton.com/jobs/information-systems-security-manager-issm-senior-advisor-fort-meade-maryland-160098-jobs--cyber-security--",
+  "notes": "VERIFIED LIVE 2026-07-03 \u2014 Senior Advisor level ISSM at Fort Meade. Matches her Division Chief seniority better than standard ISSM.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
-  "id": 9,
+  "id": 10,
   "score": 88,
-  "title": "Cyber Security Task Lead",
-  "company": "Leidos",
+  "title": "Information Systems Security Manager (ISSM)",
+  "company": "The Swift Group",
   "market": "MD",
-  "city": "Linthicum Heights, MD",
-  "salary": "$150K-$190K/yr",
-  "roleType": "Cyber Ops",
+  "city": "Annapolis Junction, MD",
+  "salary": "$135K-$185K/yr",
+  "roleType": "ISSM/RMF",
   "tags": [
-   "TS/SCI"
+   "TS/SCI Poly",
+   "RMF",
+   "VERIFIED"
   ],
   "priority": "High",
-  "url": "https://careers.leidos.com/search/jobs?keywords=cyber%20security%20task%20lead&location=Maryland",
-  "notes": "Leads cyber team - Briefs senior officials on cyber operations - Hybrid - TS/SCI eligibility - Leadership match",
+  "url": "https://jobs.gem.com/the-swift-group/am9icG9zdDrOmSysURENNOHCDbX-m1mk",
+  "notes": "VERIFIED LIVE 2026-07-03 \u2014 ISSM leading IA program, RMF/DoD. Annapolis Junction = 20 min from Ellicott City.",
+  "postedDate": "2026-07-03",
+  "posted": "2026-07-03"
+ },
+ {
+  "id": 11,
+  "score": 88,
+  "title": "Supervisory IT Cybersecurity Specialist (INFOSEC) GS-15",
+  "company": "Federal Agency (USAJOBS)",
+  "market": "DC",
+  "city": "Washington, DC",
+  "salary": "$143K-$195K/yr",
+  "roleType": "Federal Exec",
+  "tags": [
+   "GS-15",
+   "INFOSEC",
+   "VERIFIED"
+  ],
+  "priority": "High",
+  "url": "https://www.usajobs.gov/job/872132300",
+  "notes": "VERIFIED on USAJOBS 2026-07-03 \u2014 GS-15 supervisory cyber. Check closing date.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
@@ -188,24 +236,24 @@
   "notes": "1,300+ cleared cyber roles active in the Ft Meade corridor. Cyber PM roles map to her portfolio management of major State Dept IT security projects + multimillion-dollar budget oversight.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03",
-  "id": 10
+  "id": 12
  },
  {
-  "id": 11,
+  "id": 13,
   "score": 87,
-  "title": "Director of Cybersecurity / Security Program",
-  "company": "Private Sector (Remote)",
-  "market": "Remote",
-  "city": "Remote",
-  "salary": "$170K-$220K/yr",
-  "roleType": "Security Director",
+  "title": "Cybersecurity Executive (DHS Cybersecurity Service)",
+  "company": "Department of Homeland Security",
+  "market": "DC",
+  "city": "Washington, DC",
+  "salary": "$176K-$238K/yr",
+  "roleType": "Federal Exec",
   "tags": [
-   "CISSP",
-   "Remote"
+   "DHS CS",
+   "Executive"
   ],
   "priority": "High",
-  "url": "https://www.linkedin.com/jobs/search/?keywords=Director%20of%20Cybersecurity&location=United%20States&f_WT=2",
-  "notes": "Enterprise security program leadership - Fully remote - CISSP valued - Executive-level scope",
+  "url": "https://cybersecurity.usajobs.gov/",
+  "notes": "DHS Cybersecurity Service \u2014 excepted service, pay up to $238K. Rolling intake for executive-track cyber leaders.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
@@ -226,63 +274,43 @@
   "notes": "Director-level vendor risk consulting actively hiring per July 2026 scan. Her State Dept vendor due-diligence frameworks + NIST 800-161 program = the exact service offering. 22,000+ TPRM listings nationally, 146 new.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03",
-  "id": 12
- },
- {
-  "id": 13,
-  "score": 86,
-  "title": "Senior Manager, Cyber Risk / GRC",
-  "company": "Private Sector (Remote)",
-  "market": "Remote",
-  "city": "Remote",
-  "salary": "$155K-$200K/yr",
-  "roleType": "GRC/Risk",
-  "tags": [
-   "CISSP",
-   "Remote"
-  ],
-  "priority": "High",
-  "url": "https://www.indeed.com/q-cyber-security-grc-remote-jobs.html",
-  "notes": "Governance risk and compliance leadership - Archer/ServiceNow GRC - CRISC/CISSP valued - Remote",
-  "postedDate": "2026-07-03",
-  "posted": "2026-07-03"
- },
- {
-  "id": 14,
-  "score": 85,
-  "title": "Information Systems Security Manager (ISSM) 2",
-  "company": "Amentum",
-  "market": "MD",
-  "city": "Fort Meade, MD",
-  "salary": "$140K-$175K/yr",
-  "roleType": "ISSM/RMF",
-  "tags": [
-   "TS/SCI",
-   "RMF"
-  ],
-  "priority": "High",
-  "url": "https://www.amentumcareers.com/jobs?keywords=ISSM&location=Fort%20Meade",
-  "notes": "IA program management - NSA/CSS RMF process - IAM Level II - TS/SCI with Poly - Strong domain match",
-  "postedDate": "2026-07-03",
-  "posted": "2026-07-03"
+  "id": 14
  },
  {
   "id": 15,
-  "score": 85,
-  "title": "Information Systems Security Manager (ISSM) - Remote",
-  "company": "Logistics Management Institute (LMI)",
-  "market": "Remote",
-  "city": "Remote",
-  "salary": "$150K-$185K/yr",
-  "roleType": "ISSM/RMF",
+  "score": 86,
+  "title": "Cyber Security Task Lead",
+  "company": "Leidos",
+  "market": "MD",
+  "city": "Linthicum Heights, MD",
+  "salary": "$150K-$190K/yr",
+  "roleType": "Cyber Ops",
   "tags": [
-   "CISSP",
-   "RMF",
-   "Remote"
+   "TS/SCI",
+   "Task Lead"
   ],
   "priority": "High",
-  "url": "https://www.ziprecruiter.com/c/Logistics-Management-Institute/Job/Cybersecurity-Information-Systems-Security-Manager-(ISSM)-Clearance-Required/-in-Remote,US?jid=7369ee04c57ad873",
-  "notes": "5+ yrs RMF - ATO development - NIST 800-53 continuous monitoring - Full RMF lifecycle - CISSP required - Fully remote - Strong match",
+  "url": "https://careers.leidos.com/search/jobs?keywords=cyber%20security%20task%20lead&location=Maryland",
+  "notes": "Leidos cyber task lead roles in MD \u2014 leadership + cleared ops match.",
+  "postedDate": "2026-07-03",
+  "posted": "2026-07-03"
+ },
+ {
+  "id": 16,
+  "score": 85,
+  "title": "Director of Cybersecurity / Security Program",
+  "company": "Private Sector (Remote)",
+  "market": "Remote",
+  "city": "Remote",
+  "salary": "$170K-$220K/yr",
+  "roleType": "Security Director",
+  "tags": [
+   "Remote",
+   "Director"
+  ],
+  "priority": "High",
+  "url": "https://www.linkedin.com/jobs/search/?keywords=Director%20of%20Cybersecurity&location=United%20States&f_WT=2",
+  "notes": "Remote director-level security program roles \u2014 venture-backed and enterprise cos actively hiring CISSP execs per July 2026 market scan.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
@@ -300,45 +328,27 @@
   ],
   "priority": "High",
   "url": "https://www.glassdoor.com/Job/washington-program-manager-top-secret-clearance-jobs-SRCH_IL.0,10_IC1138213_KO11,47.htm",
-  "notes": "693 cleared PM openings in DC (July 2026). Typical bar: 10+ yrs IT ops with 5+ supervisory in federal environment — she clears it easily. DC TPM average $164K.",
+  "notes": "693 cleared PM openings in DC (July 2026). Typical bar: 10+ yrs IT ops with 5+ supervisory in federal environment \u2014 she clears it easily. DC TPM average $164K.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03",
-  "id": 16
- },
- {
-  "id": 17,
-  "score": 83,
-  "title": "Deputy Chief Information Security Officer",
-  "company": "Virginia Tech",
-  "market": "VA",
-  "city": "Blacksburg, VA",
-  "salary": "$150K-$190K/yr",
-  "roleType": "CISO",
-  "tags": [
-   "CISSP"
-  ],
-  "priority": "High",
-  "url": "https://www.jobs.virginia.gov/jobs/deputy-chief-information-security-officer-blacksburg-virginia-united-states",
-  "notes": "Deputy CISO - Program strategy, operations, talent development - Public sector / higher ed - VA",
-  "postedDate": "2026-07-03",
-  "posted": "2026-07-03"
+  "id": 17
  },
  {
   "id": 18,
   "score": 84,
-  "title": "Information System Security Manager (ISSM)",
-  "company": "Peraton",
-  "market": "VA",
-  "city": "Herndon, VA",
-  "salary": "$135K-$170K/yr",
-  "roleType": "ISSM/RMF",
+  "title": "Senior Manager, Cyber Risk / GRC",
+  "company": "Private Sector (Remote)",
+  "market": "Remote",
+  "city": "Remote",
+  "salary": "$155K-$200K/yr",
+  "roleType": "GRC/Risk",
   "tags": [
-   "TS/SCI",
-   "RMF"
+   "Remote",
+   "GRC"
   ],
   "priority": "Medium",
-  "url": "https://www.careers.peraton.com/jobs?keywords=ISSM&location=Herndon%20Virginia",
-  "notes": "Oversees cybersecurity posture for multiple systems - Directs ISSOs - RMF/FISMA - TS/SCI",
+  "url": "https://www.indeed.com/q-cyber-security-grc-remote-jobs.html",
+  "notes": "152 remote GRC roles on Glassdoor as of this refresh \u2014 CRISC/CISM directly valued.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
@@ -356,7 +366,7 @@
   ],
   "priority": "Medium",
   "url": "https://www.usajobs.gov/Search/Results?k=program%20project%20management%20cybersecurity",
-  "notes": "Federal PM track (0340/2210 series) — cyber program oversight roles post regularly. Her federal exec background + MBA fits; watch for direct-hire announcements.",
+  "notes": "Federal PM track (0340/2210 series) \u2014 cyber program oversight roles post regularly. Her federal exec background + MBA fits; watch for direct-hire announcements.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03",
   "id": 19
@@ -364,6 +374,25 @@
  {
   "id": 20,
   "score": 83,
+  "title": "Director, Cybersecurity",
+  "company": "State of Maryland (DoIT)",
+  "market": "MD",
+  "city": "Baltimore, MD",
+  "salary": "$140K-$180K/yr",
+  "roleType": "CISO",
+  "tags": [
+   "State Gov",
+   "Director"
+  ],
+  "priority": "Medium",
+  "url": "https://jobapscloud.com/MD/sup/bulpreview.asp?R1=23&R2=005485&R3=0030",
+  "notes": "MD DoIT cybersecurity director announcement \u2014 older series; verify current status. MD added Director of State Cybersecurity + Director of Local Cybersecurity roles under State CISO.",
+  "postedDate": "2026-07-03",
+  "posted": "2026-07-03"
+ },
+ {
+  "id": 21,
+  "score": 82,
   "title": "Cybersecurity Supply Chain Risk Management SME",
   "company": "Navanti Group",
   "market": "VA",
@@ -371,18 +400,18 @@
   "salary": "$140K-$180K/yr",
   "roleType": "C-SCRM",
   "tags": [
-   "CISSP",
-   "RMF"
+   "C-SCRM",
+   "SME"
   ],
   "priority": "Medium",
   "url": "https://www.indeed.com/jobs?q=Navanti+cybersecurity+supply+chain+risk+management&l=Arlington%2C+VA",
-  "notes": "C-SCRM SME (anticipated position) - Vendor risk - Direct domain fit - Arlington",
+  "notes": "C-SCRM SME supporting federal client \u2014 her exact current function.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
-  "id": 21,
-  "score": 82,
+  "id": 22,
+  "score": 81,
   "title": "Supply Chain Risk Management (SCRM) Lead",
   "company": "Federal Contractor",
   "market": "VA",
@@ -390,17 +419,18 @@
   "salary": "$140K-$175K/yr",
   "roleType": "C-SCRM",
   "tags": [
-   "RMF"
+   "SCRM",
+   "Federal"
   ],
   "priority": "Medium",
   "url": "https://www.indeed.com/jobs?q=supply+chain+risk+management+lead+cyber&l=Falls+Church%2C+VA",
-  "notes": "Coordinates vendor security assessments - Establishes SCRM policies - Stakeholder interface - Domain fit",
+  "notes": "SCRM lead roles clustered in NoVA federal corridor.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
-  "id": 22,
-  "score": 81,
+  "id": 23,
+  "score": 80,
   "title": "Principal Computer Network Defense Analyst",
   "company": "Leidos",
   "market": "MD",
@@ -408,29 +438,12 @@
   "salary": "$150K-$185K/yr",
   "roleType": "Cyber Ops",
   "tags": [
+   "CND",
    "TS/SCI"
   ],
   "priority": "Medium",
   "url": "https://careers.leidos.com/search/jobs?keywords=principal%20computer%20network%20defense&location=Maryland",
-  "notes": "Principal CND - Matches Red Team / CND background - TS/SCI with Poly - 25K sign-on - Senior IC role",
-  "postedDate": "2026-07-03",
-  "posted": "2026-07-03"
- },
- {
-  "id": 23,
-  "score": 80,
-  "title": "Cyber Risk / GRC Manager",
-  "company": "Private Sector",
-  "market": "DC",
-  "city": "Washington, DC",
-  "salary": "$130K-$180K/yr",
-  "roleType": "GRC/Risk",
-  "tags": [
-   "CISSP"
-  ],
-  "priority": "Medium",
-  "url": "https://www.ziprecruiter.com/Jobs/Grc-Manager/-in-Washington,DC",
-  "notes": "GRC platform experience (Archer/MetricStream/ServiceNow) - CISSP/CISA/CRISC valued - DC metro",
+  "notes": "Principal CND \u2014 maps to her Red Team / CND analyst background at senior level.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
@@ -448,7 +461,7 @@
   ],
   "priority": "Medium",
   "url": "https://www.indeed.com/q-remote-third-party-risk-management-jobs.html",
-  "notes": "600+ remote TPRM roles on Glassdoor. Lead/manager level pays below her director comp — but strong part-time/flexible and remote pipeline for the post-retirement phase.",
+  "notes": "600+ remote TPRM roles on Glassdoor. Lead/manager level pays below her director comp \u2014 but strong part-time/flexible and remote pipeline for the post-retirement phase.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03",
   "id": 24
@@ -456,6 +469,25 @@
  {
   "id": 25,
   "score": 79,
+  "title": "Cyber Risk / GRC Manager",
+  "company": "Private Sector",
+  "market": "DC",
+  "city": "Washington, DC",
+  "salary": "$130K-$180K/yr",
+  "roleType": "GRC/Risk",
+  "tags": [
+   "GRC",
+   "CRISC"
+  ],
+  "priority": "Medium",
+  "url": "https://www.ziprecruiter.com/Jobs/Grc-Manager/-in-Washington,DC",
+  "notes": "GRC manager roles in DC \u2014 CRISC + CISM stack directly relevant.",
+  "postedDate": "2026-07-03",
+  "posted": "2026-07-03"
+ },
+ {
+  "id": 26,
+  "score": 78,
   "title": "Insider Threat Program Manager",
   "company": "Federal Contractor",
   "market": "VA",
@@ -463,17 +495,18 @@
   "salary": "$140K-$178K/yr",
   "roleType": "IR/Threat",
   "tags": [
+   "Insider Threat",
    "TS/SCI"
   ],
   "priority": "Medium",
-  "url": "https://www.linkedin.com/jobs/search/?keywords=insider%20threat%20program%20manager&location=Virginia",
-  "notes": "Leads insider threat program - Matches DIA CISO insider threat experience - TS/SCI - Northern VA",
+  "url": "https://www.linkedin.com/jobs/search/?keywords=insider%20threat%20program%20manager&location=McLean%20Virginia",
+  "notes": "She ran the DIA insider threat program in the European theater \u2014 direct experience match.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
-  "id": 26,
-  "score": 78,
+  "id": 27,
+  "score": 77,
   "title": "Incident Response / DFIR Manager",
   "company": "Private Sector (Remote)",
   "market": "Remote",
@@ -481,31 +514,12 @@
   "salary": "$150K-$190K/yr",
   "roleType": "IR/Threat",
   "tags": [
-   "CISSP",
-   "Remote"
+   "Remote",
+   "DFIR"
   ],
   "priority": "Medium",
   "url": "https://www.indeed.com/q-incident-response-manager-l-remote-jobs.html",
-  "notes": "Leads IR/DFIR program - Matches incident handling background - Digital forensics MS - Remote",
-  "postedDate": "2026-07-03",
-  "posted": "2026-07-03"
- },
- {
-  "id": 27,
-  "score": 77,
-  "title": "Delegated Authorizing Official Rep (DAO-R) / RMF Lead",
-  "company": "Arcfield",
-  "market": "VA",
-  "city": "Chantilly, VA",
-  "salary": "$140K-$180K/yr",
-  "roleType": "ISSM/RMF",
-  "tags": [
-   "TS/SCI",
-   "RMF"
-  ],
-  "priority": "Medium",
-  "url": "https://www.indeed.com/jobs?q=Arcfield+authorizing+official+RMF&l=Chantilly%2C+VA",
-  "notes": "ICD-503 RMF lifecycle - ATO risk recommendations - Authorizing official support - TS/SCI - RMF SME match",
+  "notes": "MS in Digital Forensics & Cyber Investigations + incident handling program leadership.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
@@ -523,14 +537,52 @@
   ],
   "priority": "Medium",
   "url": "https://www.ziprecruiter.com/Jobs/Technical-Program-Manager/-in-Washington,DC",
-  "notes": "Portfolio/PMO leadership — her multi-task-order, multi-bureau program orchestration translates directly. PMP not held; MBA (May 2026) + 20 yrs federal program leadership carries most postings that say PMP preferred.",
+  "notes": "Portfolio/PMO leadership \u2014 her multi-task-order, multi-bureau program orchestration translates directly. PMP not held; MBA (May 2026) + 20 yrs federal program leadership carries most postings that say PMP preferred.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03",
   "id": 28
  },
  {
   "id": 29,
+  "score": 76,
+  "title": "Delegated Authorizing Official Rep (DAO-R) / RMF Lead",
+  "company": "Arcfield",
+  "market": "VA",
+  "city": "Chantilly, VA",
+  "salary": "$140K-$180K/yr",
+  "roleType": "ISSM/RMF",
+  "tags": [
+   "RMF",
+   "A&A"
+  ],
+  "priority": "Medium",
+  "url": "https://www.indeed.com/jobs?q=Arcfield+authorizing+official+RMF&l=Chantilly%2C+VA",
+  "notes": "RMF SME / A&A authority role \u2014 she was RMF SME for the European theater.",
+  "postedDate": "2026-07-03",
+  "posted": "2026-07-03"
+ },
+ {
+  "id": 30,
   "score": 75,
+  "title": "Endpoint Security / EDR Program Lead",
+  "company": "Federal Contractor",
+  "market": "VA",
+  "city": "Reston, VA",
+  "salary": "$140K-$180K/yr",
+  "roleType": "Endpoint",
+  "tags": [
+   "EDR",
+   "HBSS"
+  ],
+  "priority": "Medium",
+  "url": "https://www.linkedin.com/jobs/search/?keywords=endpoint%20security%20program%20lead&location=Reston%20Virginia",
+  "notes": "Former DoD Endpoint Security Division Chief (50-person team) \u2014 overqualified in a good way.",
+  "postedDate": "2026-07-03",
+  "posted": "2026-07-03"
+ },
+ {
+  "id": 31,
+  "score": 74,
   "title": "Threat Intelligence Lead / Manager",
   "company": "Federal Contractor",
   "market": "MD",
@@ -538,11 +590,12 @@
   "salary": "$135K-$175K/yr",
   "roleType": "IR/Threat",
   "tags": [
+   "Threat Intel",
    "TS/SCI"
   ],
   "priority": "Medium",
   "url": "https://www.indeed.com/jobs?q=threat+intelligence+lead&l=Maryland",
-  "notes": "Threat intel program leadership - Matches network warfare / CND background - TS/SCI - MD",
+  "notes": "Threat intel leadership near BWI corridor \u2014 NSA-adjacent contractor cluster.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
@@ -560,14 +613,14 @@
   ],
   "priority": "Medium",
   "url": "https://clearedjobs.net/l-maryland-jobs.html",
-  "notes": "She built the NSA Mission Manager curriculum and ran DoD 8570 workforce certification for DISA Europe — workforce development leadership is an underused arrow in her quiver.",
+  "notes": "She built the NSA Mission Manager curriculum and ran DoD 8570 workforce certification for DISA Europe \u2014 workforce development leadership is an underused arrow in her quiver.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03",
-  "id": 30
+  "id": 32
  },
  {
   "score": 70,
-  "title": "Adjunct Faculty — Cybersecurity (Part-Time)",
+  "title": "Adjunct Faculty \u2014 Cybersecurity (Part-Time)",
   "company": "UMGC / Regional Universities",
   "market": "Remote",
   "city": "Remote / Adelphi, MD",
@@ -579,14 +632,14 @@
   ],
   "priority": "Medium",
   "url": "https://careers.umgc.edu/",
-  "notes": "Two-time UMGC alum (MBA May 2026 + MS Digital Forensics) with 20 yrs practitioner credibility — natural part-time/flexible income and identity bridge for the March 2027 post-retirement phase.",
+  "notes": "Two-time UMGC alum (MBA May 2026 + MS Digital Forensics) with 20 yrs practitioner credibility \u2014 natural part-time/flexible income and identity bridge for the March 2027 post-retirement phase.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03",
-  "id": 31
+  "id": 33
  },
  {
-  "id": 32,
-  "score": 74,
+  "id": 34,
+  "score": 72,
   "title": "Chief Information Security Officer",
   "company": "Private Sector (Enterprise)",
   "market": "DC",
@@ -594,17 +647,18 @@
   "salary": "$200K-$280K/yr",
   "roleType": "CISO",
   "tags": [
-   "CISSP"
+   "CISO",
+   "Enterprise"
   ],
   "priority": "Stretch",
   "url": "https://www.linkedin.com/jobs/search/?keywords=Chief%20Information%20Security%20Officer&location=Washington%20DC",
-  "notes": "Enterprise CISO - Aspirational C-suite reach - Highly competitive - Board-level exposure",
+  "notes": "250 CISO listings in DC on Ladders as of this refresh. Private-sector CISO comp at IC primes can exceed $350K.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
-  "id": 33,
-  "score": 73,
+  "id": 35,
+  "score": 71,
   "title": "VP / Senior Director, Cybersecurity",
   "company": "Private Sector (Remote)",
   "market": "Remote",
@@ -612,36 +666,18 @@
   "salary": "$200K-$260K/yr",
   "roleType": "Security Director",
   "tags": [
-   "CISSP",
-   "Remote"
+   "Remote",
+   "VP"
   ],
   "priority": "Stretch",
   "url": "https://www.linkedin.com/jobs/search/?keywords=VP%20cybersecurity&location=United%20States&f_WT=2",
-  "notes": "VP/Sr Director cyber - Aspirational executive reach - Remote - Competitive private-sector pivot",
+  "notes": "VP-level remote \u2014 MBA (May 2026) + 20 yrs federal leadership strengthens the exec case.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
-  "id": 34,
-  "score": 72,
-  "title": "Supervisory IT Cybersecurity Specialist (GS-15)",
-  "company": "Federal Agency",
-  "market": "DC",
-  "city": "Washington, DC",
-  "salary": "$143K-$195K/yr",
-  "roleType": "Federal Exec",
-  "tags": [
-   "Public Trust"
-  ],
-  "priority": "Stretch",
-  "url": "https://www.usajobs.gov/Search/Results?k=supervisory%20cybersecurity%20specialist&l=Washington%2C%20DC",
-  "notes": "GS-15 supervisory cyber - Federal hiring timeline - Strong fit but competitive - Long process",
-  "postedDate": "2026-07-03",
-  "posted": "2026-07-03"
- },
- {
-  "id": 35,
-  "score": 71,
+  "id": 36,
+  "score": 70,
   "title": "Cyber Operations Director (Cleared)",
   "company": "Booz Allen Hamilton",
   "market": "VA",
@@ -649,17 +685,18 @@
   "salary": "$170K-$220K/yr",
   "roleType": "Cyber Ops",
   "tags": [
-   "TS/SCI"
+   "TS/SCI",
+   "Director"
   ],
   "priority": "Stretch",
   "url": "https://careers.boozallen.com/teams/cyber",
-  "notes": "Cyber ops director - May require full-scope poly - Competitive - Executive consulting scope",
+  "notes": "She started her cleared career at Booz Allen (2003-2007) \u2014 alumni returner angle.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
-  "id": 36,
-  "score": 70,
+  "id": 37,
+  "score": 69,
   "title": "Principal Cybersecurity Architect",
   "company": "JHU Applied Physics Laboratory",
   "market": "MD",
@@ -667,30 +704,31 @@
   "salary": "$160K-$210K/yr",
   "roleType": "Security Director",
   "tags": [
-   "TS/SCI"
+   "FFRDC",
+   "Laurel MD"
   ],
   "priority": "Stretch",
-  "url": "https://www.linkedin.com/jobs/search/?keywords=principal%20cybersecurity%20architect%20APL&location=Laurel%20Maryland",
-  "notes": "Principal architect - Deep technical bar - TS/SCI - Prestigious lab - Competitive reach role",
+  "url": "https://www.linkedin.com/jobs/search/?keywords=principal%20cybersecurity%20architect&location=Laurel%20Maryland",
+  "notes": "APL = 15 min from Ellicott City, stable FFRDC, strong benefits.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  },
  {
-  "id": 37,
-  "score": 68,
-  "title": "Agency CISO / Deputy CISO",
-  "company": "Federal Agency",
-  "market": "DC",
-  "city": "Washington, DC",
-  "salary": "$170K-$210K/yr",
-  "roleType": "Federal Exec",
+  "id": 38,
+  "score": 66,
+  "title": "Cybersecurity Consulting Director",
+  "company": "Big 4 / Consulting",
+  "market": "Remote",
+  "city": "Remote",
+  "salary": "$180K-$250K/yr",
+  "roleType": "Security Director",
   "tags": [
-   "Public Trust",
-   "SES"
+   "Consulting",
+   "Remote"
   ],
   "priority": "Stretch",
-  "url": "https://www.usajobs.gov/Search/Results?k=deputy%20chief%20information%20security%20officer&l=Washington%2C%20DC",
-  "notes": "Federal CISO/Deputy CISO - SES-level - Long hiring timeline - Highly competitive - Aspirational",
+  "url": "https://www.linkedin.com/jobs/search/?keywords=cybersecurity%20consulting%20director&location=United%20States",
+  "notes": "Consulting director track \u2014 federal C-SCRM expertise is a differentiator Big 4 firms sell to agencies.",
   "postedDate": "2026-07-03",
   "posted": "2026-07-03"
  }
