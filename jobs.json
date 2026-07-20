@@ -1,34 +1,604 @@
 [
-{"id":1,"score":96,"title":"Lead Cyber-Supply Chain Risk Management Specialist","company":"Boeing","market":"VA","city":"Arlington, VA","salary":"$155K-$205K/yr","roleType":"C-SCRM","tags":["TS/SCI eligible","VERIFIED"],"priority":"High","url":"https://jobs.boeing.com/job/arlington/lead-cyber-supply-chain-risk-management-specialist/185/96799241056","notes":"VERIFIED direct posting 2026-07-17 - Lead-level C-SCRM role driving integration of C-SCRM controls into GRC processes/platforms - strong direct match to current State Dept C-SCRM directorship","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":2,"score":95,"title":"Deputy Program Manager - TS/SCI w/ Poly","company":"Amentum","market":"MD","city":"Columbia, MD","salary":"$165K-$210K/yr","roleType":"Program Mgmt","tags":["TS/SCI","VERIFIED"],"priority":"High","url":"https://www.amentumcareers.com/jobs/deputy-program-manager-ts-sci-w-poly-columbia-maryland-united-states","notes":"VERIFIED direct posting 2026-07-17 - 5-year enterprise cybersecurity/RMF contract, orchestrates cost/schedule/risk/staffing across Prime TTOs near Fort Meade - direct fit for 9-contractor program leadership background","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":3,"score":94,"title":"Information Systems Security Manager (ISSM), Senior Advisor","company":"Peraton","market":"MD","city":"Fort Meade, MD","salary":"$160K-$200K/yr","roleType":"ISSM/RMF","tags":["TS/SCI w/Poly","VERIFIED"],"priority":"High","url":"https://www.careers.peraton.com/jobs/information-systems-security-manager-issm-senior-advisor-fort-meade-maryland-160098-jobs--cyber-security--","notes":"VERIFIED direct posting 2026-07-17 - Senior Advisor ISSM, active TS/SCI w/poly and DoD 8570 IAM III required - matches CISSP/CISM and prior ISSM/RMF experience","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":4,"score":93,"title":"Senior Cyber-Supply Chain Risk Management Specialist","company":"Boeing","market":"VA","city":"Arlington, VA","salary":"$140K-$185K/yr","roleType":"C-SCRM","tags":["TS/SCI eligible","VERIFIED"],"priority":"High","url":"https://jobs.boeing.com/job/arlington/senior-cyber-supply-chain-risk-management-specialist/185/96799241024","notes":"VERIFIED direct posting 2026-07-17 - Senior C-SCRM specialist, companion listing to the Lead role above - strong direct C-SCRM match","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":5,"score":92,"title":"Information Systems Security Manager (ISSM)","company":"MITRE","market":"VA","city":"McLean, VA","salary":"$150K-$195K/yr","roleType":"ISSM/RMF","tags":["TS/SCI","VERIFIED"],"priority":"High","url":"https://careers.mitre.org/us/en/job/R107938/Information-Systems-Security-Manager-ISSM","notes":"VERIFIED direct posting 2026-07-17 - FFRDC ISSM role, strong RMF/authorization emphasis, non-profit R&D mission fits federal service background","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":6,"score":91,"title":"Information Systems Security Manager (ISSM) 2 - TS/SCI w/Poly","company":"Amentum","market":"MD","city":"Fort Meade, MD","salary":"$145K-$185K/yr","roleType":"ISSM/RMF","tags":["TS/SCI w/Poly","VERIFIED"],"priority":"High","url":"https://www.amentumcareers.com/jobs/information-systems-security-manager-issm-2-ts-sci-w-poly-fort-meade-maryland-united-states-94673c63-1cc1-4d12-ad24-b76876243c17","notes":"VERIFIED direct posting 2026-07-17 - ISSM providing IA program management, security policy implementation/enforcement - active TS/SCI w/poly required","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":7,"score":90,"title":"Cyber-Supply Chain Risk Management (C-SCRM) SME Analyst","company":"Leidos","market":"MD","city":"Gaithersburg, MD","salary":"$150K-$190K/yr","roleType":"C-SCRM","tags":["Hybrid","VERIFIED"],"priority":"High","url":"https://careers.leidos.com/jobs/17315029-cyber-supply-chain-risk-management-c-scrm-sme-analyst","notes":"VERIFIED direct posting 2026-07-17 - SME-level C-SCRM analyst supporting DoD enterprise data/analytics products, hybrid remote - direct C-SCRM specialty match","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":8,"score":89,"title":"Information System Security Manager (ISSM), Level 3","company":"HII Mission Technologies","market":"MD","city":"Annapolis Junction, MD","salary":"$139K-$210K/yr","roleType":"ISSM/RMF","tags":["TS/SCI"],"priority":"High","url":"https://www.clearancejobs.com/jobs/8779519/information-system-security-manager-issm","notes":"ISSM Level 3 role covering Annapolis Junction/Elkridge/Hanover MD sites - salary range confirmed via ClearanceJobs listing, senior TS/SCI required","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":9,"score":88,"title":"Cybersecurity Program Manager","company":"ManTech","market":"MD","city":"Fort Meade / Annapolis Junction, MD","salary":"$150K-$190K/yr","roleType":"Program Mgmt","tags":["TS/SCI"],"priority":"High","url":"https://www.mantech.com/ic-cyber-careers","notes":"ManTech IC Cyber Careers portal lists open Cyber Security Program Manager roles at Fort Meade/Annapolis Junction - apply via IC Cyber Careers page","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":10,"score":88,"title":"Information Systems Security Manager (ISSM)","company":"OPS Consulting","market":"MD","city":"Annapolis Junction, MD","salary":"$145K-$185K/yr","roleType":"ISSM/RMF","tags":["TS/SCI w/Poly"],"priority":"High","url":"https://www.linkedin.com/jobs/view/issm-information-sys-tech-analyst-3-with-security-clearance-at-clearancejobs-3377978849","notes":"ISSM providing leadership/oversight for program IA, RMF authorization support - active TS/SCI w/poly required, US citizenship","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":11,"score":87,"title":"Director of Technical Program Management","company":"GDIT / Federal Contractors (search)","market":"DC","city":"Washington, DC","salary":"$165K-$220K/yr","roleType":"Program Mgmt","tags":["Cleared","Hybrid"],"priority":"High","url":"https://migratemate.co/director-of-technical-program-management-jobs/district-of-columbia/washington","notes":"Aggregated listing of Director-level TPM openings in DC (GDIT, Serco among active employers per market scan) - director/portfolio level matches expanded PM scope","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":12,"score":86,"title":"Senior Director / Principal Consultant, Vendor Risk Management","company":"Multiple Employers (DC-Baltimore search)","market":"DC","city":"Washington DC-Baltimore Area","salary":"$150K-$195K/yr","roleType":"Vendor Risk/TPRM","tags":["TPRM"],"priority":"High","url":"https://www.linkedin.com/jobs/third-party-risk-jobs","notes":"Principal/Director Consultant, Vendor Risk Management actively listed for DC-Baltimore area on LinkedIn aggregator - director-level TPRM fit","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":13,"score":85,"title":"Program Manager, Cybersecurity Supply Chain Risk Management (C-SCRM)","company":"NuScale Power","market":"Remote","city":"Corvallis, OR (Remote eligible)","salary":"$140K-$180K/yr","roleType":"Program Mgmt","tags":["Remote"],"priority":"High","url":"https://jobs.jobvite.com/nuscale-power/job/onp6zfwb","notes":"Establishes/leads enterprise-wide OT+IT C-SCRM program reporting to Info Security Supervisor - remote-eligible, direct C-SCRM program leadership match","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":14,"score":85,"title":"Cyber Supply Chain Risk Management Specialist (C-SCRM)","company":"Exiger","market":"Remote","city":"Remote / Washington DC","salary":"$135K-$175K/yr","roleType":"Vendor Risk/TPRM","tags":["Remote"],"priority":"High","url":"https://jobs.insightpartners.com/companies/exiger/jobs/75994960-cyber-supply-chain-risk-management-specialist-c-scrm","notes":"Exiger is a leading supply chain and third-party risk platform vendor - direct C-SCRM/TPRM crossover role, remote-friendly","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":15,"score":85,"title":"Remote Director, Cybersecurity GRC (CISSP required)","company":"Multiple Employers (remote search)","market":"Remote","city":"Remote","salary":"$160K-$220K/yr","roleType":"GRC/Risk","tags":["Remote","CISSP"],"priority":"High","url":"https://www.glassdoor.com/Job/remote-cybersecurity-grc-jobs-SRCH_IL.0,6_IS11047_KO7,24.htm","notes":"Aggregated director-level remote GRC openings requiring CISSP + 10-15 years leadership per market data - fits governance/risk/compliance target scope","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":16,"score":85,"title":"ISSO / Cyber Security Lead - TS/SCI Required (Flexible)","company":"Multiple Employers (JobLeads)","market":"MD","city":"Fort Meade, MD","salary":"$150K-$190K/yr","roleType":"Cyber Ops","tags":["TS/SCI","Flexible"],"priority":"High","url":"https://www.jobleads.com/us/job/isso-cyber-security-lead-ts-sci-required-flexible--fort-meade--edbc8c5ff1f25b481a2954a7d44b782e4","notes":"Cyber security lead role at Fort Meade with flexible schedule option - TS/SCI required, aligns with endpoint/cyber ops leadership background","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":17,"score":82,"title":"Director - Cybersecurity Third Party Risk Management (Remote)","company":"AbbVie","market":"Remote","city":"Remote (North Chicago, IL HQ)","salary":"$135K-$175K/yr","roleType":"Vendor Risk/TPRM","tags":["Remote","VERIFIED"],"priority":"Medium","url":"https://careers.abbvie.com/en/job/director-cybersecurity-third-party-risk-management-remote-in-north-chicago-il-jid-2349","notes":"VERIFIED direct posting 2026-07-17 - Director-level TPRM role in Business Technology Solutions; posted range $87.5K-$111.5K on req but director scope likely bands higher - flagged Medium pending comp confirmation","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":18,"score":80,"title":"Technical Program Manager - Cleared Federal Programs","company":"Multiple Employers (Indeed search)","market":"VA","city":"Arlington, VA","salary":"$145K-$188K/yr","roleType":"Program Mgmt","tags":["Cleared"],"priority":"Medium","url":"https://www.indeed.com/q-technical-program-manager-l-arlington,-va-jobs.html","notes":"Aggregated TPM openings in Arlington cleared-federal market; average pay ~$164K/yr in DC per market data","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":19,"score":79,"title":"IT Program Manager","company":"Multiple Employers (Indeed search)","market":"DC","city":"Washington, DC","salary":"$130K-$175K/yr","roleType":"Program Mgmt","tags":["Federal"],"priority":"Medium","url":"https://www.indeed.com/q-it-program-manager-l-washington,-dc-jobs.html","notes":"Broad IT PM listing pool in DC - generic search link, good volume of federal/contractor openings","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":20,"score":78,"title":"Cybersecurity GRC Manager (Remote)","company":"Multiple Employers (Glassdoor search)","market":"Remote","city":"Remote","salary":"$110K-$150K/yr","roleType":"GRC/Risk","tags":["Remote"],"priority":"Medium","url":"https://www.glassdoor.com/Job/remote-cyber-security-grc-jobs-SRCH_IL.0,6_IS11047_KO7,25.htm","notes":"Manager-level (not yet director) remote GRC pool - good for immediate availability, slightly below director comp target","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":21,"score":78,"title":"SecurityX & AI, Department of Cybersecurity - Adjunct Faculty","company":"University of Maryland Global Campus (UMGC)","market":"Remote","city":"Remote","salary":"$1,085-$1,116/credit hour","roleType":"Program Mgmt","tags":["Part-time","Remote","VERIFIED"],"priority":"Medium","url":"https://careers.umgc.edu/job/cybersecurity-technology-securityx-ai-department-of-cybersecurity-adjunct-faculty-adjunct-faculty-remote-10025462/","notes":"VERIFIED direct posting 2026-07-17 - remote adjunct faculty teaching SecurityX/AI in Cybersecurity Management & Policy program - fits MBA (May 2026) + workforce development interest, flexible/part-time track","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":22,"score":77,"title":"Manager, Third Party Risk Management (Remote)","company":"Multiple Employers (Glassdoor/LinkedIn search)","market":"Remote","city":"Remote","salary":"$101K-$146K/yr","roleType":"Vendor Risk/TPRM","tags":["Remote"],"priority":"Medium","url":"https://www.glassdoor.com/Job/remote-third-party-risk-management-jobs-SRCH_IL.0,6_IS11047_KO7,34.htm","notes":"Manager-level TPRM pool, avg pay ~$126K/yr in DC per market data - includes bank/fintech TPRM leadership openings","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":23,"score":76,"title":"CISO / Deputy CISO Openings","company":"Multiple Employers (Dice.com search)","market":"VA","city":"Virginia (statewide)","salary":"$140K-$210K/yr","roleType":"CISO","tags":["Cleared"],"priority":"Medium","url":"https://www.dice.com/jobs/q-CISO-l-Virginia-jobs","notes":"Aggregated CISO/Deputy CISO listings across Virginia employers - generic search link, useful for casting a wide net","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":24,"score":76,"title":"Cybersecurity Director Openings","company":"Multiple Employers (Indeed search)","market":"DC","city":"Washington, DC","salary":"$130K-$180K/yr","roleType":"Security Director","tags":[],"priority":"Medium","url":"https://www.indeed.com/q-cybersecurity-director-l-washington,-dc-jobs.html","notes":"Director-level cybersecurity listing pool in DC - good breadth, generic search link","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":25,"score":75,"title":"Senior Cybersecurity Compliance Analyst","company":"SAIC","market":"VA","city":"Arlington, VA","salary":"$115K-$150K/yr","roleType":"GRC/Risk","tags":["TS min / TS-SCI eligible"],"priority":"Medium","url":"https://jobs.saic.com/search/jobs/in/md-maryland?q=cybersecurity","notes":"SAIC cybersecurity compliance role, minimum TS clearance with ability to obtain TS/SCI - below director level but strong GRC/compliance alignment","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":26,"score":74,"title":"Deputy Program Manager - Cleared Federal IT","company":"Multiple Employers (Ziprecruiter search)","market":"MD","city":"Columbia, MD","salary":"$130K-$170K/yr","roleType":"Program Mgmt","tags":["Cleared"],"priority":"Medium","url":"https://www.ziprecruiter.com/Jobs/Cybersecurity-Program-Manager/-in-Columbia,MD","notes":"Columbia MD cybersecurity/deputy PM listing pool - generic search link, good geographic match to Ellicott City base","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":27,"score":73,"title":"Supply Chain Risk Management Lead","company":"Lockheed Martin","market":"VA","city":"Lexington, KY","salary":"$120K-$160K/yr","roleType":"C-SCRM","tags":["Relocation"],"priority":"Medium","url":"https://www.lockheedmartinjobs.com/job/lexington/supply-chain-risk-management-lead/694/94827638544","notes":"Direct C-SCRM lead posting but requires relocation to Lexington, KY - out of preferred MD/VA/DC market, minor gap","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":28,"score":72,"title":"Deputy Chief Information Security Officer","company":"Virginia Tech","market":"VA","city":"Blacksburg, VA","salary":"$130K-$175K/yr","roleType":"CISO","tags":["Relocation"],"priority":"Medium","url":"https://www.jobs.virginia.gov/jobs/deputy-chief-information-security-officer-blacksburg-virginia-united-states","notes":"University Deputy CISO supporting strategic direction/operational execution of cybersecurity program - requires relocation to Blacksburg, out of preferred market","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":29,"score":71,"title":"Remote CISSP Security Executive Roles (GRC/Manager/Director)","company":"Multiple Employers (FlexJobs/Indeed search)","market":"Remote","city":"Remote","salary":"$102K-$180K/yr","roleType":"GRC/Risk","tags":["Remote","CISSP"],"priority":"Medium","url":"https://www.flexjobs.com/remote-jobs/cissp","notes":"Broad remote CISSP-preferred pool spanning manager to director level - generic search link, good for casting a wide remote net","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":30,"score":70,"title":"Part-Time Cybersecurity Policy Analyst / Instructor","company":"Multiple Employers (Indeed search)","market":"MD","city":"Maryland (statewide)","salary":"$35-$67/hr","roleType":"Program Mgmt","tags":["Part-time"],"priority":"Medium","url":"https://www.indeed.com/q-part-time-cybersecurity-policy-l-maryland-jobs.html","notes":"Part-time cybersecurity policy/instruction openings across Maryland - fits flexible/advisory track alongside MBA completion","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":31,"score":66,"title":"Enterprise CISO / VP Security ($250K+)","company":"Multiple Employers (executive search aggregate)","market":"Remote","city":"National / Remote","salary":"$220K-$420K/yr","roleType":"CISO","tags":["Executive","Aspirational"],"priority":"Stretch","url":"https://www.glassdoor.com/Job/remote-cyber-security-grc-jobs-SRCH_IL.0,6_IS11047_KO7,25.htm","notes":"Enterprise CISO/VP Security compensation band per market data ($220K-$420K+, requires CISSP + 10-15 yrs progressive leadership) - aspirational stretch given no prior enterprise commercial CISO title","postedDate":"2026-07-17","posted":"2026-07-17"},
-{"id":32,"score":65,"title":"Supply Chain Risk Management Analyst Openings","company":"Multiple Employers (ClearanceJobs search)","market":"DC","city":"Washington, DC area","salary":"$80K-$120K/yr","roleType":"C-SCRM","tags":["Cleared"],"priority":"Stretch","url":"https://www.clearancejobs.com/q-supply-chain-risk-management-analyst","notes":"Analyst-level C-SCRM pool, below Zetra's director-level target scope - included as a volume/backup option, generic search link","postedDate":"2026-07-17","posted":"2026-07-17"}
+  {
+    "id": 1,
+    "score": 95,
+    "title": "Deputy Program Manager - TS/SCI w/ Poly",
+    "company": "Amentum",
+    "market": "MD",
+    "city": "Columbia, MD",
+    "salary": "$180,000-$230,000/yr",
+    "roleType": "Program Mgmt",
+    "tags": [
+      "TS/SCI",
+      "VERIFIED"
+    ],
+    "priority": "High",
+    "url": "https://www.amentumcareers.com/jobs/deputy-program-manager-ts-sci-w-poly-columbia-maryland-united-states",
+    "notes": "New 5-year enterprise-wide cybersecurity/RMF contract - PMP required, IAM II/III (CISSP/CISM) strongly preferred - 15+ yrs PM experience - matches C-SCRM/PM crossover profile - Posted 2026-06-09, open until filled",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 2,
+    "score": 94,
+    "title": "Information Technology Program Manager",
+    "company": "U.S. Department of State - Bureau of Diplomatic Security",
+    "market": "VA",
+    "city": "Arlington, VA",
+    "salary": "$169,279-$197,200/yr",
+    "roleType": "Program Mgmt",
+    "tags": [
+      "TS/SCI",
+      "VERIFIED",
+      "Federal"
+    ],
+    "priority": "High",
+    "url": "https://www.usajobs.gov/job/875718700",
+    "notes": "CLOSES TODAY, July 20, 2026 - APPLY NOW - GS-15 EPS Division Chief managing IT ops, cybersecurity, Tier 1-3 help desk, RMF/FISMA compliance for DS global systems",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20",
+    "closeDate": "2026-07-20"
+  },
+  {
+    "id": 3,
+    "score": 93,
+    "title": "Senior Cyber-Supply Chain Risk Management Specialist",
+    "company": "Boeing",
+    "market": "VA",
+    "city": "Arlington, VA",
+    "salary": "Not disclosed",
+    "roleType": "Vendor Risk/TPRM",
+    "tags": [
+      "C-SCRM"
+    ],
+    "priority": "High",
+    "url": "https://jobs.boeing.com/job/arlington/senior-cyber-supply-chain-risk-management-specialist/185/96799241024",
+    "notes": "Third Party Risk and Resilience team - SME in cyber supply chain risk management and emerging frameworks - 10+ yrs risk/governance/regulatory experience - direct C-SCRM specialty match - hybrid - posted 2026-06-22",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 4,
+    "score": 91,
+    "title": "Lead Cyber-Supply Chain Risk Management Specialist",
+    "company": "Boeing",
+    "market": "VA",
+    "city": "Arlington, VA",
+    "salary": "Not disclosed",
+    "roleType": "Vendor Risk/TPRM",
+    "tags": [
+      "C-SCRM"
+    ],
+    "priority": "High",
+    "url": "https://jobs.boeing.com/job/arlington/lead-cyber-supply-chain-risk-management-specialist/185/96799241056",
+    "notes": "Third Party Risk and Resilience team - 5+ yrs risk/governance/regulatory experience - direct C-SCRM specialty match - hybrid - posted 2026-06-22",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 5,
+    "score": 90,
+    "title": "Information Systems Security Manager (ISSM), Senior Advisor",
+    "company": "Peraton",
+    "market": "MD",
+    "city": "Fort Meade, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "High",
+    "url": "https://www.careers.peraton.com/jobs/information-systems-security-manager-issm-senior-advisor-fort-meade-maryland-160098-jobs--cyber-security--",
+    "notes": "Senior advisor-level ISSM supporting Information Assurance program at Fort Meade - matches Zetra's DoD/IC endpoint and C-SCRM leadership background",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 6,
+    "score": 90,
+    "title": "Cyber Security Manager, SCI & Special Programs/ISSM",
+    "company": "Johns Hopkins Applied Physics Laboratory (APL)",
+    "market": "MD",
+    "city": "Laurel, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "High",
+    "url": "https://careers.jhuapl.edu/cyber/jobs/56489?lang=en-us",
+    "notes": "Leads SSP development, accreditation/re-accreditation, and oversight for classified systems - 8+ yrs experience, CASP+/CISSP/CAP/GSLC required",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 7,
+    "score": 89,
+    "title": "Technical Program Manager",
+    "company": "Defense Innovation Unit (DIU)",
+    "market": "VA",
+    "city": "Arlington, VA",
+    "salary": "Not disclosed",
+    "roleType": "Program Mgmt",
+    "tags": [
+      "Cleared"
+    ],
+    "priority": "High",
+    "url": "https://www.ziprecruiter.com/c/Defense-Innovation-Unit/Job/Technical-Program-Manager/-in-Arlington,VA?jid=b922d95a78fd1c3a",
+    "notes": "DoD innovation unit - technical program leadership on emerging defense tech programs - strong fit for program management pivot",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 8,
+    "score": 88,
+    "title": "Information Systems Security Manager (ISSM) 2 - TS/SCI w/Poly",
+    "company": "Amentum",
+    "market": "MD",
+    "city": "Fort Meade, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "High",
+    "url": "https://www.amentumcareers.com/jobs/information-systems-security-manager-issm-2-ts-sci-w-poly-fort-meade-maryland-united-states-94673c63-1cc1-4d12-ad24-b76876243c17",
+    "notes": "Information Assurance program management support for program/organization/system enclave at Fort Meade",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 9,
+    "score": 87,
+    "title": "Risk Management Framework (RMF) Lead",
+    "company": "Peraton",
+    "market": "VA",
+    "city": "Herndon, VA",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "High",
+    "url": "https://www.complyapply.com/jobs/538612433-risk-management-framework-rmf-lead-at-peraton",
+    "notes": "Leads enterprise RMF implementation, ATO efforts, and org-wide risk management for Army National Guard DMV-area program - NIST SP 800-53/800-37, eMASS expertise",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 10,
+    "score": 87,
+    "title": "Information Systems Security Manager (ISSM), Senior - TS/SCI w/Poly",
+    "company": "Defense Contractor (via ClearedJobs.Net)",
+    "market": "MD",
+    "city": "Fort Meade, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "High",
+    "url": "https://clearedjobs.net/job/information-systems-security-manager-issm-senior-ts-sci-with-poly-fort-meade-maryland-1643923",
+    "notes": "Senior-level ISSM role at Fort Meade - verify current employer/details on ClearedJobs listing before applying",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 11,
+    "score": 86,
+    "title": "Deputy Cybersecurity Governance Lead",
+    "company": "SAIC",
+    "market": "DC",
+    "city": "Washington, DC",
+    "salary": "$120,001-$160,000/yr",
+    "roleType": "GRC/Risk",
+    "tags": [
+      "Federal",
+      "GRC"
+    ],
+    "priority": "High",
+    "url": "https://jobs.saic.com/jobs/17769047-deputy-cybersecurity-governance-lead",
+    "notes": "Requires prior ISSM, Deputy ISSM, Lead ISSO, or GRC Lead experience in a federal environment - posted 2026-06-08",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 12,
+    "score": 86,
+    "title": "IT Governance and Configuration Manager",
+    "company": "SAIC",
+    "market": "VA",
+    "city": "Springfield, VA",
+    "salary": "$160,001-$200,000/yr",
+    "roleType": "GRC/Risk",
+    "tags": [
+      "GRC"
+    ],
+    "priority": "High",
+    "url": "https://jobs.saic.com/jobs/17701601-it-governance-and-configuration-manager",
+    "notes": "8+ yrs cybersecurity, 5+ yrs PKI and Federal Governance (GRC) focus - posted 2026-06-17",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 13,
+    "score": 85,
+    "title": "Cyber-Supply Chain Risk Management (C-SCRM) SME Analyst",
+    "company": "Leidos",
+    "market": "MD",
+    "city": "Gaithersburg, MD",
+    "salary": "Not disclosed",
+    "roleType": "Vendor Risk/TPRM",
+    "tags": [
+      "TS/SCI",
+      "C-SCRM"
+    ],
+    "priority": "High",
+    "url": "https://careers.leidos.com/jobs/17315029-cyber-supply-chain-risk-management-c-scrm-sme-analyst",
+    "notes": "Hybrid remote - SME to implement, expand, and mature end-to-end DoD SCRM program - direct C-SCRM specialty match",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 14,
+    "score": 85,
+    "title": "Cyber-Supply Chain Risk Management (C-SCRM) SME Analyst",
+    "company": "Leidos",
+    "market": "VA",
+    "city": "Alexandria, VA",
+    "salary": "Not disclosed",
+    "roleType": "Vendor Risk/TPRM",
+    "tags": [
+      "TS/SCI",
+      "C-SCRM"
+    ],
+    "priority": "High",
+    "url": "https://careers.leidos.com/jobs/17315028-cyber-supply-chain-risk-management-c-scrm-sme-analyst",
+    "notes": "Hybrid remote - SME to implement, expand, and mature end-to-end DoD SCRM program - direct C-SCRM specialty match",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 15,
+    "score": 82,
+    "title": "C-SCRM SBOM Analyst SME",
+    "company": "Leidos",
+    "market": "MD",
+    "city": "Gaithersburg, MD",
+    "salary": "Not disclosed",
+    "roleType": "Vendor Risk/TPRM",
+    "tags": [
+      "C-SCRM"
+    ],
+    "priority": "Medium",
+    "url": "https://careers.leidos.com/jobs/17413366-c-scrm-sbom-analyst-sme",
+    "notes": "Hybrid remote - software bill of materials (SBOM) analysis within DoD SCRM program",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 16,
+    "score": 82,
+    "title": "C-SCRM SBOM Analyst SME",
+    "company": "Leidos",
+    "market": "VA",
+    "city": "Alexandria, VA",
+    "salary": "Not disclosed",
+    "roleType": "Vendor Risk/TPRM",
+    "tags": [
+      "C-SCRM"
+    ],
+    "priority": "Medium",
+    "url": "https://careers.leidos.com/jobs/17355692-c-scrm-sbom-analyst-sme",
+    "notes": "Hybrid remote - software bill of materials (SBOM) analysis within DoD SCRM program",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 17,
+    "score": 81,
+    "title": "Risk Management Framework (RMF) Coordinator, Level 3 - TS/SCI with Poly",
+    "company": "Amentum",
+    "market": "MD",
+    "city": "Linthicum, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "Medium",
+    "url": "https://www.amentumcareers.com/jobs/risk-management-framework-coordinator-level-3-ts-sci-with-poly-linthicum-maryland-united-states",
+    "notes": "Senior RMF coordinator supporting authorization/A&A workflows on prime IC contract",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 18,
+    "score": 80,
+    "title": "Program Manager, Cybersecurity Supply Chain Risk Management (C-SCRM)",
+    "company": "NuScale Power",
+    "market": "Remote",
+    "city": "Remote (HQ Portland, OR)",
+    "salary": "Not disclosed",
+    "roleType": "Program Mgmt",
+    "tags": [
+      "C-SCRM",
+      "Remote"
+    ],
+    "priority": "Medium",
+    "url": "https://jobs.jobvite.com/nuscale-power/job/onp6zfwb",
+    "notes": "Establishes, leads, and governs enterprise-wide C-SCRM program spanning OT and IT - remote-eligible, direct C-SCRM/PM specialty match",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 19,
+    "score": 79,
+    "title": "Third Party Risk Management Analyst",
+    "company": "Maryland Department of Information Technology (DoIT)",
+    "market": "MD",
+    "city": "Annapolis/Crownsville, MD",
+    "salary": "Not disclosed",
+    "roleType": "Vendor Risk/TPRM",
+    "tags": [
+      "State Government"
+    ],
+    "priority": "Medium",
+    "url": "https://doit.maryland.gov/About-DoIT/Press/pages/state-of-maryland-welcome-new-state-chief-cybersecurity-officer.aspx",
+    "notes": "State of Maryland TPRM program build-out - ensures vendors/contractors/cloud providers meet state security standards - check DoIT careers/jobapscloud.com for the live requisition",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 20,
+    "score": 79,
+    "title": "Risk Management Framework (RMF) Coordinator 2 - TS/SCI w/Poly",
+    "company": "Amentum",
+    "market": "MD",
+    "city": "Linthicum, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "Medium",
+    "url": "https://www.amentumcareers.com/jobs/risk-management-framework-rmf-coordinator-2-ts-sci-w-poly-linthicum-maryland-united-states",
+    "notes": "Mid-level RMF coordinator on prime contract based out of Linthicum, MD office",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 21,
+    "score": 78,
+    "title": "Program Manager - Clearance Required",
+    "company": "Cydecor",
+    "market": "DC",
+    "city": "Washington Navy Yard, DC",
+    "salary": "Not disclosed",
+    "roleType": "Program Mgmt",
+    "tags": [
+      "Cleared"
+    ],
+    "priority": "Medium",
+    "url": "https://www.indeed.com/viewjob?jk=12b3af29de2783a5",
+    "notes": "Program management support engagement at NAVFAC Headquarters, Washington Navy Yard",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 22,
+    "score": 78,
+    "title": "Information System Security Manager (ISSM)",
+    "company": "The Swift Group",
+    "market": "MD",
+    "city": "Annapolis Junction, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "Medium",
+    "url": "https://jobs.gem.com/the-swift-group/am9icG9zdDrOmSysURENNOHCDbX-m1mk",
+    "notes": "Leadership and oversight of Information Assurance program - RMF and DoD requirements enforcement",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 23,
+    "score": 77,
+    "title": "Cyber Supply Chain Risk Management Specialist (C-SCRM)",
+    "company": "Exiger",
+    "market": "VA",
+    "city": "Richmond, VA",
+    "salary": "Not disclosed",
+    "roleType": "Vendor Risk/TPRM",
+    "tags": [
+      "C-SCRM"
+    ],
+    "priority": "Medium",
+    "url": "https://jobs.insightpartners.com/companies/exiger/jobs/75994960-cyber-supply-chain-risk-management-specialist-c-scrm",
+    "notes": "Direct C-SCRM specialty match - Richmond, VA is outside core commuting area, check remote/hybrid eligibility",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 24,
+    "score": 76,
+    "title": "Third Party Risk Analyst",
+    "company": "Booz Allen Hamilton",
+    "market": "VA",
+    "city": "McLean, VA",
+    "salary": "Not disclosed",
+    "roleType": "Vendor Risk/TPRM",
+    "tags": [
+      "TPRM"
+    ],
+    "priority": "Medium",
+    "url": "https://careers.boozallen.com/jobs/JobDetail/McLean-Third-Party-Risk-Analyst-R0221256/112453",
+    "notes": "Legal, Ethics & Compliance team - assesses third-party compliance/reputational risk, advises business leaders, shapes mitigation - senior candidates can position as team/program lead",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 25,
+    "score": 75,
+    "title": "Senior ISSE: TS/SCI, Linux & RMF A&A Lead",
+    "company": "Zeta Associates",
+    "market": "VA",
+    "city": "Fairfax, VA",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "Medium",
+    "url": "https://www.jobleads.com/us/job/senior-isse-ts-sci-linux-rmf-a-a-lead--fairfax--efc4547852b39622a2cd15529cc31a000",
+    "notes": "RMF Assessment & Authorization lead role, requires TS/SCI with CI Poly",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 26,
+    "score": 74,
+    "title": "Information Systems Security Engineer",
+    "company": "SAIC",
+    "market": "VA",
+    "city": "Arlington, VA",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "GRC"
+    ],
+    "priority": "Medium",
+    "url": "https://jobs.saic.com/jobs/17883358-information-systems-security-engineer",
+    "notes": "Collaborates with ISSMs and mission owners on architecture risk decisions - 9 yrs cybersecurity experience - posted 2026-06-17",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 27,
+    "score": 74,
+    "title": "ISSM (Information Sys Tech Analyst 3) with Security Clearance",
+    "company": "Defense Contractor (via ClearanceJobs)",
+    "market": "MD",
+    "city": "Annapolis Junction, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "TS/SCI"
+    ],
+    "priority": "Medium",
+    "url": "https://www.linkedin.com/jobs/view/issm-information-sys-tech-analyst-3-with-security-clearance-at-clearancejobs-3377978849",
+    "notes": "Verify current employer/requisition status on LinkedIn before applying",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 28,
+    "score": 73,
+    "title": "Information System Security Manager, with Security Clearance",
+    "company": "Defense Contractor (via JobLeads)",
+    "market": "MD",
+    "city": "Fort Meade, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "Cleared"
+    ],
+    "priority": "Medium",
+    "url": "https://www.jobleads.com/us/job/information-system-security-manager-with-security-clearance--fort-meade--eff11e081013f8adad8498c00db94d2a9",
+    "notes": "Verify current employer/requisition status on JobLeads before applying",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 29,
+    "score": 71,
+    "title": "Information System Security Officer (ISSO), Intermediate, with Security Clearance",
+    "company": "Defense Contractor (via JobLeads)",
+    "market": "MD",
+    "city": "Fort Meade, MD",
+    "salary": "Not disclosed",
+    "roleType": "ISSM/RMF",
+    "tags": [
+      "Cleared"
+    ],
+    "priority": "Medium",
+    "url": "https://www.jobleads.com/us/job/information-system-security-officer-isso-intermediate-with-security-clearance--fort-meade--e4c87a52f7e7d36be0d5bd813a4b98ced",
+    "notes": "Intermediate-level ISSO role - below Zetra's typical seniority but strong Fort Meade proximity match; verify scope before applying",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 30,
+    "score": 70,
+    "title": "Cybersecurity Risk Specialist, Mid",
+    "company": "Booz Allen Hamilton",
+    "market": "DC",
+    "city": "Washington, DC",
+    "salary": "Not disclosed",
+    "roleType": "GRC/Risk",
+    "tags": [
+      "GRC"
+    ],
+    "priority": "Medium",
+    "url": "https://careers.boozallen.com/talent/JobDetail?jobId=113977",
+    "notes": "Mid-level cybersecurity risk role - could serve as a bridge/advisory engagement while targeting director-level openings",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 31,
+    "score": 68,
+    "title": "Chief Information Security Officer",
+    "company": "University of Virginia",
+    "market": "VA",
+    "city": "Charlottesville, VA",
+    "salary": "Not disclosed",
+    "roleType": "CISO",
+    "tags": [
+      "Relocation"
+    ],
+    "priority": "Stretch",
+    "url": "https://www.jobs.virginia.gov/jobs/chief-information-security-officer-charlottesville-virginia-united-states",
+    "notes": "Reports to VP/CIO, strategic leadership over university-wide security program - requires relocation and strong in-person presence in Charlottesville",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 32,
+    "score": 65,
+    "title": "Program Security Supervisor",
+    "company": "Johns Hopkins Applied Physics Laboratory (APL)",
+    "market": "MD",
+    "city": "Laurel, MD",
+    "salary": "Not disclosed",
+    "roleType": "Security Director",
+    "tags": [
+      "Cleared"
+    ],
+    "priority": "Stretch",
+    "url": "https://careers.jhuapl.edu/management/jobs/56169?lang=en-us",
+    "notes": "Program security leadership adjacent to cyber - broadens APL pipeline beyond the direct ISSM opening",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  },
+  {
+    "id": 33,
+    "score": 62,
+    "title": "Cybersecurity - Adjunct Faculty",
+    "company": "Community College of Baltimore County (CCBC)",
+    "market": "MD",
+    "city": "Catonsville/Essex, MD",
+    "salary": "$1,085/credit hour",
+    "roleType": "Training & Workforce Dev",
+    "tags": [
+      "Part-Time"
+    ],
+    "priority": "Stretch",
+    "url": "https://higheredhiring.com/jobdetail-397897-cybersecurity-adjunct-faculty",
+    "notes": "Part-time adjunct teaching networking/security fundamentals - Master's degree required, CISSP/CEH preferred - fits flexible/part-time target and MBA-supported teaching credential angle",
+    "postedDate": "2026-07-20",
+    "posted": "2026-07-20"
+  }
 ]
