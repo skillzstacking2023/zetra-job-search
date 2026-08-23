@@ -1,0 +1,87 @@
+name: Notify Zetra on job refresh
+
+# Fires when jobs.json changes (Zetra's daily refresh commit),
+# and can be run by hand from the Actions tab. Sends from Arnold's Gmail via App Password.
+on:
+  push:
+    paths:
+      - 'jobs.json'
+  workflow_dispatch: {}
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v5
+
+      - name: Build summary and send via Gmail SMTP
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          python3 - <<'PY'
+          import json, os, ssl, smtplib, datetime
+          from email.mime.text import MIMEText
+
+          RECIPIENTS = ["zetra.t.taylor@gmail.com", "arbatiste@gmail.com"]
+
+          jobs = json.load(open('jobs.json'))
+          high = [j for j in jobs if j.get('priority') == 'High']
+          med = [j for j in jobs if j.get('priority') == 'Medium']
+          stretch = [j for j in jobs if j.get('priority') == 'Stretch']
+
+          def sector_count(name):
+              return len([j for j in jobs if j.get('sector') == name])
+
+          today = datetime.date.today().strftime('%A, %B %-d, %Y')
+          subject = f"Zetra's Executive IT Job Dashboard Refreshed - {today}"
+
+          top = '\n'.join(
+              f"- {j.get('score')} pts -- {j.get('title')} @ {j.get('company')}\n"
+              f"    {j.get('level')} | {j.get('sector')} | {j.get('salary')}"
+              for j in high[:4]
+          )
+
+          body = (
+              "Hi Zetra,\n\n"
+              "Your executive IT job search dashboard was refreshed this morning.\n"
+              "Every role below is 100 percent remote, at Senior Director or VP level.\n\n"
+              "Today's Summary:\n"
+              f"- Total roles: {len(jobs)}\n"
+              f"- High fit: {len(high)}\n"
+              f"- Medium fit: {len(med)}\n"
+              f"- Stretch: {len(stretch)}\n\n"
+              "Sector mix:\n"
+              f"- Commercial IT: {sector_count('Commercial')}\n"
+              f"- Healthcare IT: {sector_count('Healthcare')}\n"
+              f"- State Government IT: {sector_count('State Gov')}\n"
+              f"- Defense (non-NSA): {sector_count('Defense')}\n\n"
+              f"Top Opportunities:\n{top}\n\n"
+              "View Dashboard: https://skillzstacking2023.github.io/zetra-job-search/\n\n"
+              "The dashboard has three tabs - Opportunities, Pipeline and Analytics.\n"
+              "Open any card's fit breakdown to see exactly why it scored what it did,\n"
+              "and use the stage buttons to track applications through to offer.\n\n"
+              "Target 3-5 tailored applications per week at this level. Depth beats volume.\n\n"
+              "-- Automated notifier"
+          )
+
+          gmail_addr = os.environ.get('GMAIL_ADDRESS')
+          app_pw = os.environ.get('GMAIL_APP_PASSWORD')
+          if not gmail_addr or not app_pw:
+              raise SystemExit("Missing GMAIL_ADDRESS or GMAIL_APP_PASSWORD repo secret.")
+          app_pw = "".join(ch for ch in app_pw if ch.isalnum() and ord(ch) < 128)
+          gmail_addr = gmail_addr.strip()
+
+          msg = MIMEText(body, "plain", "utf-8")
+          msg["Subject"] = subject
+          msg["From"] = gmail_addr
+          msg["To"] = ", ".join(RECIPIENTS)
+
+          ctx = ssl.create_default_context()
+          with smtplib.SMTP("smtp.gmail.com", 587) as s:
+              s.starttls(context=ctx)
+              s.login(gmail_addr, app_pw)
+              s.send_message(msg, from_addr=gmail_addr, to_addrs=RECIPIENTS)
+          print("Email sent from", gmail_addr, "to", ", ".join(RECIPIENTS))
+          PY
