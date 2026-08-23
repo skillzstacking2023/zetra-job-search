@@ -24,7 +24,7 @@ jobs:
           import json, os, ssl, smtplib, datetime
           from email.mime.text import MIMEText
 
-          RECIPIENTS = ["zetra.t.taylor@gmail.com", "arbatiste@gmail.com"]
+          RECIPIENTS = ["zbatiste@mac.com", "arbatiste@gmail.com"]
 
           jobs = json.load(open('jobs.json'))
           high = [j for j in jobs if j.get('priority') == 'High']
