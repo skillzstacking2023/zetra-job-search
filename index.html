@@ -3,332 +3,892 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zetra M. Batiste, CISSP - Cybersecurity Executive Job Search</title>
+<title>Zetra M. Batiste, CISSP - Cybersecurity Leadership Job Search Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root{
-    --bg:#0b1220; --panel:#131c2e; --panel2:#1a2540; --line:#26324d;
-    --txt:#e8eef7; --muted:#93a1bd; --accent:#4f8cff; --accent2:#31d0aa;
-    --high:#31d0aa; --med:#f2b544; --stretch:#8a93a8;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.5;padding-bottom:60px}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
-  header{background:linear-gradient(135deg,#0e1830,#16233f);border-bottom:1px solid var(--line);padding:30px 0 26px}
-  .name{font-size:30px;font-weight:700;letter-spacing:.2px}
-  .subtitle{color:var(--muted);margin-top:4px;font-size:15px}
-  .cred{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-  .chip{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:5px 12px;font-size:12.5px;color:var(--txt)}
-  .chip b{color:var(--accent2)}
-  .btnrow{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
-  .btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer}
-  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt)}
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:12px;margin:22px 0}
-  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center}
-  .stat .n{font-size:24px;font-weight:700}
-  .stat .l{font-size:12px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
-  .controls{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;position:sticky;top:0;z-index:5}
-  .controls .grp{display:flex;flex-direction:column;gap:5px}
-  .controls label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-  select,input[type=text]{background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px;min-width:140px}
-  .toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none;margin-top:16px}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
-  @media(max-width:800px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
-  .card{background:var(--panel);border:1px solid var(--line);border-left-width:4px;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:9px}
-  .card.High{border-left-color:var(--high)}
-  .card.Medium{border-left-color:var(--med)}
-  .card.Stretch{border-left-color:var(--stretch)}
-  .ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-  .title{font-size:16.5px;font-weight:700;line-height:1.3}
-  .company{color:var(--muted);font-size:13.5px;margin-top:2px}
-  .score{flex:0 0 auto;width:52px;height:52px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;font-size:19px;background:var(--panel2);border:1px solid var(--line)}
-  .score.High{color:var(--high)} .score.Medium{color:var(--med)} .score.Stretch{color:var(--stretch)}
-  .score small{font-size:8.5px;color:var(--muted);font-weight:600;letter-spacing:.5px}
-  .meta{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted)}
-  .meta span{display:inline-flex;align-items:center;gap:4px}
-  .badges{display:flex;flex-wrap:wrap;gap:6px}
-  .badge{font-size:11px;padding:3px 9px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);color:var(--txt)}
-  .badge.role{background:rgba(79,140,255,.14);border-color:rgba(79,140,255,.35);color:#a9c6ff}
-  .badge.clr{background:rgba(49,208,170,.13);border-color:rgba(49,208,170,.35);color:#7ff0d5}
-  .notes{font-size:13px;color:#c3ceE0}
-  .cbot{display:flex;justify-content:space-between;align-items:center;margin-top:4px;padding-top:10px;border-top:1px solid var(--line)}
-  .apply{background:var(--accent);color:#fff;padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:600}
-  .posted{font-size:12px;color:var(--muted)}
-  .age{margin-left:8px;padding:2px 8px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:11px}
-  .age.fresh{color:var(--high)} .age.stale{color:var(--med)}
-  .empty{text-align:center;color:var(--muted);padding:50px;grid-column:1/-1}
-  /* --- v2: tracking, deadlines, scanning aids --- */
-  .flags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:-2px}
-  .flag{font-size:10.5px;font-weight:700;letter-spacing:.4px;padding:2px 8px;border-radius:10px;text-transform:uppercase}
-  .flag.new{background:rgba(79,140,255,.16);border:1px solid rgba(79,140,255,.45);color:#a9c6ff}
-  .flag.close{background:rgba(242,181,68,.16);border:1px solid rgba(242,181,68,.5);color:#f7cd7a}
-  .flag.close.urgent{background:rgba(255,90,90,.18);border-color:rgba(255,90,90,.6);color:#ff9a9a}
-  .card.tracked{box-shadow:inset 3px 0 0 rgba(255,255,255,.04)}
-  .track{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:2px}
-  .sbtn{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);cursor:pointer}
-  .sbtn:hover{color:var(--txt)}
-  .sbtn.on.Saved{background:rgba(79,140,255,.18);border-color:var(--accent);color:#bcd4ff}
-  .sbtn.on.Applied{background:rgba(49,208,170,.16);border-color:var(--accent2);color:#7ff0d5}
-  .sbtn.on.Interviewing{background:rgba(242,181,68,.18);border-color:var(--med);color:#f7cd7a}
-  .sbtn.on.Passed{background:rgba(138,147,168,.18);border-color:var(--stretch);color:#c3ceE0}
-  .notebtn{margin-left:auto;font-size:11.5px;color:var(--muted);cursor:pointer;background:none;border:none;text-decoration:underline dotted}
-  .notebox{width:100%;margin-top:6px;background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:vertical;display:none}
-  .notebox.show{display:block}
-  .stat.act .n{color:var(--accent2)}
-  .modal{position:fixed;inset:0;background:rgba(4,8,16,.72);display:none;align-items:flex-start;justify-content:center;padding:40px 20px;z-index:50;overflow:auto}
-  .modal.open{display:flex}
-  .sheet{background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:760px;width:100%;padding:26px 28px}
-  .sheet h2{font-size:20px;margin-bottom:4px}
-  .sheet h3{font-size:14px;color:var(--accent2);margin:18px 0 6px;text-transform:uppercase;letter-spacing:.5px}
-  .sheet p,.sheet li{font-size:14px;color:#cdd7e8}
-  .sheet ul{margin-left:18px;margin-top:4px}
-  .sheet .x{float:right;cursor:pointer;color:var(--muted);font-size:22px;line-height:1}
-  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:34px}
+:root{
+--bg:#0b1120;--bg2:#0f172a;--card:#161f33;--card2:#1c2740;--text:#e8eefb;--muted:#94a3b8;
+--accent:#38bdf8;--accent2:#818cf8;--line:#2a3752;--chip:#233150;
+--green:#22c55e;--amber:#eab308;--orange:#f97316;--purple:#a855f7;--teal:#2dd4bf;
+}
+[data-theme="light"]{
+--bg:#f1f5f9;--bg2:#e9eef6;--card:#ffffff;--card2:#f6f9fd;--text:#0f172a;--muted:#52627a;
+--accent:#0369a1;--accent2:#4f46e5;--line:#cbd8e8;--chip:#e6edf7;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:var(--bg);color:var(--text);line-height:1.55;transition:background .2s,color .2s}
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px}
+header{padding:30px 0 20px;border-bottom:1px solid var(--line);
+background:linear-gradient(160deg,var(--bg2),var(--bg))}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+h1{margin:0 0 6px;font-size:29px;letter-spacing:-.02em}
+.creds{color:var(--accent);font-size:14px;font-weight:600;margin-bottom:6px}
+.sub{color:var(--muted);font-size:13.5px;max-width:760px}
+.theme-btn{flex:none;background:var(--card);border:1px solid var(--line);color:var(--text);
+padding:9px 15px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer}
+.theme-btn:hover{border-color:var(--accent)}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 16px;min-width:104px}
+.stat .n{font-size:23px;font-weight:800;letter-spacing:-.02em}
+.stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.updated{color:var(--muted);font-size:12px;margin-top:12px}
+
+.tabs{display:flex;gap:4px;margin:22px 0 0;border-bottom:1px solid var(--line)}
+.tab{background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);
+padding:11px 18px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.panel{display:none}
+.panel.active{display:block}
+
+.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:20px 0 14px}
+input[type=search]{flex:1;min-width:220px;background:var(--card);border:1px solid var(--line);
+color:var(--text);padding:10px 13px;border-radius:10px;font-size:14px;font-family:inherit}
+select{background:var(--card);border:1px solid var(--line);color:var(--text);
+padding:9px 11px;border-radius:10px;font-size:13.5px;font-family:inherit;cursor:pointer}
+input[type=search]:focus,select:focus{outline:none;border-color:var(--accent)}
+.reset{background:transparent;border:1px solid var(--line);color:var(--muted);padding:9px 13px;
+border-radius:10px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:600}
+.reset:hover{border-color:var(--accent);color:var(--text)}
+.count{color:var(--muted);font-size:13px;margin-bottom:12px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:15px;margin-bottom:44px}
+.job{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px;
+display:flex;flex-direction:column;gap:10px;border-left:3px solid var(--line);transition:border-color .15s}
+.job:hover{border-color:var(--accent)}
+.job.st-interested{border-left-color:var(--purple)}
+.job.st-applied{border-left-color:var(--accent)}
+.job.st-screening{border-left-color:var(--teal)}
+.job.st-interview{border-left-color:var(--amber)}
+.job.st-offer{border-left-color:var(--green)}
+.row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.title{font-size:16.5px;font-weight:700;margin:0;letter-spacing:-.01em}
+.company{color:var(--accent);font-size:14px;font-weight:600;margin-top:2px}
+.ring{flex:none;position:relative;width:54px;height:54px}
+.ring svg{transform:rotate(-90deg)}
+.ring .val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+font-weight:800;font-size:15px}
+.badges{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;padding:3.5px 9px;border-radius:999px;background:var(--chip);
+color:var(--text);border:1px solid var(--line);font-weight:600}
+.chip.sec-Commercial{background:#14532d33;border-color:#22c55e;color:#86efac}
+.chip.sec-Healthcare{background:#0e747033;border-color:#2dd4bf;color:#99f6e4}
+.chip.sec-Defense{background:#7c2d1233;border-color:#f97316;color:#fdba74}
+.chip.secStateGov{background:#1e3a8a33;border-color:#60a5fa;color:#bfdbfe}
+.chip.lvl{background:#4c1d9533;border-color:#a855f7;color:#e9d5ff}
+.chip.trk{font-weight:800}
+.chip.trk.exec{background:#1e3a8a55;border-color:#818cf8;color:#c7d2fe}
+.chip.trk.pmrmf{background:#42200655;border-color:#eab308;color:#fde68a}
+.chip.remote{background:#0e747033;border-color:#2dd4bf;color:#99f6e4}
+.chip.clr-active{background:#7c2d1233;border-color:#f97316;color:#fdba74}
+.chip.clr-elig{background:#1e3a8a33;border-color:#60a5fa;color:#bfdbfe}
+.pri{font-weight:800;font-size:11px;padding:3.5px 10px;border-radius:999px}
+.pri.High{background:#14532d;color:#86efac}
+.pri.Medium{background:#422006;color:#fde68a}
+.pri.Stretch{background:#431407;color:#fdba74}
+.salary{color:var(--text);font-size:13.5px;font-weight:600}
+.notes{color:var(--muted);font-size:13px}
+.floorwarn{font-size:11.5px;color:#fdba74;font-weight:600}
+.actbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--card);
+border:1px solid var(--accent);border-radius:12px;padding:12px 15px;margin:16px 0 2px}
+.actcount{font-size:13px;font-weight:700;margin-right:4px}
+.actbtn{font-size:12px;font-weight:700;padding:7px 13px;border-radius:9px;border:1px solid var(--line);
+background:transparent;color:var(--text);cursor:pointer;font-family:inherit}
+.actbtn:hover{border-color:var(--accent)}
+.actmsg{font-size:12px;color:var(--accent);font-weight:600}
+.guide{max-width:820px;padding:8px 0 50px;font-size:14px}
+.guide h2{font-size:19px;margin:30px 0 8px;letter-spacing:-.01em}
+.guide h2:first-child{margin-top:12px}
+.guide p{color:var(--muted);margin:0 0 12px;line-height:1.65}
+.guide ul{color:var(--muted);margin:0 0 14px;padding-left:20px;line-height:1.7}
+.guide li{margin-bottom:5px}
+.guide strong{color:var(--text)}
+.guide .callout{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+border-radius:10px;padding:14px 17px;margin:0 0 16px}
+.guide .callout.warn{border-left-color:#f97316}
+.guide .callout p:last-child{margin-bottom:0}
+.agel{font-size:11.5px;color:var(--muted)}
+.agel.urgent{color:#fdba74;font-weight:700}
+.stagebar{display:flex;gap:4px;flex-wrap:wrap;padding-top:2px;align-items:center}
+.savehint{font-size:11px;color:var(--muted);font-weight:700;margin-right:2px}
+.stagebtn{font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;border:1px solid var(--line);
+background:transparent;color:var(--muted);cursor:pointer;font-family:inherit}
+.stagebtn:hover{border-color:var(--accent);color:var(--text)}
+.stagebtn.on{color:#04283a}
+.stagebtn.on.interested{background:var(--purple);border-color:var(--purple);color:#faf5ff}
+.stagebtn.on.applied{background:var(--accent);border-color:var(--accent)}
+.stagebtn.on.screening{background:var(--teal);border-color:var(--teal)}
+.stagebtn.on.interview{background:var(--amber);border-color:var(--amber)}
+.stagebtn.on.offer{background:var(--green);border-color:var(--green);color:#052e16}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:2px}
+.linkrow{display:flex;gap:8px}
+a.apply{background:var(--accent);color:#04283a;text-decoration:none;font-weight:700;font-size:13px;
+padding:8px 14px;border-radius:9px}
+[data-theme="light"] a.apply{color:#fff}
+.expand{background:transparent;border:1px solid var(--line);color:var(--muted);font-size:12.5px;
+font-weight:700;padding:8px 12px;border-radius:9px;cursor:pointer;font-family:inherit}
+.expand:hover{border-color:var(--accent);color:var(--text)}
+.detail{display:none;border-top:1px solid var(--line);padding-top:13px;margin-top:4px;gap:14px;
+flex-direction:column}
+.detail.open{display:flex}
+.dh{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+font-weight:700;margin-bottom:8px}
+.fitrow{display:grid;grid-template-columns:88px 1fr 26px;gap:9px;align-items:center;margin-bottom:7px}
+.fitlabel{font-size:12px;color:var(--muted);font-weight:600}
+.bar{height:7px;background:var(--chip);border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:99px}
+.fitnum{font-size:12px;font-weight:800;text-align:right}
+.fitnote{font-size:12px;color:var(--muted);margin:-2px 0 9px 97px;line-height:1.45}
+.intel{display:grid;grid-template-columns:106px 1fr;gap:6px 12px;font-size:12.5px}
+.ik{color:var(--muted);font-weight:600}
+.notebox{width:100%;background:var(--card2);border:1px solid var(--line);color:var(--text);
+border-radius:9px;padding:9px 11px;font-size:13px;font-family:inherit;resize:vertical;min-height:62px}
+.notebox:focus{outline:none;border-color:var(--accent)}
+
+.board{display:grid;grid-template-columns:repeat(5,minmax(210px,1fr));gap:12px;
+overflow-x:auto;padding-bottom:44px;margin-top:18px}
+.col{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:12px;min-height:180px}
+.colhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}
+.colname{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.colcount{font-size:11px;font-weight:800;background:var(--chip);padding:2px 8px;border-radius:99px;color:var(--muted)}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px;margin-bottom:9px}
+.pcard .pt{font-size:13px;font-weight:700;line-height:1.35}
+.pcard .pc{font-size:12px;color:var(--accent);font-weight:600;margin-top:2px}
+.pcard .pm{font-size:11px;color:var(--muted);margin-top:5px}
+.pcard .pn{font-size:11.5px;color:var(--muted);margin-top:7px;padding-top:7px;border-top:1px solid var(--line);
+white-space:pre-wrap}
+.movebar{display:flex;gap:4px;margin-top:8px}
+.movebtn{flex:1;font-size:10.5px;font-weight:700;padding:4px 6px;border-radius:6px;
+border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-family:inherit}
+.movebtn:hover{border-color:var(--accent);color:var(--text)}
+.colempty{color:var(--muted);font-size:12px;text-align:center;padding:18px 6px}
+
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:16px;
+margin:20px 0 44px}
+.chartbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.chartbox h3{margin:0 0 4px;font-size:15px}
+.chartbox .cs{color:var(--muted);font-size:12px;margin-bottom:14px}
+.canvaswrap{position:relative;height:270px}
+.empty{color:var(--muted);text-align:center;padding:48px}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:26px;border-top:1px solid var(--line)}
+@media(max-width:640px){
+.grid{grid-template-columns:1fr}
+h1{font-size:22px}
+.fitnote{margin-left:0}
+}
+.whatsnew{display:none;background:var(--card);border:1px solid var(--accent);border-left:3px solid var(--accent);border-radius:12px;padding:14px 16px;margin:16px 0 0}
+.wnhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px;font-size:14px;font-weight:700}
+.wnclose{background:var(--accent);color:#04283a;border:none;font-weight:700;font-size:12px;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:inherit}
+.wnitem{padding:8px 0;border-top:1px solid var(--line)}
+.wntitle{font-size:13.5px;font-weight:700}
+.wnbody{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.5}
+.wndate{font-size:11px;color:var(--muted);margin-top:3px;opacity:.7}
 </style>
 </head>
 <body>
 <header>
-  <div class="wrap">
-    <div class="name">Zetra M. Batiste, CISSP</div>
-    <div class="subtitle">Senior Cybersecurity Executive &middot; Cyber Supply Chain Risk, RMF/FISMA, Endpoint Security, Cyber Operations, Program Management</div>
-    <div class="cred">
-      <span class="chip"><b>Clearance:</b> TS/SCI</span>
-      <span class="chip"><b>Certs:</b> CISSP &middot; CISM &middot; CRISC</span>
-      <span class="chip"><b>Based:</b> Ellicott City, MD</span>
-      <span class="chip"><b>Target:</b> MD &middot; VA &middot; DC &middot; Remote</span>
-      <span class="chip"><b>Availability:</b> Immediate</span>
-    </div>
-    <div class="btnrow">
-      <button class="btn" onclick="openResume()">View Candidate Summary</button>
-      <a class="btn ghost" id="refreshLink" href="?">Refresh Listings</a>
-    </div>
-  </div>
+<div class="wrap">
+<div class="header-top">
+<div>
+<h1>Zetra M. Batiste, CISSP - Cybersecurity Leadership Job Search</h1>
+<div class="creds">CISSP · CRISC · CISM · CRISC · CISM - MS Computer Systems Management - TS/SCI with Full-Scope Polygraph</div>
+<div class="sub">Senior Director, Cyber Risk Management &amp; IT Services Division Lead - $350M portfolio, $100M+ FY25 revenue, 159 staff + 80 subcontractors. Targeting 100% remote Senior Director and VP roles in Commercial IT, Healthcare IT, State Government IT, and non-NSA Defense. Compensation floor $225K base.</div>
+</div>
+<button class="theme-btn" id="wnbtn" onclick="renderWhatsNew(true)">What&#39;s new</button>
+<button class="theme-btn" id="theme-btn" onclick="toggleTheme()">Light Mode</button>
+</div>
+<div class="stats" id="stats"></div>
+<div class="whatsnew" id="whatsnew"></div>
+<div class="updated" id="updated"></div>
+</div>
 </header>
 
 <div class="wrap">
-  <div class="stats" id="stats"></div>
-
-  <div class="controls">
-    <div class="grp"><label>Market</label>
-      <select id="fMarket"><option value="">All Markets</option><option>MD</option><option>VA</option><option>DC</option><option>Remote</option></select>
-    </div>
-    <div class="grp"><label>Role Type</label>
-      <select id="fRole"><option value="">All Roles</option></select>
-    </div>
-    <div class="grp"><label>Priority</label>
-      <select id="fPriority"><option value="">All</option><option>High</option><option>Medium</option><option>Stretch</option></select>
-    </div>
-    <div class="grp"><label>Sort By</label>
-      <select id="fSort">
-        <option value="score">Best Match</option>
-        <option value="newest">Newest</option>
-        <option value="closing">Closing Soonest</option>
-        <option value="salary">Salary (high)</option>
-      </select>
-    </div>
-    <div class="grp"><label>Search</label>
-      <input type="text" id="fSearch" placeholder="title, company, keyword">
-    </div>
-    <label class="toggle"><input type="checkbox" id="fStale"> Hide 30+ days old</label>
-    <label class="toggle"><input type="checkbox" id="fVerified"> Verified direct postings only</label>
-  </div>
-
-  <div class="grid" id="grid"></div>
-  <footer id="footer"></footer>
+<div class="tabs">
+<button class="tab active" data-panel="p-opps" onclick="showTab(this)">Opportunities</button>
+<button class="tab" data-panel="p-pipe" onclick="showTab(this)">Pipeline</button>
+<button class="tab" data-panel="p-analytics" onclick="showTab(this)">Analytics</button>
+<button class="tab" data-panel="p-guide" onclick="showTab(this)">How to use</button>
+</div>
+<div class="actbar">
+<span class="actcount" id="actcount"></span>
+<button class="actbtn" type="button" onclick="emailPipeline()">Email to me</button>
+<button class="actbtn" type="button" onclick="copyPipeline()">Copy list</button>
+<button class="actbtn" type="button" onclick="downloadCSV()">Download CSV</button>
+<button class="actbtn" type="button" onclick="backupJSON()">Backup</button>
+<label class="actbtn" style="cursor:pointer">Restore<input type="file" id="restorefile" accept="application/json,.json" style="display:none" onchange="restoreJSON(event)"></label>
+<span class="actmsg" id="actmsg"></span>
 </div>
 
-<div class="modal" id="resumeModal">
-  <div class="sheet">
-    <span class="x" onclick="closeResume()">&times;</span>
-    <h2>Zetra M. Batiste, CISSP</h2>
-    <p>Innovative, results-driven cybersecurity executive with 20+ years of federal, military, and international leadership. Proven record designing and implementing enterprise cybersecurity frameworks, leading large teams and multimillion-dollar budgets, and driving risk-informed decisions across federal IT ecosystems.</p>
-    <h3>Clearance &amp; Certifications</h3>
-    <p>Active TS/SCI. CISSP (ISC2), CISM &amp; CRISC (ISACA). CEH and CISA training. MBA (May 2026), MS Digital Forensics &amp; Cyber Investigations, MS Computer Information Technology (Security).</p>
-    <h3>Core Expertise</h3>
-    <ul>
-      <li>Cyber Supply Chain Risk Management (C-SCRM), NIST SP 800-161, vendor/third-party risk</li>
-      <li>Risk Management Framework (RMF), FISMA, A&amp;A / ATO, security compliance</li>
-      <li>Endpoint security, EDR/HBSS, vulnerability management, SIEM (ArcSight)</li>
-      <li>Incident response, insider threat programs, threat intelligence, CND / Red Team</li>
-      <li>Security program leadership, policy development, executive briefings, budget oversight</li>
-    </ul>
-    <h3>Recent Leadership</h3>
-    <ul>
-      <li>Director, C-SCRM &mdash; U.S. Department of State (2022&ndash;present)</li>
-      <li>Division Chief, Endpoint Security &mdash; Department of Defense, Fort Meade (2019&ndash;2022)</li>
-      <li>Technical Director &amp; Network Warfare Cyber Manager &mdash; DoD (2017&ndash;2019)</li>
-      <li>European Theater CISO &mdash; Defense Intelligence Agency (2012&ndash;2013)</li>
-    </ul>
-    <h3>Job Search Focus</h3>
-    <p>Executive and senior cybersecurity leadership roles &mdash; CISO/Deputy CISO, Cyber/Security Director, C-SCRM lead, GRC &amp; cyber risk, ISSM/RMF, cyber operations leadership, cybersecurity program/portfolio management (PMO, technical PM), vendor/third-party risk management, and part-time or advisory roles (incl. adjunct faculty) &mdash; located in Maryland, Virginia, Washington DC, or fully remote.</p>
-  </div>
+<div class="panel active" id="p-opps">
+<div class="controls">
+<input type="search" id="q" placeholder="Search title, company, notes, intel...">
+<select id="track"><option value="">All Roles ($175K+)</option><option value="Executive">Leadership (CISO / VP / Director)</option><option value="PM / RMF">GRC / Supply Chain / IC</option></select>
+<select id="priority"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Stretch</option></select>
+<select id="sector"><option value="">All sectors</option><option>Commercial</option><option>Healthcare</option><option>State Gov</option><option>Defense</option></select>
+<select id="level"><option value="">All levels</option><option>VP</option><option>Senior Director</option><option>Director</option><option>Senior Manager</option><option>Senior / Lead</option></select>
+<select id="role"><option value="">All functions</option></select>
+<select id="comp">
+<option value="">Any compensation</option>
+<option value="min225000">Guaranteed $225K+ (band minimum)</option>
+<option value="min250000">Guaranteed $250K+ (band minimum)</option>
+<option value="max300000">Could reach $300K+ (band maximum)</option>
+</select>
+<select id="stage">
+<option value="">All pipeline stages</option>
+<option value="untracked">Not tracked</option>
+<option value="interested">Interested</option>
+<option value="applied">Applied</option>
+<option value="screening">Screening</option>
+<option value="interview">Interview</option>
+<option value="offer">Offer</option>
+</select>
+<select id="sort">
+<option value="score">Sort: fit score</option>
+<option value="compdesc">Sort: comp high to low</option>
+<option value="company">Sort: company A-Z</option>
+</select>
+<button class="reset" onclick="resetFilters()">Reset</button>
 </div>
+<div class="count" id="count"></div>
+<div class="grid" id="grid"></div>
+</div>
+
+<div class="panel" id="p-pipe">
+<div class="count" id="pipecount" style="margin-top:20px"></div>
+<div class="board" id="board"></div>
+</div>
+
+<div class="panel" id="p-guide">
+<div class="guide">
+
+<h2>What is in here, and how it got here</h2>
+<p>Every role on this dashboard has been opened and read against the live posting before it was published. Nothing is listed on the strength of a search-result summary. Four things are checked on each one:</p>
+<ul>
+<li><strong>Still open</strong> - no expired, filled or closed postings</li>
+<li><strong>Genuinely 100% remote</strong>, and remote for someone living in Maryland. If a posting never actually uses the word remote, it is dropped rather than assumed</li>
+<li><strong>Senior Director or VP</strong> - a role titled Director, or one whose body text reads Director, does not belong here</li>
+<li><strong>The salary band that applies to Maryland</strong>, not a higher band published for another state</li>
+</ul>
+<p>Roles that fail any of these are removed entirely rather than kept at a lower score. That is why the list is short. A shorter honest list is the point.</p>
+
+<h2>Reading a role card</h2>
+<p>The <strong>number in the ring</strong> is an overall fit score out of 100. Green is a strong fit (85+), amber is good with a gap (75-84), orange is a stretch (65-74).</p>
+<p>Under the salary you may see an <strong>amber warning</strong> that the band starts below $225K. That means the employer published a wide range and the top of it is not guaranteed - worth knowing before you invest time.</p>
+<p>The grey line at the bottom shows <strong>how old the posting is, when it closes</strong>, and the date it was last checked against the live listing. Anything closing within seven days is highlighted in amber.</p>
+<p>Click <strong>Fit breakdown + intel</strong> on any card to open three things: a five-part score breakdown explaining exactly why it scored what it did, what is known about the company, and a free-text notes box that saves as you type.</p>
+
+<h2>Tracking roles you are interested in</h2>
+<p>Every card has five stage buttons: <strong>Interested, Applied, Screening, Interview, Offer</strong>. Click one to track the role. Click the same button again to untrack it.</p>
+<p>Tracked roles appear on the <strong>Pipeline</strong> tab as a board, one column per stage, and the arrows under each card move it forward or back. Your notes travel with the role.</p>
+<div class="callout">
+<p><strong>Your tracking survives the daily refresh.</strong> Each role is remembered by company and title rather than by position in the list, so a role you marked Applied stays Applied tomorrow even though the list around it changes.</p>
+</div>
+
+<h2>Sending roles to yourself</h2>
+<p>The buttons at the top of the Pipeline tab work on whatever you have tracked:</p>
+<ul>
+<li><strong>Email to me</strong> - opens your email app with a message already written, addressed to you, listing every tracked role grouped by stage with links, salary and your own notes. You just press send.</li>
+<li><strong>Copy list</strong> - puts the same text on your clipboard to paste into a document, a message, or an email to someone else</li>
+<li><strong>Download CSV</strong> - a spreadsheet of everything you are tracking, for Excel or Google Sheets</li>
+<li><strong>Backup</strong> and <strong>Restore</strong> - see the caveat below</li>
+</ul>
+<div class="callout warn">
+<p><strong>Your tracking lives in this browser only.</strong> It is not stored on a server. If you clear your browsing data, or switch to a different computer or phone, it will not follow you.</p>
+<p>Use <strong>Backup</strong> now and then to download a small file of your pipeline, and <strong>Restore</strong> to load it back or move it to another device.</p>
+</div>
+
+<h2>What the tiles at the top mean</h2>
+<ul>
+<li><strong>Verified roles</strong> - the total, all individually checked</li>
+<li><strong>High fit</strong> - scored 85 or above</li>
+<li><strong>VP level</strong> - the rest are Senior Director</li>
+<li><strong>100% remote</strong> - always equals the total; anything not genuinely remote is removed rather than listed</li>
+<li><strong>No clearance</strong> - roles needing no security clearance at all. Your active TS/SCI is an asset on the others, never a barrier</li>
+<li><strong>Min $225K+</strong> - roles where even the <em>bottom</em> of the published band clears your floor. This deliberately does not count roles that merely <em>could</em> reach a high number</li>
+<li><strong>Closing &lt;= 7d</strong> - apply to these first</li>
+<li><strong>In pipeline</strong> - how many you are tracking</li>
+</ul>
+
+<h2>The Analytics tab</h2>
+<p>Six views of the same data: where the remote executive market actually is by sector, how scores are distributed, published salary bands with a dashed line marking your $225K floor, an average of where this slate is strong and where it is thin, your application funnel, and which kinds of executive roles exist remotely.</p>
+<p>The compensation chart is worth a look - the grey part of each bar is the band minimum and the blue part is the range above it, so you can see at a glance which employers start below your floor.</p>
+
+<h2>What this dashboard does not know</h2>
+<div class="callout warn">
+<p>Company intel is incomplete. Recent news and hiring history are unknown for most employers here, and those fields say so rather than guessing.</p>
+<p>Where an employer publishes no salary, the card says <strong>Not disclosed - est.</strong> and the number is an estimate, not something the employer stated.</p>
+<p>Most importantly: at Senior Director and VP level, a large share of roles are never posted publicly at all - they are filled through executive search firms and referrals. Treat this as one input to your search, not the whole map of it.</p>
+</div>
+
+<h2>When it updates</h2>
+<p>The list refreshes every morning and you get an email summarising what changed. The date under the header always shows when roles were last checked against their live postings.</p>
+
+</div>
+</div>
+
+<div class="panel" id="p-analytics">
+<div class="charts">
+<div class="chartbox">
+<h3>Opportunities by sector</h3>
+<div class="cs">Where the remote executive market actually is for her profile</div>
+<div class="canvaswrap"><canvas id="c-sector"></canvas></div>
+</div>
+<div class="chartbox">
+<h3>Fit score distribution</h3>
+<div class="cs">How many roles land in each scoring band</div>
+<div class="canvaswrap"><canvas id="c-score"></canvas></div>
+</div>
+<div class="chartbox">
+<h3>Compensation ranges</h3>
+<div class="cs">Published or estimated base bands, highest first. Dashed line is the $225K floor.</div>
+<div class="canvaswrap"><canvas id="c-comp"></canvas></div>
+</div>
+<div class="chartbox">
+<h3>Average fit breakdown</h3>
+<div class="cs">Where this slate is strong and where it is thin, averaged across all roles</div>
+<div class="canvaswrap"><canvas id="c-radar"></canvas></div>
+</div>
+<div class="chartbox">
+<h3>Application pipeline</h3>
+<div class="cs">Your progress through the funnel. Updates as you set stages.</div>
+<div class="canvaswrap"><canvas id="c-funnel"></canvas></div>
+</div>
+<div class="chartbox">
+<h3>Function mix</h3>
+<div class="cs">Which kinds of executive roles are available remotely</div>
+<div class="canvaswrap"><canvas id="c-role"></canvas></div>
+</div>
+</div>
+</div>
+</div>
+
+<footer>Auto-refreshed daily. Built for Zetra M. Batiste. Scores reflect fit to her profile: 100% remote, $175K+ floor, TS/SCI cleared cybersecurity leader — CISSP · CRISC · CISM — director or VP, $225K+ base, Commercial / Healthcare / State Government IT, and Defense excluding NSA. Every role here was opened and re-checked against the live posting for remote status, seniority and published salary - roles that failed were removed rather than downgraded. Where a salary is an estimate rather than a published band, the card says so. Pipeline stages and notes are saved in this browser only.</footer>
 
 <script>
-let JOBS=[];
-let NEWKEYS=new Set();      // keys new since last visit
-const grid=document.getElementById('grid');
-const STATUSES=['Saved','Applied','Interviewing','Passed'];
-function ageDays(d){const t=new Date(d+'T00:00:00');return Math.floor((Date.now()-t)/86400000);}
+var JOBS=[];
+var STAGES=["interested","applied","screening","interview","offer"];
+var STAGE_LABEL={interested:"Interested",applied:"Applied",screening:"Screening",interview:"Interview",offer:"Offer"};
+var STATE=JSON.parse(localStorage.getItem("tt_state_v2")||"{}");
+var OPEN={};
+var CHARTS={};
 
-/* ---- stable per-job key (survives jobs.json refreshes that reassign ids) ---- */
-function keyOf(j){return (j.title+'|'+j.company).toLowerCase().replace(/\s+/g,' ').trim();}
+function saveState(){localStorage.setItem("tt_state_v2",JSON.stringify(STATE));}
+function getRec(id){if(!STATE[id])STATE[id]={stage:"",notes:""};return STATE[id];}
+function setStage(id,s){var r=getRec(id);r.stage=(r.stage===s)?"":s;saveState();renderAll();}
+function moveStage(id,dir){
+var r=getRec(id);var i=STAGES.indexOf(r.stage);var n=i+dir;
+if(n<0){r.stage="";}else if(n>=STAGES.length){return;}else{r.stage=STAGES[n];}
+saveState();renderAll();
+}
+function setNotes(id,v){getRec(id).notes=v;saveState();}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+function val(id){return document.getElementById(id).value;}
+function scoreColor(s){return s>=85?"#22c55e":s>=75?"#eab308":"#f97316";}
+function secClass(s){return s==="State Gov"?"secStateGov":"sec-"+s;}
+function slugify(s){return String(s==null?"":s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+/,"").replace(/-+$/,"").slice(0,80);}
+function jobKey(j){return j.key?j.key:(slugify(j.company)+"--"+slugify(j.title)+"--"+slugify(j.location||""));}
+function daysOld(d){if(!d)return null;var t=new Date(d+"T00:00:00");return Math.floor((Date.now()-t)/86400000);}
+function daysLeft(d){if(!d)return null;var t=new Date(d+"T00:00:00");return Math.ceil((t-Date.now())/86400000);}
+function ageLine(j){
+var p=[];
+var a=daysOld(j.posted);
+p.push(a===null?"Posting date not published":(a<=1?"Posted today":"Posted "+a+" days ago"));
+var l=daysLeft(j.expiresOn);
+if(l!==null)p.push(l<0?"CLOSED":(l===0?"Closes today":l===1?"Closes tomorrow":"Closes in "+l+" days"));
+if(j.verified)p.push("Verified against posting "+j.verified);
+return p.join("  -  ");
+}
+function isUrgent(j){var l=daysLeft(j.expiresOn);return l!==null&&l<=7;}
+function money(n){return "$"+Math.round(n/1000)+"K";}
 
-/* ---- localStorage-backed tracking ---- */
-function lsGet(k,def){try{return JSON.parse(localStorage.getItem(k))??def;}catch(e){return def;}}
-function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-let TRACK=lsGet('zetra_track',{});   // {key:{status,note}}
-function trackOf(j){return TRACK[keyOf(j)]||{status:'',note:''};}
-function setStatus(j,status){
-  const k=keyOf(j);const cur=TRACK[k]||{status:'',note:''};
-  cur.status = (cur.status===status)?'':status;   // toggle off if same
-  TRACK[k]=cur;lsSet('zetra_track',TRACK);buildStats();render();
-}
-function setNote(j,note){
-  const k=keyOf(j);const cur=TRACK[k]||{status:'',note:''};
-  cur.note=note;TRACK[k]=cur;lsSet('zetra_track',TRACK);
+function ring(score){
+var w=el("div","ring");
+var c=scoreColor(score);
+var r=23,circ=2*Math.PI*r,off=circ*(1-score/100);
+var svg='<svg width="54" height="54" viewBox="0 0 54 54">'+
+'<circle cx="27" cy="27" r="'+r+'" fill="none" stroke="var(--chip)" stroke-width="5"></circle>'+
+'<circle cx="27" cy="27" r="'+r+'" fill="none" stroke="'+c+'" stroke-width="5" stroke-linecap="round" '+
+'stroke-dasharray="'+circ.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"></circle></svg>';
+w.innerHTML=svg;
+var v=el("div","val",score);v.style.color=c;w.appendChild(v);
+return w;
 }
 
-/* ---- deadline parsing: explicit closeDate field, else parse "CLOSES <Month> <d>, <yyyy>" from notes ---- */
-const MONTHS={january:0,february:1,march:2,april:3,may:4,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
-function closeDateOf(j){
-  if(j.closeDate){const d=new Date(j.closeDate+'T23:59:59');return isNaN(d)?null:d;}
-  const m=(j.notes||'').match(/clos\w*\s+([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/i);
-  if(m&&MONTHS[m[1].toLowerCase()]!==undefined){return new Date(+m[3],MONTHS[m[1].toLowerCase()],+m[2],23,59,59);}
-  return null;
+function fitBlock(j){
+var box=el("div");
+box.appendChild(el("div","dh","Why it scored "+j.score));
+var keys=[["leadership","Leadership"],["domain","Domain"],["remote","Remote"],["comp","Comp"],["industry","Industry"]];
+keys.forEach(function(k){
+var v=(j.fit&&j.fit[k[0]])||0;
+var row=el("div","fitrow");
+row.appendChild(el("div","fitlabel",k[1]));
+var bar=el("div","bar");
+var sp=el("span");sp.style.width=(v*20)+"%";
+sp.style.background=v>=5?"var(--green)":v>=4?"var(--accent)":v>=3?"var(--amber)":"var(--orange)";
+bar.appendChild(sp);row.appendChild(bar);
+row.appendChild(el("div","fitnum",v+"/5"));
+box.appendChild(row);
+if(j.fitNotes&&j.fitNotes[k[0]])box.appendChild(el("div","fitnote",j.fitNotes[k[0]]));
+});
+return box;
 }
-function daysToClose(j){const d=closeDateOf(j);return d?Math.ceil((d-Date.now())/86400000):null;}
-function isVerified(j){return (j.tags||[]).some(t=>/verified/i.test(t));}
-function salaryNum(j){const m=(j.salary||'').match(/(\d+)\s*K/i);return m?+m[1]:0;}
-function render(){
-  const m=document.getElementById('fMarket').value;
-  const r=document.getElementById('fRole').value;
-  const p=document.getElementById('fPriority').value;
-  const q=document.getElementById('fSearch').value.trim().toLowerCase();
-  const hideStale=document.getElementById('fStale').checked;
-  const verOnly=document.getElementById('fVerified').checked;
-  const sort=document.getElementById('fSort').value;
-  let rows=JOBS.filter(j=>{
-    if(m&&j.market!==m)return false;
-    if(r&&j.roleType!==r)return false;
-    if(p&&j.priority!==p)return false;
-    if(hideStale&&ageDays(j.posted)>=30)return false;
-    if(verOnly&&!isVerified(j))return false;
-    if(q){const blob=(j.title+' '+j.company+' '+j.city+' '+(j.notes||'')+' '+(j.tags||[]).join(' ')).toLowerCase();if(!blob.includes(q))return false;}
-    return true;
-  });
-  rows.sort((a,b)=>{
-    if(sort==='newest')return (b.posted||'').localeCompare(a.posted||'');
-    if(sort==='salary')return salaryNum(b)-salaryNum(a);
-    if(sort==='closing'){                       // jobs with a deadline first, soonest on top
-      const da=daysToClose(a),db=daysToClose(b);
-      if(da===null&&db===null)return b.score-a.score;
-      if(da===null)return 1; if(db===null)return -1; return da-db;
-    }
-    return b.score-a.score;
-  });
-  grid.innerHTML = rows.length? rows.map(cardHTML).join('') :
-    '<div class="empty">No listings match these filters.</div>';
-  document.getElementById('footer').textContent =
-    'Showing '+rows.length+' of '+JOBS.length+' listings · Scored to Zetra’s executive cybersecurity profile · Markets: MD, VA, DC, Remote';
+
+function intelBlock(j){
+var box=el("div");
+box.appendChild(el("div","dh","Company intel"));
+var g=el("div","intel");
+var rows=[["Size","size"],["Headquarters","hq"],["Remote policy","remotePolicy"],["Recent news","news"],["Hiring history","levelHistory"]];
+rows.forEach(function(r){
+var v=(j.intel&&j.intel[r[1]])||"Not determined";
+g.appendChild(el("div","ik",r[0]));
+g.appendChild(el("div",null,v));
+});
+box.appendChild(g);
+return box;
 }
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function cardHTML(j){
-  const i=JOBS.indexOf(j);
-  const a=ageDays(j.posted);
-  const ageCls=a<30?'fresh':'stale';
-  const tags=(j.tags||[]).map(t=>'<span class="badge clr">'+t+'</span>').join('');
-  const tr=trackOf(j);
-  // flags
-  let flags='';
-  if(NEWKEYS.has(keyOf(j)))flags+='<span class="flag new">New</span>';
-  const dtc=daysToClose(j);
-  if(dtc!==null){
-    const cls = dtc<=3?'flag close urgent':'flag close';
-    const lbl = dtc<0?'Closed':(dtc===0?'Closes today':(dtc===1?'Closes in 1 day':'Closes in '+dtc+' days'));
-    flags+=`<span class="${cls}">${lbl}</span>`;
-  }
-  const flagRow=flags?`<div class="flags">${flags}</div>`:'';
-  // status buttons
-  const sbtns=STATUSES.map(s=>`<button class="sbtn ${s} ${tr.status===s?'on':''}" data-i="${i}" data-act="status" data-s="${s}">${s}</button>`).join('');
-  const noteShow=tr.note?'show':'';
-  return `<div class="card ${j.priority} ${tr.status?'tracked':''}">
-    ${flagRow}
-    <div class="ctop">
-      <div>
-        <div class="title">${j.title}</div>
-        <div class="company">${j.company}</div>
-      </div>
-      <div class="score ${j.priority}">${j.score}<small>${j.priority.toUpperCase()}</small></div>
-    </div>
-    <div class="meta">
-      <span>\u{1F4CD} ${j.city} · ${j.market}</span>
-      <span>\u{1F4B0} ${j.salary}</span>
-    </div>
-    <div class="badges"><span class="badge role">${j.roleType}</span>${tags}</div>
-    <div class="notes">${j.notes||''}</div>
-    <div class="track">${sbtns}<button class="notebtn" data-i="${i}" data-act="note-toggle">${tr.note?'Edit note':'+ Note'}</button></div>
-    <textarea class="notebox ${noteShow}" data-i="${i}" data-act="note" placeholder="Private note — application status, contacts, follow-ups…">${esc(tr.note||'')}</textarea>
-    <div class="cbot">
-      <a class="apply" href="${j.url}" target="_blank" rel="noopener">View / Apply →</a>
-      <span class="posted">Posted ${j.posted}<span class="age ${ageCls}">${a}d</span></span>
-    </div>
-  </div>`;
+
+function noteBlock(j){
+var box=el("div");
+box.appendChild(el("div","dh","Your notes"));
+var ta=document.createElement("textarea");
+ta.className="notebox";
+ta.placeholder="Recruiter name, referral path, tailored resume version, follow-up date...";
+ta.value=getRec(jobKey(j)).notes||"";
+ta.addEventListener("input",function(){setNotes(jobKey(j),ta.value);});
+box.appendChild(ta);
+return box;
 }
+
+function matches(j){
+var q=val("q").toLowerCase();
+var hay=(j.title+" "+j.company+" "+j.location+" "+j.notes+" "+j.roleType+" "+j.sector+" "+
+JSON.stringify(j.intel||{})+" "+JSON.stringify(j.fitNotes||{})).toLowerCase();
+if(q&&hay.indexOf(q)<0)return false;
+if(val("track")&&j.track!==val("track"))return false;
+if(val("priority")&&j.priority!==val("priority"))return false;
+if(val("sector")&&j.sector!==val("sector"))return false;
+if(val("level")&&j.level!==val("level"))return false;
+if(val("role")&&j.roleType!==val("role"))return false;
+var cv=val("comp");
+if(cv){
+var cn=parseInt(cv.replace(/^(min|max)/,""),10);
+if(cv.indexOf("min")===0){if((j.salaryMin||0)<cn)return false;}
+else{if((j.salaryMax||0)<cn)return false;}
+}
+var st=val("stage");var cur=getRec(jobKey(j)).stage;
+if(st==="untracked"&&cur)return false;
+if(st&&st!=="untracked"&&cur!==st)return false;
+return true;
+}
+
+function sortJobs(list){
+var s=val("sort");
+var out=list.slice();
+if(s==="compdesc")out.sort(function(a,b){return (b.salaryMax||0)-(a.salaryMax||0);});
+else if(s==="company")out.sort(function(a,b){return a.company.localeCompare(b.company);});
+else out.sort(function(a,b){return b.score-a.score;});
+return out;
+}
+
+function renderGrid(){
+var grid=document.getElementById("grid");grid.innerHTML="";
+var list=sortJobs(JOBS.filter(matches));
+document.getElementById("count").textContent=
+list.length+" of "+JOBS.length+" roles shown";
+if(!list.length){grid.innerHTML='<div class="empty">No matches. Try clearing filters.</div>';return;}
+list.forEach(function(j){
+var rec=getRec(jobKey(j));
+var card=el("div","job"+(rec.stage?" st-"+rec.stage:""));
+
+var row=el("div","row");
+var left=el("div");
+left.appendChild(el("p","title",j.title));
+left.appendChild(el("div","company",j.company));
+row.appendChild(left);
+row.appendChild(ring(j.score));
+card.appendChild(row);
+
+var b=el("div","badges");
+b.appendChild(el("span","pri "+j.priority,j.priority));
+b.appendChild(el("span","chip trk"+(j.track==="Executive"?" exec":" pmrmf"),j.track));
+b.appendChild(el("span","chip lvl",j.level));
+b.appendChild(el("span","chip "+secClass(j.sector),j.sector));
+b.appendChild(el("span","chip remote",j.location));
+b.appendChild(el("span","chip",j.roleType));
+if(j.clearance==="Active Required")b.appendChild(el("span","chip clr-active","Active clearance required"));
+else if(j.clearance==="Eligible/Sponsor")b.appendChild(el("span","chip clr-elig","Clearance eligible"));
+card.appendChild(b);
+
+card.appendChild(el("div","salary",j.salary));
+var jf=(j.track==="Executive")?225000:175000;
+if((j.salaryMin||0)<jf)card.appendChild(el("div","floorwarn",
+"Band starts at $"+Math.round((j.salaryMin||0)/1000)+"K - below the $"+Math.round(jf/1000)+"K floor for this track, so the top of this band is not guaranteed"));
+card.appendChild(el("div","notes",j.notes));
+card.appendChild(el("div","agel"+(isUrgent(j)?" urgent":""),ageLine(j)));
+
+var sb=el("div","stagebar");
+sb.appendChild(el("span","savehint","Save as:"));
+STAGES.forEach(function(s){
+var btn=el("button","stagebtn"+(rec.stage===s?" on "+s:""),STAGE_LABEL[s]);
+btn.type="button";
+btn.onclick=function(){setStage(jobKey(j),s);};
+sb.appendChild(btn);
+});
+card.appendChild(sb);
+
+var act=el("div","actions");
+var exp=el("button","expand",OPEN[jobKey(j)]?"Hide detail":"Fit breakdown + intel");
+exp.type="button";
+exp.onclick=function(){OPEN[jobKey(j)]=!OPEN[jobKey(j)];renderGrid();};
+act.appendChild(exp);
+var lr=el("div","linkrow");
+var a=el("a","apply","View / Apply");a.href=j.url;a.target="_blank";a.rel="noopener";
+lr.appendChild(a);act.appendChild(lr);
+card.appendChild(act);
+
+var det=el("div","detail"+(OPEN[jobKey(j)]?" open":""));
+det.appendChild(fitBlock(j));
+det.appendChild(intelBlock(j));
+det.appendChild(noteBlock(j));
+card.appendChild(det);
+
+grid.appendChild(card);
+});
+}
+
+function renderBoard(){
+var board=document.getElementById("board");board.innerHTML="";
+var tracked=JOBS.filter(function(j){return getRec(jobKey(j)).stage;}).length;
+document.getElementById("pipecount").textContent=
+tracked+" of "+JOBS.length+" roles are in your pipeline. Use the stage buttons on any card, or the arrows below, to move a role along.";
+var pn=document.querySelector("#stat-pipeline .n");
+if(pn)pn.textContent=tracked;
+var ac=document.getElementById("actcount");
+if(ac)ac.textContent=tracked?(tracked+" role"+(tracked===1?"":"s")+" saved"):"No roles saved yet - click Interested on any role to save it";
+STAGES.forEach(function(s){
+var col=el("div","col");
+var head=el("div","colhead");
+head.appendChild(el("div","colname",STAGE_LABEL[s]));
+var inCol=JOBS.filter(function(j){return getRec(jobKey(j)).stage===s;});
+head.appendChild(el("div","colcount",String(inCol.length)));
+col.appendChild(head);
+if(!inCol.length)col.appendChild(el("div","colempty","Nothing here yet"));
+inCol.sort(function(a,b){return b.score-a.score;}).forEach(function(j){
+var c=el("div","pcard");
+c.appendChild(el("div","pt",j.title));
+c.appendChild(el("div","pc",j.company));
+c.appendChild(el("div","pm",j.score+" fit - "+j.salary));
+var n=getRec(jobKey(j)).notes;
+if(n)c.appendChild(el("div","pn",n));
+var mb=el("div","movebar");
+var back=el("button","movebtn","< Back");back.type="button";
+back.onclick=function(){moveStage(jobKey(j),-1);};
+var fwd=el("button","movebtn","Next >");fwd.type="button";
+fwd.onclick=function(){moveStage(jobKey(j),1);};
+mb.appendChild(back);mb.appendChild(fwd);
+c.appendChild(mb);
+col.appendChild(c);
+});
+board.appendChild(col);
+});
+}
+
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+function mk(id,cfg){
+if(CHARTS[id]){CHARTS[id].destroy();}
+var ctx=document.getElementById(id);
+if(!ctx)return;
+CHARTS[id]=new Chart(ctx,cfg);
+}
+
+function renderCharts(){
+if(typeof Chart==="undefined")return;
+var textC=css("--text")||"#e8eefb";
+var mutedC=css("--muted")||"#94a3b8";
+var lineC=css("--line")||"#2a3752";
+Chart.defaults.color=mutedC;
+Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";
+
+var secs=["Commercial","Healthcare","State Gov","Defense"];
+var secCounts=secs.map(function(s){return JOBS.filter(function(j){return j.sector===s;}).length;});
+mk("c-sector",{type:"doughnut",
+data:{labels:secs,datasets:[{data:secCounts,
+backgroundColor:["#22c55e","#2dd4bf","#60a5fa","#f97316"],borderWidth:0}]},
+options:{responsive:true,maintainAspectRatio:false,cutout:"58%",
+plugins:{legend:{position:"right",labels:{boxWidth:12,padding:14}}}}});
+
+var bands=["High 85-100","Medium 75-84","Stretch 65-74"];
+var bandCounts=[
+JOBS.filter(function(j){return j.score>=85;}).length,
+JOBS.filter(function(j){return j.score>=75&&j.score<85;}).length,
+JOBS.filter(function(j){return j.score<75;}).length];
+mk("c-score",{type:"bar",
+data:{labels:bands,datasets:[{data:bandCounts,
+backgroundColor:["#22c55e","#eab308","#f97316"],borderRadius:6}]},
+options:{responsive:true,maintainAspectRatio:false,
+plugins:{legend:{display:false}},
+scales:{y:{beginAtZero:true,ticks:{precision:0},grid:{color:lineC}},x:{grid:{display:false}}}}});
+
+var byComp=JOBS.slice().sort(function(a,b){return (b.salaryMax||0)-(a.salaryMax||0);}).slice(0,12);
+var floorLine={id:"floorLine",afterDatasetsDraw:function(c){
+if(!c.scales||!c.scales.x)return;
+var x=c.scales.x.getPixelForValue(225);
+var g=c.ctx;g.save();
+g.strokeStyle="#f97316";g.lineWidth=2;g.setLineDash([5,4]);
+g.beginPath();g.moveTo(x,c.chartArea.top);g.lineTo(x,c.chartArea.bottom);g.stroke();
+g.setLineDash([]);g.fillStyle="#f97316";g.font="bold 10px -apple-system,sans-serif";
+g.textAlign="left";g.fillText("$225K floor",x+4,c.chartArea.top+11);
+g.restore();}};
+mk("c-comp",{type:"bar",plugins:[floorLine],
+data:{labels:byComp.map(function(j){return j.company;}),
+datasets:[
+{label:"Band minimum",data:byComp.map(function(j){return (j.salaryMin||0)/1000;}),
+backgroundColor:"#334155",borderRadius:4,stack:"s"},
+{label:"Band above minimum",data:byComp.map(function(j){return ((j.salaryMax||0)-(j.salaryMin||0))/1000;}),
+backgroundColor:"#38bdf8",borderRadius:4,stack:"s"}]},
+options:{responsive:true,maintainAspectRatio:false,indexAxis:"y",
+plugins:{legend:{position:"bottom",labels:{boxWidth:12}},
+tooltip:{callbacks:{label:function(c){
+var j=byComp[c.dataIndex];
+return j.salary;}}}},
+scales:{x:{stacked:true,grid:{color:lineC},ticks:{callback:function(v){return "$"+v+"K";}}},
+y:{stacked:true,grid:{display:false},ticks:{font:{size:11}}}}}});
+
+var dims=["leadership","domain","remote","comp","industry"];
+var avg=dims.map(function(d){
+var t=0,n=0;
+JOBS.forEach(function(j){if(j.fit&&j.fit[d]){t+=j.fit[d];n++;}});
+return n?(t/n).toFixed(2):0;});
+mk("c-radar",{type:"radar",
+data:{labels:["Leadership scope","Domain match","Remote confidence","Comp clears floor","Industry transfer"],
+datasets:[{label:"Average across slate",data:avg,
+backgroundColor:"rgba(56,189,248,.22)",borderColor:"#38bdf8",pointBackgroundColor:"#38bdf8",borderWidth:2}]},
+options:{responsive:true,maintainAspectRatio:false,
+plugins:{legend:{display:false}},
+scales:{r:{min:0,max:5,ticks:{stepSize:1,backdropColor:"transparent"},
+grid:{color:lineC},angleLines:{color:lineC},pointLabels:{font:{size:11}}}}}});
+
+var funnel=STAGES.map(function(s){
+return JOBS.filter(function(j){return getRec(jobKey(j)).stage===s;}).length;});
+mk("c-funnel",{type:"bar",
+data:{labels:STAGES.map(function(s){return STAGE_LABEL[s];}),
+datasets:[{data:funnel,
+backgroundColor:["#a855f7","#38bdf8","#2dd4bf","#eab308","#22c55e"],borderRadius:6}]},
+options:{responsive:true,maintainAspectRatio:false,
+plugins:{legend:{display:false}},
+scales:{y:{beginAtZero:true,ticks:{precision:0},grid:{color:lineC}},x:{grid:{display:false}}}}});
+
+var roles=[];
+JOBS.forEach(function(j){if(roles.indexOf(j.roleType)<0)roles.push(j.roleType);});
+roles.sort();
+var roleCounts=roles.map(function(r){return JOBS.filter(function(j){return j.roleType===r;}).length;});
+mk("c-role",{type:"bar",
+data:{labels:roles,datasets:[{data:roleCounts,backgroundColor:"#818cf8",borderRadius:5}]},
+options:{responsive:true,maintainAspectRatio:false,indexAxis:"y",
+plugins:{legend:{display:false}},
+scales:{x:{beginAtZero:true,ticks:{precision:0},grid:{color:lineC}},
+y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+}
+
+function trackedJobs(){return JOBS.filter(function(j){return getRec(jobKey(j)).stage;});}
+function actMsg(s){var m=document.getElementById("actmsg");if(!m)return;m.textContent=s;
+setTimeout(function(){if(m)m.textContent="";},4000);}
+function pipeText(full){
+var L=trackedJobs();
+var o=["My tracked roles ("+L.length+")",""];
+STAGES.forEach(function(s){
+var inS=L.filter(function(j){return getRec(jobKey(j)).stage===s;});
+if(!inS.length)return;
+o.push(STAGE_LABEL[s].toUpperCase()+" ("+inS.length+")");
+inS.forEach(function(j){
+o.push("  - "+j.title+" | "+j.company);
+if(full)o.push("    "+j.location+" | "+j.salary+" | fit "+j.score+(j.expiresOn?" | closes "+j.expiresOn:""));
+o.push("    "+j.url);
+var n=getRec(jobKey(j)).notes;
+if(full&&n)o.push("    Notes: "+n.replace(/\s+/g," "));
+});
+o.push("");});
+o.push("Dashboard: https://skillzstacking2023.github.io/zetra-job-search/");
+return o.join("\n");}
+function noneTracked(){
+alert("Nothing tracked yet.\n\nOpen the Opportunities tab and click a stage button - Interested, Applied, Screening, Interview or Offer - on any role you want to keep.");}
+function emailPipeline(){
+var L=trackedJobs();if(!L.length){noneTracked();return;}
+var subj="My tracked roles - "+L.length+" role"+(L.length===1?"":"s");
+var body=pipeText(true);
+try{navigator.clipboard.writeText(subj+"\n\n"+body);}catch(e){}
+var mk=function(b){return "https://mail.google.com/mail/?view=cm&fs=1&to=tiffany.t.taylor@gmail.com&cc=arbatiste@gmail.com&su="+encodeURIComponent(subj)+"&body="+encodeURIComponent(b);};
+var u=mk(body);
+if(u.length>7000)u=mk(pipeText(false));
+if(u.length>7000){copyPipeline();actMsg("Too many to fit in a compose link - copied to your clipboard instead");return;}
+var w=window.open(u,"_blank","noopener");
+if(!w){actMsg("Popup blocked - the list is copied to your clipboard instead");return;}
+actMsg("Opened Gmail with "+L.length+" role"+(L.length===1?"":"s")+" - also copied to your clipboard");}
+function fallbackCopy(txt){
+var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";
+document.body.appendChild(ta);ta.select();
+try{document.execCommand("copy");actMsg("Copied to clipboard");}catch(e){actMsg("Could not copy automatically");}
+document.body.removeChild(ta);}
+function copyPipeline(){
+var L=trackedJobs();
+if(!L.length){noneTracked();return;}
+var txt=pipeText(true);
+if(navigator.clipboard&&navigator.clipboard.writeText){
+navigator.clipboard.writeText(txt).then(function(){actMsg("Copied "+L.length+" role"+(L.length===1?"":"s")+" to clipboard");},function(){fallbackCopy(txt);});
+}else{fallbackCopy(txt);}}
+function csvEsc(s){return '"'+String(s==null?"":s).replace(/"/g,'""')+'"';}
+function dl(text,name,mime){
+var b=new Blob([text],{type:mime});var a=document.createElement("a");
+a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();
+setTimeout(function(){URL.revokeObjectURL(a.href);document.body.removeChild(a);},600);}
+function today(){return new Date().toISOString().slice(0,10);}
+function downloadCSV(){
+var L=trackedJobs();
+if(!L.length){noneTracked();return;}
+var head=["Stage","Title","Company","Sector","Level","Location","Salary","Band min","Band max","Fit score","Priority","Closes","URL","My notes"];
+var rows=[head.map(csvEsc).join(",")];
+L.forEach(function(j){var r=getRec(jobKey(j));
+rows.push([STAGE_LABEL[r.stage]||"",j.title,j.company,j.sector,j.level,j.location,j.salary,
+j.salaryMin||"",j.salaryMax||"",j.score,j.priority,j.expiresOn||"",j.url,r.notes||""].map(csvEsc).join(","));});
+dl(rows.join("\n"),"tiffany-tracked-roles-"+today()+".csv","text/csv;charset=utf-8");
+actMsg("Downloaded "+L.length+" role"+(L.length===1?"":"s")+" as CSV");}
+function backupJSON(){
+dl(JSON.stringify({saved:today(),state:STATE},null,2),"tiffany-pipeline-backup-"+today()+".json","application/json");
+actMsg("Backup downloaded - keep it somewhere safe");}
+function restoreJSON(ev){
+var f=ev.target.files&&ev.target.files[0];
+if(!f){return;}
+var rd=new FileReader();
+rd.onload=function(){
+try{
+var d=JSON.parse(rd.result);
+var st=(d&&d.state)?d.state:d;
+if(!st||typeof st!=="object"||Array.isArray(st))throw new Error("that file is not a pipeline backup");
+STATE=st;saveState();renderAll();
+actMsg("Pipeline restored from "+((d&&d.saved)?d.saved:"backup"));
+}catch(e){alert("Could not read that backup file.\n\n"+e.message);}};
+rd.onerror=function(){alert("Could not read that file.");};
+rd.readAsText(f);ev.target.value="";}
+function renderAll(){renderGrid();renderBoard();renderCharts();}
+
+
+var WN_KEY="tt_wn_seen";
+var WHATSNEW=[{"id":"2026-08-14-e-tracks","date":"August 14, 2026","title":"Two tracks: Executive and PM / RMF","body":"The search now covers Program and Project Management, RMF leadership and practitioner roles, and FedRAMP, StateRAMP and CMMC compliance alongside the original Senior Director and VP roles. Use the Both tracks filter to switch between them. Where a role is a step down in scope, the card says so plainly."},{"id":"2026-08-14-d-save","date":"August 14, 2026","title":"Save roles and email them to yourself","body":"Click any stage button on a role to save it. The bar under the tabs lets you email the list to yourself, copy it, download a CSV, or back it up so it survives clearing your browser."},{"id":"2026-08-14-c-guide","date":"August 14, 2026","title":"New How to use tab","body":"A plain-language guide to reading a card, tracking applications, and what the dashboard does and does not know."},{"id":"2026-08-14-b-verified","date":"August 14, 2026","title":"Every role re-checked against its live posting","body":"Roles are now opened and verified for remote status, seniority and published salary before they appear. Anything that fails is removed rather than shown with a lower score. Cards show real posting dates and close dates."},{"id":"2026-08-14-a-comp","date":"August 14, 2026","title":"Honest compensation display","body":"The salary tile now counts roles where even the bottom of the published band clears the floor, and any card whose band starts below it says so in amber."}];
+function wnUnseen(){var s=localStorage.getItem(WN_KEY)||"";return WHATSNEW.filter(function(w){return w.id>s;});}
+function updateWnDot(){var b=document.getElementById("wnbtn");if(!b)return;var n=wnUnseen().length;b.textContent=n?("What's new ("+n+")"):"What's new";}
+function dismissWhatsNew(){localStorage.setItem(WN_KEY,WHATSNEW[0].id);var b=document.getElementById("whatsnew");if(b)b.style.display="none";updateWnDot();}
+function renderWhatsNew(showAll){
+var box=document.getElementById("whatsnew");if(!box)return;
+var items=showAll?WHATSNEW:wnUnseen();
+box.innerHTML="";
+if(!items.length){box.style.display="none";updateWnDot();return;}
+box.style.display="block";
+var h=document.createElement("div");h.className="wnhead";
+var sp=document.createElement("span");sp.textContent=showAll?"What's new":"New since your last visit";
+h.appendChild(sp);
+var x=document.createElement("button");x.type="button";x.className="wnclose";x.textContent="Got it";
+x.onclick=dismissWhatsNew;h.appendChild(x);
+box.appendChild(h);
+items.forEach(function(w){
+var it=document.createElement("div");it.className="wnitem";
+var a=document.createElement("div");a.className="wntitle";a.textContent=w.title;it.appendChild(a);
+var c=document.createElement("div");c.className="wnbody";c.textContent=w.body;it.appendChild(c);
+var d=document.createElement("div");d.className="wndate";d.textContent=w.date;it.appendChild(d);
+box.appendChild(it);});
+updateWnDot();}
 function buildStats(){
-  const c=(f)=>JOBS.filter(f).length;
-  const ts=(st)=>JOBS.filter(j=>trackOf(j).status===st).length;
-  const s=[
-    ['Total',JOBS.length,''],
-    ['High',c(j=>j.priority==='High'),''],
-    ['Medium',c(j=>j.priority==='Medium'),''],
-    ['Saved',ts('Saved'),'act'],
-    ['Applied',ts('Applied'),'act'],
-    ['Interviewing',ts('Interviewing'),'act'],
-    ['Updated',JOBS[0]?JOBS[0].posted:'-','']
-  ];
-  document.getElementById('stats').innerHTML=s.map(x=>`<div class="stat ${x[2]}"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('');
+var s=document.getElementById("stats");s.innerHTML="";
+function stat(n,l){var d=el("div","stat");d.appendChild(el("div","n",n));d.appendChild(el("div","l",l));return d;}
+var high=JOBS.filter(function(j){return j.priority==="High";}).length;
+var vp=JOBS.filter(function(j){return j.level==="VP";}).length;
+var noClr=JOBS.filter(function(j){return !j.clearance||j.clearance==="None";}).length;
+var execN=JOBS.filter(function(j){return j.track==="Executive";}).length;
+var pmN=JOBS.filter(function(j){return j.track!=="Executive";}).length;
+var floorSafe=JOBS.filter(function(j){return (j.salaryMin||0)>=(j.track==="Executive"?225000:175000);}).length;
+var tracked=JOBS.filter(function(j){return getRec(jobKey(j)).stage;}).length;
+var closing=JOBS.filter(isUrgent).length;
+s.appendChild(stat(JOBS.length,"Verified roles"));
+var et=stat(execN,"Executive track");
+et.style.borderColor="#818cf8";
+s.appendChild(et);
+var pt2=stat(pmN,"PM / RMF track");
+pt2.style.borderColor="#eab308";
+s.appendChild(pt2);
+s.appendChild(stat(high,"High fit"));
+s.appendChild(stat(JOBS.length,"100% remote"));
+s.appendChild(stat(noClr,"No clearance"));
+var fs=stat(floorSafe,"Min clears floor");
+fs.title="Roles where even the BOTTOM of the published band clears the floor for that track - $225K Executive, $175K PM / RMF";
+if(floorSafe<JOBS.length)fs.style.borderColor="#eab308";
+s.appendChild(fs);
+var ct=stat(closing,"Closing <= 7d");
+if(closing>0)ct.style.borderColor="#f97316";
+s.appendChild(ct);
+var pt=stat(tracked,"In pipeline");
+pt.id="stat-pipeline";
+s.appendChild(pt);
+var roles=[];
+JOBS.forEach(function(j){if(roles.indexOf(j.roleType)<0)roles.push(j.roleType);});
+roles.sort();
+var rsel=document.getElementById("role");
+roles.forEach(function(r){var o=document.createElement("option");o.value=r;o.textContent=r;rsel.appendChild(o);});
 }
-function buildRoleFilter(){
-  const roles=[...new Set(JOBS.map(j=>j.roleType))].sort();
-  const sel=document.getElementById('fRole');
-  roles.forEach(r=>{const o=document.createElement('option');o.textContent=r;sel.appendChild(o);});
-}
-function openResume(){document.getElementById('resumeModal').classList.add('open');}
-function closeResume(){document.getElementById('resumeModal').classList.remove('open');}
-document.getElementById('resumeModal').addEventListener('click',e=>{if(e.target.id==='resumeModal')closeResume();});
-['fMarket','fRole','fPriority','fStale','fVerified','fSort'].forEach(id=>document.getElementById(id).addEventListener('change',render));
-document.getElementById('fSearch').addEventListener('input',render);
-document.getElementById('refreshLink').href='?v='+Date.now();
 
-/* delegated handlers for tracking controls */
-grid.addEventListener('click',e=>{
-  const el=e.target.closest('[data-act]');if(!el)return;
-  const act=el.dataset.act;
-  if(act==='status'){setStatus(JOBS[+el.dataset.i],el.dataset.s);}
-  else if(act==='note-toggle'){
-    const box=el.closest('.card').querySelector('.notebox');
-    box.classList.toggle('show');if(box.classList.contains('show'))box.focus();
-  }
-});
-grid.addEventListener('input',e=>{
-  const el=e.target.closest('[data-act="note"]');if(!el)return;
-  setNote(JOBS[+el.dataset.i],el.value);
-});
-const JOBS_DATA=[{"id":1,"score":95,"title":"Supervisory IT Specialist (Cyber Policy and Planning) GS-15","company":"Department of Homeland Security","market":"DC","city":"Washington, DC","salary":"$150K-$195K/yr","roleType":"Federal Exec","tags":["GS-15","Cyber Policy","VERIFIED"],"priority":"High","url":"https://dhs.usajobs.gov/job/874975400","notes":"VERIFIED OPEN 2026-07-03 \u2014 CLOSES JULY 8, 2026. GS-2210-15 leading a national-level cyber policy team. Direct match to her federal exec track \u2014 APPLY NOW.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":2,"score":94,"title":"Director, Cyber Supply Chain Risk Management (C-SCRM)","company":"Federal Systems Integrator","market":"VA","city":"Arlington, VA","salary":"$175K-$215K/yr","roleType":"C-SCRM","tags":["TS/SCI","CISSP","RMF"],"priority":"High","url":"https://www.linkedin.com/jobs/search/?keywords=Director%20Cyber%20Supply%20Chain%20Risk%20Management&location=Arlington%20Virginia","notes":"Direct match to current State Dept C-SCRM director role - NIST 800-161 - Vendor risk governance - TS/SCI leveraged","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":3,"score":93,"title":"Lead Cyber-Supply Chain Risk Management Specialist","company":"Boeing","market":"VA","city":"Arlington, VA","salary":"$160K-$205K/yr","roleType":"C-SCRM","tags":["C-SCRM","NIST 800-161","VERIFIED"],"priority":"High","url":"https://jobs.boeing.com/job/arlington/lead-cyber-supply-chain-risk-management-specialist/185/96799241056","notes":"VERIFIED LIVE 2026-07-03 \u2014 direct posting. Lead C-SCRM specialist, emerging frameworks. Her exact specialty.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":4,"score":92,"title":"Senior Cyber-Supply Chain Risk Management Specialist","company":"Boeing","market":"VA","city":"Arlington, VA","salary":"$150K-$190K/yr","roleType":"C-SCRM","tags":["C-SCRM","NIST 800-53","VERIFIED"],"priority":"High","url":"https://jobs.boeing.com/search-jobs/c-scrm/185/1","notes":"VERIFIED \u2014 Job ID JR2026514501, posted June 22, 2026. 5+ yrs risk management/governance, NIST 800-53/800-171/CMMC frameworks.","postedDate":"2026-06-22","posted":"2026-06-22"},{"id":5,"score":92,"title":"Deputy Chief Information Security Officer","company":"State of Maryland","market":"MD","city":"Baltimore, MD","salary":"$150K-$185K/yr","roleType":"CISO","tags":["State Gov","Deputy CISO"],"priority":"High","url":"https://www.jobapscloud.com/MD/sup/BulPreview.asp?R1=24&R2=004491&R3=0007","notes":"State of MD Deputy CISO announcement (repost) \u2014 still appearing in listings 2026-07-03; verify status on MD JobAps before applying.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":6,"score":91,"title":"Chief Information Security Officer","company":"Federal Agency (USAJOBS)","market":"DC","city":"Washington, DC","salary":"$180K-$221K/yr","roleType":"Federal Exec","tags":["CISO","Federal","VERIFIED"],"priority":"High","url":"https://www.usajobs.gov/job/873411000","notes":"VERIFIED on USAJOBS 2026-07-03 \u2014 agency CISO vacancy. Check announcement for closing date and SES/GS level.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":7,"score":90,"title":"Information Systems Security Manager (ISSM) 2 \u2014 TS/SCI w/Poly","company":"Amentum","market":"MD","city":"Fort Meade, MD","salary":"$140K-$175K/yr","roleType":"ISSM/RMF","tags":["TS/SCI","RMF","VERIFIED"],"priority":"High","url":"https://www.amentumcareers.com/jobs/information-systems-security-manager-issm-2-ts-sci-w-poly-fort-meade-maryland-united-states-94673c63-1cc1-4d12-ad24-b76876243c17","notes":"VERIFIED LIVE 2026-07-03 \u2014 direct posting at Fort Meade. Her old duty station; RMF + clearance direct match.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":90,"title":"Deputy Program Manager \u2014 TS/SCI w/Poly","company":"Amentum","market":"MD","city":"Columbia, MD","salary":"$150K-$190K/yr","roleType":"Program Mgmt","tags":["TS/SCI Poly","PMO","RMF","VERIFIED"],"priority":"High","url":"https://www.amentumcareers.com/jobs/deputy-program-manager-ts-sci-w-poly-columbia-maryland-united-states","notes":"VERIFIED LIVE 2026-07-03 \u2014 PMO for enterprise-wide cybersecurity + RMF program near Fort Meade. Cost/schedule/risk/staffing across task orders. Her Division Chief + budget experience is a direct hit. 15 min from Ellicott City.","postedDate":"2026-07-03","posted":"2026-07-03","id":8},{"id":9,"score":89,"title":"Information Systems Security Manager (ISSM), Senior Advisor","company":"Peraton","market":"MD","city":"Fort Meade, MD","salary":"$146K-$234K/yr","roleType":"ISSM/RMF","tags":["TS/SCI","Senior Advisor","VERIFIED"],"priority":"High","url":"https://www.careers.peraton.com/jobs/information-systems-security-manager-issm-senior-advisor-fort-meade-maryland-160098-jobs--cyber-security--","notes":"VERIFIED LIVE 2026-07-03 \u2014 Senior Advisor level ISSM at Fort Meade. Matches her Division Chief seniority better than standard ISSM.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":10,"score":88,"title":"Information Systems Security Manager (ISSM)","company":"The Swift Group","market":"MD","city":"Annapolis Junction, MD","salary":"$135K-$185K/yr","roleType":"ISSM/RMF","tags":["TS/SCI Poly","RMF","VERIFIED"],"priority":"High","url":"https://jobs.gem.com/the-swift-group/am9icG9zdDrOmSysURENNOHCDbX-m1mk","notes":"VERIFIED LIVE 2026-07-03 \u2014 ISSM leading IA program, RMF/DoD. Annapolis Junction = 20 min from Ellicott City.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":11,"score":88,"title":"Supervisory IT Cybersecurity Specialist (INFOSEC) GS-15","company":"Federal Agency (USAJOBS)","market":"DC","city":"Washington, DC","salary":"$143K-$195K/yr","roleType":"Federal Exec","tags":["GS-15","INFOSEC","VERIFIED"],"priority":"High","url":"https://www.usajobs.gov/job/872132300","notes":"VERIFIED on USAJOBS 2026-07-03 \u2014 GS-15 supervisory cyber. Check closing date.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":88,"title":"Cybersecurity Program Manager (Cleared)","company":"Federal Contractor (Ft Meade corridor)","market":"MD","city":"Fort Meade / Columbia, MD","salary":"$150K-$195K/yr","roleType":"Program Mgmt","tags":["TS/SCI","Program Mgmt"],"priority":"High","url":"https://www.clearancejobs.com/q-program-manager","notes":"1,300+ cleared cyber roles active in the Ft Meade corridor. Cyber PM roles map to her portfolio management of major State Dept IT security projects + multimillion-dollar budget oversight.","postedDate":"2026-07-03","posted":"2026-07-03","id":12},{"id":13,"score":87,"title":"Cybersecurity Executive (DHS Cybersecurity Service)","company":"Department of Homeland Security","market":"DC","city":"Washington, DC","salary":"$176K-$238K/yr","roleType":"Federal Exec","tags":["DHS CS","Executive"],"priority":"High","url":"https://cybersecurity.usajobs.gov/","notes":"DHS Cybersecurity Service \u2014 excepted service, pay up to $238K. Rolling intake for executive-track cyber leaders.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":87,"title":"Principal / Director Consultant, Vendor Risk Management","company":"Consulting (DC-Baltimore)","market":"DC","city":"Washington DC-Baltimore","salary":"$150K-$200K/yr","roleType":"Vendor Risk/TPRM","tags":["TPRM","NIST 800-161"],"priority":"High","url":"https://www.linkedin.com/jobs/third-party-risk-jobs","notes":"Director-level vendor risk consulting actively hiring per July 2026 scan. Her State Dept vendor due-diligence frameworks + NIST 800-161 program = the exact service offering. 22,000+ TPRM listings nationally, 146 new.","postedDate":"2026-07-03","posted":"2026-07-03","id":14},{"id":15,"score":86,"title":"Cyber Security Task Lead","company":"Leidos","market":"MD","city":"Linthicum Heights, MD","salary":"$150K-$190K/yr","roleType":"Cyber Ops","tags":["TS/SCI","Task Lead"],"priority":"High","url":"https://careers.leidos.com/search/jobs?keywords=cyber%20security%20task%20lead&location=Maryland","notes":"Leidos cyber task lead roles in MD \u2014 leadership + cleared ops match.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":16,"score":85,"title":"Director of Cybersecurity / Security Program","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$170K-$220K/yr","roleType":"Security Director","tags":["Remote","Director"],"priority":"High","url":"https://www.linkedin.com/jobs/search/?keywords=Director%20of%20Cybersecurity&location=United%20States&f_WT=2","notes":"Remote director-level security program roles \u2014 venture-backed and enterprise cos actively hiring CISSP execs per July 2026 market scan.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":85,"title":"Technical / IT Program Manager (Cleared)","company":"Federal Contractor","market":"DC","city":"Washington, DC / Arlington, VA","salary":"$145K-$190K/yr","roleType":"Program Mgmt","tags":["TS eligible","Federal IT"],"priority":"High","url":"https://www.glassdoor.com/Job/washington-program-manager-top-secret-clearance-jobs-SRCH_IL.0,10_IC1138213_KO11,47.htm","notes":"693 cleared PM openings in DC (July 2026). Typical bar: 10+ yrs IT ops with 5+ supervisory in federal environment \u2014 she clears it easily. DC TPM average $164K.","postedDate":"2026-07-03","posted":"2026-07-03","id":17},{"id":18,"score":84,"title":"Senior Manager, Cyber Risk / GRC","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$155K-$200K/yr","roleType":"GRC/Risk","tags":["Remote","GRC"],"priority":"Medium","url":"https://www.indeed.com/q-cyber-security-grc-remote-jobs.html","notes":"152 remote GRC roles on Glassdoor as of this refresh \u2014 CRISC/CISM directly valued.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":84,"title":"Supervisory Program Manager (IT/Cyber) GS-14/15","company":"Federal Agency (USAJOBS)","market":"DC","city":"Washington, DC","salary":"$142K-$195K/yr","roleType":"Program Mgmt","tags":["GS-14/15","Federal"],"priority":"Medium","url":"https://www.usajobs.gov/Search/Results?k=program%20project%20management%20cybersecurity","notes":"Federal PM track (0340/2210 series) \u2014 cyber program oversight roles post regularly. Her federal exec background + MBA fits; watch for direct-hire announcements.","postedDate":"2026-07-03","posted":"2026-07-03","id":19},{"id":20,"score":83,"title":"Director, Cybersecurity","company":"State of Maryland (DoIT)","market":"MD","city":"Baltimore, MD","salary":"$140K-$180K/yr","roleType":"CISO","tags":["State Gov","Director"],"priority":"Medium","url":"https://jobapscloud.com/MD/sup/bulpreview.asp?R1=23&R2=005485&R3=0030","notes":"MD DoIT cybersecurity director announcement \u2014 older series; verify current status. MD added Director of State Cybersecurity + Director of Local Cybersecurity roles under State CISO.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":21,"score":82,"title":"Cybersecurity Supply Chain Risk Management SME","company":"Navanti Group","market":"VA","city":"Arlington, VA","salary":"$140K-$180K/yr","roleType":"C-SCRM","tags":["C-SCRM","SME"],"priority":"Medium","url":"https://www.indeed.com/jobs?q=Navanti+cybersecurity+supply+chain+risk+management&l=Arlington%2C+VA","notes":"C-SCRM SME supporting federal client \u2014 her exact current function.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":22,"score":81,"title":"Supply Chain Risk Management (SCRM) Lead","company":"Federal Contractor","market":"VA","city":"Falls Church, VA","salary":"$140K-$175K/yr","roleType":"C-SCRM","tags":["SCRM","Federal"],"priority":"Medium","url":"https://www.indeed.com/jobs?q=supply+chain+risk+management+lead+cyber&l=Falls+Church%2C+VA","notes":"SCRM lead roles clustered in NoVA federal corridor.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":23,"score":80,"title":"Principal Computer Network Defense Analyst","company":"Leidos","market":"MD","city":"Linthicum Heights, MD","salary":"$150K-$185K/yr","roleType":"Cyber Ops","tags":["CND","TS/SCI"],"priority":"Medium","url":"https://careers.leidos.com/search/jobs?keywords=principal%20computer%20network%20defense&location=Maryland","notes":"Principal CND \u2014 maps to her Red Team / CND analyst background at senior level.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":80,"title":"Third-Party Risk Management Lead","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$120K-$165K/yr","roleType":"Vendor Risk/TPRM","tags":["Remote","TPRM"],"priority":"Medium","url":"https://www.indeed.com/q-remote-third-party-risk-management-jobs.html","notes":"600+ remote TPRM roles on Glassdoor. Lead/manager level pays below her director comp \u2014 but strong part-time/flexible and remote pipeline for the post-retirement phase.","postedDate":"2026-07-03","posted":"2026-07-03","id":24},{"id":25,"score":79,"title":"Cyber Risk / GRC Manager","company":"Private Sector","market":"DC","city":"Washington, DC","salary":"$130K-$180K/yr","roleType":"GRC/Risk","tags":["GRC","CRISC"],"priority":"Medium","url":"https://www.ziprecruiter.com/Jobs/Grc-Manager/-in-Washington,DC","notes":"GRC manager roles in DC \u2014 CRISC + CISM stack directly relevant.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":26,"score":78,"title":"Insider Threat Program Manager","company":"Federal Contractor","market":"VA","city":"McLean, VA","salary":"$140K-$178K/yr","roleType":"IR/Threat","tags":["Insider Threat","TS/SCI"],"priority":"Medium","url":"https://www.linkedin.com/jobs/search/?keywords=insider%20threat%20program%20manager&location=McLean%20Virginia","notes":"She ran the DIA insider threat program in the European theater \u2014 direct experience match.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":27,"score":77,"title":"Incident Response / DFIR Manager","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$150K-$190K/yr","roleType":"IR/Threat","tags":["Remote","DFIR"],"priority":"Medium","url":"https://www.indeed.com/q-incident-response-manager-l-remote-jobs.html","notes":"MS in Digital Forensics & Cyber Investigations + incident handling program leadership.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":77,"title":"PMO / Portfolio Director","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$160K-$210K/yr","roleType":"Program Mgmt","tags":["Remote","PMO"],"priority":"Medium","url":"https://www.ziprecruiter.com/Jobs/Technical-Program-Manager/-in-Washington,DC","notes":"Portfolio/PMO leadership \u2014 her multi-task-order, multi-bureau program orchestration translates directly. PMP not held; MBA (May 2026) + 20 yrs federal program leadership carries most postings that say PMP preferred.","postedDate":"2026-07-03","posted":"2026-07-03","id":28},{"id":29,"score":76,"title":"Delegated Authorizing Official Rep (DAO-R) / RMF Lead","company":"Arcfield","market":"VA","city":"Chantilly, VA","salary":"$140K-$180K/yr","roleType":"ISSM/RMF","tags":["RMF","A&A"],"priority":"Medium","url":"https://www.indeed.com/jobs?q=Arcfield+authorizing+official+RMF&l=Chantilly%2C+VA","notes":"RMF SME / A&A authority role \u2014 she was RMF SME for the European theater.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":30,"score":75,"title":"Endpoint Security / EDR Program Lead","company":"Federal Contractor","market":"VA","city":"Reston, VA","salary":"$140K-$180K/yr","roleType":"Endpoint","tags":["EDR","HBSS"],"priority":"Medium","url":"https://www.linkedin.com/jobs/search/?keywords=endpoint%20security%20program%20lead&location=Reston%20Virginia","notes":"Former DoD Endpoint Security Division Chief (50-person team) \u2014 overqualified in a good way.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":31,"score":74,"title":"Threat Intelligence Lead / Manager","company":"Federal Contractor","market":"MD","city":"Hanover, MD","salary":"$135K-$175K/yr","roleType":"IR/Threat","tags":["Threat Intel","TS/SCI"],"priority":"Medium","url":"https://www.indeed.com/jobs?q=threat+intelligence+lead&l=Maryland","notes":"Threat intel leadership near BWI corridor \u2014 NSA-adjacent contractor cluster.","postedDate":"2026-07-03","posted":"2026-07-03"},{"score":74,"title":"Cybersecurity Training & Workforce Development Lead","company":"Federal Contractor","market":"MD","city":"Fort Meade, MD","salary":"$130K-$170K/yr","roleType":"Program Mgmt","tags":["Training","Curriculum"],"priority":"Medium","url":"https://clearedjobs.net/l-maryland-jobs.html","notes":"She built the NSA Mission Manager curriculum and ran DoD 8570 workforce certification for DISA Europe \u2014 workforce development leadership is an underused arrow in her quiver.","postedDate":"2026-07-03","posted":"2026-07-03","id":32},{"score":70,"title":"Adjunct Faculty \u2014 Cybersecurity (Part-Time)","company":"UMGC / Regional Universities","market":"Remote","city":"Remote / Adelphi, MD","salary":"Per course","roleType":"Program Mgmt","tags":["Part-Time","Flexible"],"priority":"Medium","url":"https://careers.umgc.edu/","notes":"Two-time UMGC alum (MBA May 2026 + MS Digital Forensics) with 20 yrs practitioner credibility \u2014 natural part-time/flexible income and identity bridge for the March 2027 post-retirement phase.","postedDate":"2026-07-03","posted":"2026-07-03","id":33},{"id":34,"score":72,"title":"Chief Information Security Officer","company":"Private Sector (Enterprise)","market":"DC","city":"Washington, DC","salary":"$200K-$280K/yr","roleType":"CISO","tags":["CISO","Enterprise"],"priority":"Stretch","url":"https://www.linkedin.com/jobs/search/?keywords=Chief%20Information%20Security%20Officer&location=Washington%20DC","notes":"250 CISO listings in DC on Ladders as of this refresh. Private-sector CISO comp at IC primes can exceed $350K.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":35,"score":71,"title":"VP / Senior Director, Cybersecurity","company":"Private Sector (Remote)","market":"Remote","city":"Remote","salary":"$200K-$260K/yr","roleType":"Security Director","tags":["Remote","VP"],"priority":"Stretch","url":"https://www.linkedin.com/jobs/search/?keywords=VP%20cybersecurity&location=United%20States&f_WT=2","notes":"VP-level remote \u2014 MBA (May 2026) + 20 yrs federal leadership strengthens the exec case.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":36,"score":70,"title":"Cyber Operations Director (Cleared)","company":"Booz Allen Hamilton","market":"VA","city":"McLean, VA","salary":"$170K-$220K/yr","roleType":"Cyber Ops","tags":["TS/SCI","Director"],"priority":"Stretch","url":"https://careers.boozallen.com/teams/cyber","notes":"She started her cleared career at Booz Allen (2003-2007) \u2014 alumni returner angle.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":37,"score":69,"title":"Principal Cybersecurity Architect","company":"JHU Applied Physics Laboratory","market":"MD","city":"Laurel, MD","salary":"$160K-$210K/yr","roleType":"Security Director","tags":["FFRDC","Laurel MD"],"priority":"Stretch","url":"https://www.linkedin.com/jobs/search/?keywords=principal%20cybersecurity%20architect&location=Laurel%20Maryland","notes":"APL = 15 min from Ellicott City, stable FFRDC, strong benefits.","postedDate":"2026-07-03","posted":"2026-07-03"},{"id":38,"score":66,"title":"Cybersecurity Consulting Director","company":"Big 4 / Consulting","market":"Remote","city":"Remote","salary":"$180K-$250K/yr","roleType":"Security Director","tags":["Consulting","Remote"],"priority":"Stretch","url":"https://www.linkedin.com/jobs/search/?keywords=cybersecurity%20consulting%20director&location=United%20States","notes":"Consulting director track \u2014 federal C-SCRM expertise is a differentiator Big 4 firms sell to agencies.","postedDate":"2026-07-03","posted":"2026-07-03"}];
-function boot(d){
-  JOBS=d;
-  // "new since last visit": keys present now but not at last visit
-  const seen=lsGet('zetra_seen',null);
-  const curKeys=JOBS.map(keyOf);
-  if(Array.isArray(seen)&&seen.length){
-    const seenSet=new Set(seen);
-    NEWKEYS=new Set(curKeys.filter(k=>!seenSet.has(k)));
-  }
-  lsSet('zetra_seen',curKeys);   // record current for next visit
-  buildStats();buildRoleFilter();render();
+function showTab(btn){
+var tabs=document.querySelectorAll(".tab");
+for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("active");
+btn.classList.add("active");
+var panels=document.querySelectorAll(".panel");
+for(var k=0;k<panels.length;k++)panels[k].classList.remove("active");
+document.getElementById(btn.getAttribute("data-panel")).classList.add("active");
+if(btn.getAttribute("data-panel")==="p-analytics")renderCharts();
 }
-fetch('jobs.json?v='+Date.now()).then(r=>r.json()).then(boot).catch(()=>boot(JOBS_DATA));
+
+function resetFilters(){
+["q","track","priority","sector","level","role","comp","stage"].forEach(function(id){
+document.getElementById(id).value="";});
+document.getElementById("sort").value="score";
+renderGrid();
+}
+
+function toggleTheme(){
+var cur=document.documentElement.getAttribute("data-theme")||"dark";
+var next=cur==="light"?"dark":"light";
+document.documentElement.setAttribute("data-theme",next);
+localStorage.setItem("tt_theme",next);
+document.getElementById("theme-btn").textContent=next==="light"?"Dark Mode":"Light Mode";
+renderCharts();
+}
+function initTheme(){
+var saved=localStorage.getItem("tt_theme")||"dark";
+document.documentElement.setAttribute("data-theme",saved);
+document.getElementById("theme-btn").textContent=saved==="light"?"Dark Mode":"Light Mode";
+}
+initTheme();
+renderWhatsNew(false);
+
+fetch("jobs.json?v="+Date.now(),{cache:"no-store"})
+.then(function(r){return r.json();})
+.then(function(data){
+JOBS=data.sort(function(a,b){return b.score-a.score;});
+buildStats();
+var vdates=[];
+JOBS.forEach(function(j){if(j.verified&&vdates.indexOf(j.verified)<0)vdates.push(j.verified);});
+vdates.sort().reverse();
+var urgent=JOBS.filter(isUrgent).length;
+document.getElementById("updated").textContent=
+"Last verified against live postings: "+(vdates[0]||"not recorded")+
+" - "+JOBS.length+" roles, every one re-checked for remote status, level and published salary"+
+(urgent?" - "+urgent+" closing within 7 days":"");
+renderAll();
+["q","track","priority","sector","level","role","comp","stage","sort"].forEach(function(id){
+document.getElementById(id).addEventListener(id==="q"?"input":"change",renderGrid);});
+})
+.catch(function(e){
+document.getElementById("grid").innerHTML=
+'<div class="empty">Could not load jobs.json - '+e.message+'</div>';});
 </script>
 </body>
 </html>
