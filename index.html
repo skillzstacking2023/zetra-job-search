@@ -891,5 +891,50 @@ document.getElementById(id).addEventListener(id==="q"?"input":"change",renderGri
 document.getElementById("grid").innerHTML=
 '<div class="empty">Could not load jobs.json - '+e.message+'</div>';});
 </script>
+
+<!-- verified-badge-v1 : renders lastVerified ("Confirmed open ...") on each job card. Additive and fail-safe: if jobs.json has no lastVerified field, nothing is drawn. -->
+<script>
+(function(){
+  var MARK="verified-badge-v1";
+  function info(d){
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(d||""))return null;
+    var t=new Date(d+"T00:00:00"), n=new Date();
+    n=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+    var days=Math.round((n-t)/864e5);
+    if(days<0)days=0;
+    var lbl=days===0?"today":days===1?"yesterday":days+" days ago";
+    return {lbl:lbl,days:days};
+  }
+  function norm(u){try{return new URL(u,location.href).href.replace(/[#?].*$/,"");}catch(e){return u||"";}}
+  function paint(){
+    fetch("jobs.json?cb="+Date.now(),{cache:"no-store"}).then(function(r){return r.json();}).then(function(jobs){
+      if(!Array.isArray(jobs))return;
+      var map={};
+      jobs.forEach(function(j){ var v=j.lastVerified||j.verified; if(j.url&&v) map[norm(j.url)]=v; });
+      if(!Object.keys(map).length)return;
+      document.querySelectorAll(".job").forEach(function(card){
+        var a=card.querySelector("a.apply")||card.querySelector("a[href]");
+        if(!a)return;
+        var f=info(map[norm(a.getAttribute("href"))]);
+        var old=card.querySelector("."+MARK);
+        if(!f){ if(old)old.remove(); return; }
+        var s=old||document.createElement("span");
+        s.className=MARK;
+        s.textContent=(f.days>3?"Needs recheck - last confirmed ":"Confirmed open ")+f.lbl;
+        s.title="Date this posting was last opened and confirmed still accepting applications.";
+        s.style.cssText="display:inline-block;font-size:11px;line-height:1.4;margin:0 8px 0 0;padding:2px 7px;border-radius:999px;white-space:nowrap;vertical-align:middle;"
+          +(f.days>3?"background:rgba(194,65,12,.13);color:#c2410c;font-weight:600;":"background:rgba(22,163,74,.12);color:#15803d;");
+        if(!old&&a.parentNode)a.parentNode.insertBefore(s,a);
+      });
+    }).catch(function(){});
+  }
+  function boot(){ setTimeout(paint,1000); setTimeout(paint,3000);
+    try{ var g=document.querySelector("#grid,.grid");
+      if(g)new MutationObserver(function(){clearTimeout(window.__vbT);window.__vbT=setTimeout(paint,250);}).observe(g,{childList:true});
+    }catch(e){}
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
+})();
+</script>
 </body>
 </html>
